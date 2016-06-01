@@ -1,0 +1,19 @@
+{
+  "name": "bot-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Slobodan Stojanovic <slobodan@cloudhorizon.com> (http://slobodan.me/)",
+  "license": "MIT",
+  "dependencies": {
+    "claudia-api-builder": "^1.1.0",
+    "request-promise": "^3.0.0",
+    "superb": "^1.3.0"
+  },
+  "devDependencies": {
+    "claudia": "^1.3.1"
+  }
+}
