@@ -33,11 +33,14 @@ api.post('/facebook', request => {
   let arr = [].concat.apply([], request.body.entry.map(entry => entry.messaging))
   let fbHandle = parsedMessage => {
     console.log('Parsed message', parsedMessage)
-    var recipient = parsedMessage.sender;
 
-    return bot(parsedMessage)
-      .then(botResponse => fbReply(recipient, botResponse, request.env.facebookAccessToken))
-      .catch(logError)
+    if (parsedMessage) {
+      var recipient = parsedMessage.sender;
+      
+      return bot(parsedMessage)
+        .then(botResponse => fbReply(recipient, botResponse, request.env.facebookAccessToken))
+        .catch(logError)
+    }
   }
 
   return Promise.all(arr.map(message => parser.fb(message)).map(fbHandle))
