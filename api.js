@@ -5,6 +5,8 @@ const api = new apiBuilder()
 const bot = require('./lib/bot')
 const parser = require('./lib/parser')
 const send = require('./lib/send')
+const rp = require('minimal-request-promise')
+const qs = require('querystring')
 
 function logError(err) {
   console.error(err)
@@ -57,8 +59,32 @@ api.post('/facebook', request => {
 })
 
 api.post('/slack/slash-command', request => {
-  if (request.token === request.env.slackToken)
+  if (request.post.token === request.env.slackToken)
     return bot(parser.slackSlashCommand(request.post))
       .then(slackReply)
       .catch(logError)
+  else
+    return slackReply('unmatched token' + ' ' + request.post.token + ' ' + request.env.slackToken)
+})
+
+api.get('/slack/landing', request => {
+  return rp({
+    method: 'POST',
+    hostname: 'slack.com',
+    port: 443,
+    path: '/api/oauth.access',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: qs.encode({
+      client_id: request.env.slackClientId,
+      client_secret: request.env.slackClientSecret,
+      code: request.queryString.code,
+      redirect_uri: request.env.slackRedirectUrl
+    })
+  })
+    .then(response => `<p>Thanks for installing the app.</p>`)
+
+}, {
+  success: { contentType: 'text/html' }
 })
