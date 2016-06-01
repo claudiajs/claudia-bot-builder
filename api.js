@@ -15,6 +15,15 @@ function fbReply(recipient, message, fbAccessToken) {
   return send.text(recipient, message, fbAccessToken)
 }
 
+function slackReply(botResponse) {
+  if (typeof botResponse === 'string')
+    return {
+      text: botResponse
+    }
+
+  return botResponse
+}
+
 module.exports = api
 
 api.get('/', () => 'ok')
@@ -36,7 +45,7 @@ api.post('/facebook', request => {
 
     if (parsedMessage) {
       var recipient = parsedMessage.sender;
-      
+
       return bot(parsedMessage)
         .then(botResponse => fbReply(recipient, botResponse, request.env.facebookAccessToken))
         .catch(logError)
@@ -45,4 +54,11 @@ api.post('/facebook', request => {
 
   return Promise.all(arr.map(message => parser.fb(message)).map(fbHandle))
     .then(() => 'ok')
+})
+
+api.post('/slack/slash-command', request => {
+  if (request.token === request.env.slackToken)
+    return bot(parser.slackSlashCommand(request.post))
+      .then(slackReply)
+      .catch(logError)
 })
