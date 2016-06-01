@@ -1,9 +1,9 @@
-'use strict'
+'use strict';
 
-const  botBuilder = require('./lib/bot-builder.js')
-const  excuse = require('huh')
+const  botBuilder = require('./lib/bot-builder.js');
+const  excuse = require('huh');
 
-module.exports = botBuilder
+module.exports = botBuilder;
 botBuilder.onMessage(function (request) {
   /*
     {
@@ -13,5 +13,5 @@ botBuilder.onMessage(function (request) {
       type: '' // facebook, slackSlashCommand, slackBot
     }
   */
-  return Promise.resolve(`Why ${request.text} > ${excuse.get()}`)
-})
+  return Promise.resolve(`Why ${request.text} > ${excuse.get()}`);
+});
