@@ -1,7 +1,7 @@
 /*global describe, it, jasmine, expect, beforeEach*/
 var botBuilder = require('../lib/bot-builder'),
   https = require('https');
-describe('Facebook Bot', function () {
+describe('Facebook Bot', () => {
   var messageHandler,
     underTest,
     lambdaContextSpy,
@@ -30,17 +30,20 @@ describe('Facebook Bot', function () {
         }
       ]
     };
-  beforeEach(function () {
+
+  beforeEach(() => {
     messageHandler = jasmine.createSpy('messageHandler');
     lambdaContextSpy = jasmine.createSpyObj('lambdaContext', ['done']);
     underTest = botBuilder(messageHandler);
   });
-  describe('API integration wiring', function () {
-    describe('token verification', function () {
-      it('uses the text/plain content type', function () {
+
+  describe('API integration wiring', () => {
+    describe('token verification', () => {
+      it('uses the text/plain content type', () => {
         expect(underTest.apiConfig().routes.facebook.GET.success.contentType).toEqual('text/plain');
       });
-      it('returns hub challenge if the tokens match', function () {
+
+      it('returns hub challenge if the tokens match', () => {
         underTest.router({
           context: {
             path: '/facebook',
@@ -56,7 +59,8 @@ describe('Facebook Bot', function () {
         }, lambdaContextSpy);
         expect(lambdaContextSpy.done).toHaveBeenCalledWith(null, 'XHCG');
       });
-      it('returns Error challenge if the tokens do not match', function () {
+
+      it('returns Error challenge if the tokens do not match', () => {
         underTest.router({
           context: {
             path: '/facebook',
@@ -73,11 +77,12 @@ describe('Facebook Bot', function () {
         expect(lambdaContextSpy.done).toHaveBeenCalledWith(null, 'Error');
       });
     });
-    describe('message handling', function () {
-      it('sends the response using https to facebook', function (done) {
+
+    describe('message handling', () => {
+      it('sends the response using https to facebook', done => {
 
         var resolveHandler,
-          handlerPromise = new Promise(function (resolve) {
+          handlerPromise = new Promise(resolve => {
             resolveHandler = resolve;
           });
         messageHandler.and.returnValue(Promise.resolve('YES'));
@@ -93,7 +98,7 @@ describe('Facebook Bot', function () {
         }, lambdaContextSpy);
 
         resolveHandler('YES');
-        handlerPromise.then(function () {
+        handlerPromise.then(() => {
           https.request.respond('Thanks!', 200, 'OK');
           expect(https.request).toHaveBeenCalledWith({
             method: 'POST',

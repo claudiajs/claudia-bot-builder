@@ -3,7 +3,7 @@
 const botBuilder = require('./lib/bot-builder.js');
 const excuse = require('huh');
 
-module.exports = botBuilder(function (request) {
+module.exports = botBuilder(request =>
   /*
     {
       sender: '',
@@ -12,5 +12,5 @@ module.exports = botBuilder(function (request) {
       type: '' // facebook, slackSlashCommand, slackBot, telegram
     }
   */
-  return Promise.resolve(`Why ${request.text} > ${excuse.get()}`);
-});
+  Promise.resolve(`Why ${request.text} > ${excuse.get()}`)
+);
