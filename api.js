@@ -1,7 +1,7 @@
 'use strict';
 
-const  botBuilder = require('./lib/bot-builder.js');
-const  excuse = require('huh');
+const botBuilder = require('./lib/bot-builder.js');
+const excuse = require('huh');
 
 module.exports = botBuilder;
 botBuilder.onMessage(function (request) {

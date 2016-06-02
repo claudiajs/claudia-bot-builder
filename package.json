@@ -4,7 +4,8 @@
   "description": "Simple bot builder for AWS Lambda and node.js",
   "main": "index.js",
   "scripts": {
-    "test": "tape tests/**/*.js | tap-spec"
+    "lint": "eslint lib *.js",
+    "test": "npm run lint && tape tests/**/*.js | tap-spec"
   },
   "repository": {
     "type": "git",
