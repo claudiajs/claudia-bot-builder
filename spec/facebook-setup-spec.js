@@ -69,10 +69,12 @@ describe('Facebook setup', () => {
         handler({body: singleMessageTemplate});
         expect(parser).toHaveBeenCalledWith({'A': 'B'});
       });
-      it('passes the parsed value to the bot if a message can be parsed', () => {
+      it('passes the parsed value to the bot if a message can be parsed', (done) => {
         parser.and.returnValue('MSG1');
         handler({body: singleMessageTemplate});
-        expect(bot).toHaveBeenCalledWith('MSG1');
+        Promise.resolve().then(() => {
+          expect(bot).toHaveBeenCalledWith('MSG1');
+        }).then(done, done.fail);
       });
       it('does not invoke the bot if the message cannot be parsed', (done) => {
         parser.and.returnValue(false);
@@ -88,6 +90,15 @@ describe('Facebook setup', () => {
           expect(message).toBe('ok');
           expect(responder).toHaveBeenCalledWith('user1', 'Yes Yes', 'ABC');
         }).then(done, done.fail);
+      });
+      it('can work with bot responses as strings', (done) => {
+        bot.and.returnValue('Yes!');
+        parser.and.returnValue({sender: 'user1', text: 'MSG1'});
+        handler({body: singleMessageTemplate, env: {facebookAccessToken: 'ABC'}}).then((message) => {
+          expect(message).toBe('ok');
+          expect(responder).toHaveBeenCalledWith('user1', 'Yes!', 'ABC');
+        }).then(done, done.fail);
+
       });
       it('logs error when the bot rejects without responding', (done) => {
         parser.and.returnValue('MSG1');
@@ -215,19 +226,23 @@ describe('Facebook setup', () => {
         expect(parser).toHaveBeenCalledWith({'E': 'F'});
         expect(parser).toHaveBeenCalledWith({'G': 'H'});
       });
-      it('calls the bot for each message individually', () => {
+      it('calls the bot for each message individually', (done) => {
         handler({body: multiMessageTemplate, env: {facebookAccessToken: 'ABC'}});
-        expect(bot.calls.count()).toEqual(4);
-        expect(bot).toHaveBeenCalledWith({sender: 'sender1', text: 'text1'});
-        expect(bot).toHaveBeenCalledWith({sender: 'sender2', text: 'text2'});
-        expect(bot).toHaveBeenCalledWith({sender: 'sender3', text: 'text3'});
-        expect(bot).toHaveBeenCalledWith({sender: 'sender4', text: 'text4'});
+        Promise.resolve().then(() => {
+          expect(bot.calls.count()).toEqual(4);
+          expect(bot).toHaveBeenCalledWith({sender: 'sender1', text: 'text1'});
+          expect(bot).toHaveBeenCalledWith({sender: 'sender2', text: 'text2'});
+          expect(bot).toHaveBeenCalledWith({sender: 'sender3', text: 'text3'});
+          expect(bot).toHaveBeenCalledWith({sender: 'sender4', text: 'text4'});
+        }).then(done, done.fail);
       });
       it('calls the responders for each bot response individually', (done) => {
         handler({body: multiMessageTemplate, env: {facebookAccessToken: 'ABC'}});
-        botPromises[0].resolve('From first');
-        botPromises[1].resolve('From second');
-        botPromises[1].then(() => {
+        Promise.resolve().then(() => {
+          botPromises[0].resolve('From first');
+          botPromises[1].resolve('From second');
+          return botPromises[1];
+        }).then(() => {
           expect(responder).toHaveBeenCalledWith('sender1', 'From first', 'ABC');
           expect(responder).toHaveBeenCalledWith('sender2', 'From second', 'ABC');
         }).then(done, done.fail);
@@ -237,20 +252,24 @@ describe('Facebook setup', () => {
         handler({body: multiMessageTemplate, env: {facebookAccessToken: 'ABC'}}).then(() => {
           hasResolved = true;
         }).then(done.fail, done.fail);
-        botPromises.forEach((p) => p.resolve('group'));
-        botPromises.pop().then(() => {
+        Promise.resolve().then(() => {
+          botPromises.forEach((p) => p.resolve('group'));
+          return botPromises.pop();
+        }).then(() => {
           responderPromises.slice(1).forEach((p) => p.resolve('result'));
           return responderPromises.pop();
         }).then(() => {
           expect(hasResolved).toBeFalsy();
         }).then(done, done.fail);
       });
-      it('resolves until all the responders resolve', (done) => {
+      it('resolves when all the responders resolve', (done) => {
         handler({body: multiMessageTemplate, env: {facebookAccessToken: 'ABC'}}).then((message) => {
           expect(message).toEqual('ok');
         }).then(done, done.fail);
-        botPromises.forEach((p) => p.resolve('group'));
-        botPromises.pop().then(() => {
+        Promise.resolve().then(() => {
+          botPromises.forEach((p) => p.resolve('group'));
+          return botPromises.pop();
+        }).then(() => {
           responderPromises.forEach((p) => p.resolve('result'));
           return responderPromises.pop();
         });

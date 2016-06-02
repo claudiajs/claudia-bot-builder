@@ -79,11 +79,8 @@ describe('Facebook Bot integration test', () => {
     });
     describe('message handling', () => {
       it('sends the response using https to facebook', done => {
-        var resolveHandler,
-          handlerPromise = new Promise(resolve => {
-            resolveHandler = resolve;
-          });
         messageHandler.and.returnValue(Promise.resolve('YES'));
+
         underTest.router({
           context: {
             path: '/facebook',
@@ -95,9 +92,8 @@ describe('Facebook Bot integration test', () => {
           }
         }, lambdaContextSpy);
 
-        resolveHandler('YES');
-        handlerPromise.then(() => {
-          expect(https.request.calls[0].args[0]).toEqual({
+        https.request.pipe(callOptions => {
+          expect(callOptions).toEqual({
             method: 'POST',
             hostname: 'graph.facebook.com',
             path: '/v2.6/me/messages?access_token=12345',
@@ -105,8 +101,8 @@ describe('Facebook Bot integration test', () => {
             headers: { 'Content-Type': 'application/json' },
             body: '{"recipient":{"id":"USER_ID"},"message":{"text":"YES"}}'
           });
-          https.request.calls[0].respond(200, 'OK', 'Thanks');
-        }).then(done, done.fail);
+          done();
+        });
       });
     });
   });
