@@ -4,8 +4,10 @@
   "description": "Simple bot builder for AWS Lambda and node.js",
   "main": "index.js",
   "scripts": {
+    "start": "ntl",
     "lint": "eslint lib *.js",
-    "test": "npm run lint && tape tests/**/*.js | tap-spec"
+    "test": "npm run lint && tape tests/**/*.js | tap-spec",
+    "deploy-gojko": "claudia update --version gojko"
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,6 @@
     "eslint-config-defaults": "^9.0.0",
     "jasmine": "^2.4.1",
     "jasmine-spec-reporter": "^2.4.0",
-    "tap-spec": "^4.1.1",
-    "tape": "^4.5.1"
+    "ntl": "^1.1.2"
   }
 }
