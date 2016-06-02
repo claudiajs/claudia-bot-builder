@@ -1,7 +1,7 @@
 /*global describe, it, jasmine, expect, beforeEach*/
 var botBuilder = require('../lib/bot-builder'),
   https = require('https');
-describe('Facebook Bot', () => {
+describe('Facebook Bot integration test', () => {
   var messageHandler,
     underTest,
     lambdaContextSpy,
@@ -77,10 +77,8 @@ describe('Facebook Bot', () => {
         expect(lambdaContextSpy.done).toHaveBeenCalledWith(null, 'Error');
       });
     });
-
     describe('message handling', () => {
       it('sends the response using https to facebook', done => {
-
         var resolveHandler,
           handlerPromise = new Promise(resolve => {
             resolveHandler = resolve;
