@@ -1,9 +1,9 @@
 /*global beforeEach, jasmine, afterEach */
 var https = require('https'),
   oldHttpsRequest;
-beforeEach(function () {
+beforeEach(() => {
   var listeners = {};
-  https.request = jasmine.createSpy('httpsRequest').and.callFake(function () {
+  https.request = jasmine.createSpy('httpsRequest').and.callFake(() => {
     var fake = {
       on: function (eventName, listener) {
         listeners[eventName] = listener;
@@ -34,6 +34,6 @@ beforeEach(function () {
     listeners['error'](err);
   };
 });
-afterEach(function () {
+afterEach(() => {
   https.request = oldHttpsRequest;
 });

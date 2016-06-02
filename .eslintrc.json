@@ -12,6 +12,7 @@
     "semi": ["error", "always"],
     "no-console": "off",
     "indent": ["error", 2],
-    "quotes": ["error", "single", {"avoidEscape": true, "allowTemplateLiterals": true}]
+    "quotes": ["error", "single", {"avoidEscape": true, "allowTemplateLiterals": true}],
+    "prefer-arrow-callback": "error"
   }
 }
