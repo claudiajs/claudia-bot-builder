@@ -11,6 +11,7 @@
   "rules": {
     "semi": ["error", "always"],
     "no-console": "off",
-    "indent": ["error", 2]
+    "indent": ["error", 2],
+    "quotes": ["error", "single", {"avoidEscape": true, "allowTemplateLiterals": true}]
   }
 }
