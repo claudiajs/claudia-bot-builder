@@ -1,16 +1,19 @@
 /*global describe, it, jasmine, expect, beforeEach*/
 var botBuilder = require('../lib/bot-builder');
-describe('BotBuilder', function () {
+describe('BotBuilder', () => {
   var messageHandler, underTest, lambdaContextSpy;
-  beforeEach(function () {
+  
+  beforeEach(() => {
     messageHandler = jasmine.createSpy('messageHandler');
     lambdaContextSpy = jasmine.createSpyObj('lambdaContext', ['done']);
     underTest = botBuilder(messageHandler);
   });
-  it('configures a Claudia Rest API', function () {
+  
+  it('configures a Claudia Rest API', () => {
     expect(underTest.apiConfig().version).toEqual(2);
   });
-  it('sets up a GET route for /', function () {
+
+  it('sets up a GET route for /', () => {
     underTest.router({
       context: {
         path: '/',
