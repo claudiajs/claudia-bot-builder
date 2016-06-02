@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "ntl",
-    "lint": "eslint lib *.js",
-    "test": "npm run lint && tape tests/**/*.js | tap-spec",
+    "pretest": "eslint lib spec *.js",
+    "test": "node spec/support/jasmine-runner.js",
     "deploy-gojko": "claudia update --version gojko"
   },
   "repository": {
