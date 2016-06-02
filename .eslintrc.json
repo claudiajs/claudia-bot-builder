@@ -1,12 +1,17 @@
 {
+  "extends": "defaults",
   "env": {
-    "node": true
+    "node": true,
+    "es6": true
   },
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module"
   },
   "rules": {
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "no-console": "off",
+    "indent": ["error", 2],
+    "quotes": ["error", "single", {"avoidEscape": true, "allowTemplateLiterals": true}]
   }
 }
