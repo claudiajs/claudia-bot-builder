@@ -99,8 +99,7 @@ describe('Facebook Bot', () => {
 
         resolveHandler('YES');
         handlerPromise.then(() => {
-          https.request.respond('Thanks!', 200, 'OK');
-          expect(https.request).toHaveBeenCalledWith({
+          expect(https.request.calls[0].args[0]).toEqual({
             method: 'POST',
             hostname: 'graph.facebook.com',
             path: '/v2.6/me/messages?access_token=12345',
@@ -108,6 +107,7 @@ describe('Facebook Bot', () => {
             headers: { 'Content-Type': 'application/json' },
             body: '{"recipient":{"id":"USER_ID"},"message":{"text":"YES"}}'
           });
+          https.request.calls[0].respond(200, 'OK', 'Thanks');
         }).then(done, done.fail);
       });
     });
