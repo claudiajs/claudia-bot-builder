@@ -1,4 +1,5 @@
 {
+  "extends": "defaults",
   "env": {
     "node": true
   },
@@ -7,6 +8,8 @@
     "sourceType": "module"
   },
   "rules": {
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "no-console": "off",
+    "indent": ["error", 2]
   }
 }
