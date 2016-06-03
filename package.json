@@ -18,7 +18,8 @@
   "dependencies": {
     "claudia-api-builder": "^1.1.0",
     "huh": "^1.1.4",
-    "minimal-request-promise": "^1.0.0"
+    "minimal-request-promise": "^1.0.0",
+    "oh-no-i-insist": "^1.0.0"
   },
   "devDependencies": {
     "claudia": "^1.3.1",
