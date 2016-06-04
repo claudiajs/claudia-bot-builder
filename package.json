@@ -16,14 +16,14 @@
   "author": "Slobodan Stojanovic <slobodan@cloudhorizon.com> (http://slobodan.me/)",
   "license": "MIT",
   "dependencies": {
-    "claudia-api-builder": "^1.2.0",
+    "claudia-api-builder": "^1.2.1",
     "huh": "^1.1.4",
     "minimal-request-promise": "^1.0.0",
     "oh-no-i-insist": "^1.0.0",
     "prompt": "^1.0.0"
   },
   "devDependencies": {
-    "claudia": "^1.4.0",
+    "claudia": "^1.4.1",
     "eslint": "^2.11.1",
     "eslint-config-defaults": "^9.0.0",
     "fake-http-request": "^1.2.0",
