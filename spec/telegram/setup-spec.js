@@ -72,15 +72,15 @@ describe('Telegram setup', () => {
       it('responds when the bot resolves', (done) => {
         parser.and.returnValue({sender: 'user1', text: 'MSG1'});
         botResolve('Yes Yes');
-        handler({body: singleMessageTemplate, env: {telegramAccessToken: 'ABC'}}).then(() => {
-          expect(responder).toHaveBeenCalledWith('user1', 'Yes Yes', 'ABC');
+        handler({body: singleMessageTemplate, env: {telegramAccessToken: 'some123AccessToken'}}).then(() => {
+          expect(responder).toHaveBeenCalledWith('user1', 'Yes Yes', 'some123AccessToken');
         }).then(done, done.fail);
       });
       it('can work with bot responses as strings', (done) => {
         bot.and.returnValue('Yes!');
         parser.and.returnValue({sender: 'user1', text: 'MSG1'});
-        handler({body: singleMessageTemplate, env: {telegramAccessToken: 'ABC'}}).then(() => {
-          expect(responder).toHaveBeenCalledWith('user1', 'Yes!', 'ABC');
+        handler({body: singleMessageTemplate, env: {telegramAccessToken: 'some123AccessToken'}}).then(() => {
+          expect(responder).toHaveBeenCalledWith('user1', 'Yes!', 'some123AccessToken');
         }).then(done, done.fail);
 
       });
@@ -98,7 +98,7 @@ describe('Telegram setup', () => {
         parser.and.returnValue('MSG1');
         responder.and.throwError('XXX');
         botResolve('Yes');
-        handler({body: singleMessageTemplate, env: {telegramAccessToken: 'ABC'}}).then(() => {
+        handler({body: singleMessageTemplate, env: {telegramAccessToken: 'some123AccessToken'}}).then(() => {
           expect(logError).toHaveBeenCalledWith(jasmine.any(Error));
         }).then(done, done.fail);
       });
@@ -114,7 +114,7 @@ describe('Telegram setup', () => {
           parser.and.returnValue('MSG1');
         });
         it('waits for the responders to resolve before completing the request', (done) => {
-          handler({body: singleMessageTemplate, env: {telegramAccessToken: 'ABC'}}).then(() => {
+          handler({body: singleMessageTemplate, env: {telegramAccessToken: 'some123AccessToken'}}).then(() => {
             hasResolved = true;
           });
 
@@ -125,7 +125,7 @@ describe('Telegram setup', () => {
           botResolve('YES');
         });
         it('resolves when the responder resolves', (done) => {
-          handler({body: singleMessageTemplate, env: {telegramAccessToken: 'ABC'}}).then(done, done.fail);
+          handler({body: singleMessageTemplate, env: {telegramAccessToken: 'some123AccessToken'}}).then(done, done.fail);
 
           botPromise.then(() => {
             responderResolve('As Promised!');
@@ -133,7 +133,7 @@ describe('Telegram setup', () => {
           botResolve('YES');
         });
         it('logs error when the responder rejects', (done) => {
-          handler({body: singleMessageTemplate, env: {telegramAccessToken: 'ABC'}}).then(() => {
+          handler({body: singleMessageTemplate, env: {telegramAccessToken: 'some123AccessToken'}}).then(() => {
             expect(logError).toHaveBeenCalledWith('Bomb!');
           }).then(done, done.fail);
 
