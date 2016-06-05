@@ -5,7 +5,7 @@ var setup = require('../../lib/telegram/setup');
 describe('Telegram setup', () => {
   var api, bot, logError, parser, responder, botPromise, botResolve, botReject;
   beforeEach(() => {
-    api = jasmine.createSpyObj('api', ['post']);
+    api = jasmine.createSpyObj('api', ['post', 'addPostDeployStep']);
     botPromise = new Promise((resolve, reject) => {
       botResolve = resolve;
       botReject = reject;
