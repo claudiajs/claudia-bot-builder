@@ -46,16 +46,18 @@ Claudia.js (and the bot builder extension) just uses the standard AWS Node.js SD
 
 ### Telegram bot configuration
 
-For getting a Telegram bot access token - use their [BotFather](https://telegram.me/BotFather) bot for creating bots
+For getting a Telegram bot access token - use their [BotFather](https://telegram.me/BotFather) bot for creating bots. 
+
+Use `--configure-telegram-bot` when deploying with Claudia to configure the access token in your bot.
 
 
 ### Skype bot configuration
 
 For getting Skype bot credentials:
 
-  - Create a Microsoft App and get its App ID and App secret on [Microsoft Apps](https://apps.dev.microsoft.com/)
-  - Create the Skype bot and use the App ID and App Secret (Private key) on the [Microsoft My Bots](https://developer.microsoft.com/en-us/skype/bots/manage)
-
+- Create a Microsoft App and get its App ID and App secret on [Microsoft Apps](https://apps.dev.microsoft.com/)
+- Create the Skype bot and use the App ID and App Secret (Private key) on the [Microsoft My Bots](https://developer.microsoft.com/en-us/skype/bots/manage)
+- Use `--configure-skype-bot` when deploying with Claudia to configure the access details in your bot.
 
 ### Further information
 
