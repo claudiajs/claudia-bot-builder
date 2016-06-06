@@ -37,4 +37,4 @@ See the [Release History](RELEASES.md)
 
 ## License 
 
-MIT -- see [LICENSE]
+MIT -- see [LICENSE](LICENSE)
