@@ -6,7 +6,7 @@ The Claudia Bot Builder is based on a simple callback API. Whenever a message is
 const botBuilder = require('claudia-bot-builder');
 
 module.exports = botBuilder(request =>
-  return `I got ${request.text}`
+  `I got ${request.text}`
 );
 ```
 
