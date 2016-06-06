@@ -44,6 +44,19 @@ Claudia.js (and the bot builder extension) just uses the standard AWS Node.js SD
 8. All done, talk to your bot from the Facebook page.
 
 
+### Telegram bot configuration
+
+For getting a Telegram bot access token - use their [BotFather](https://telegram.me/BotFather) bot for creating bots
+
+
+### Skype bot configuration
+
+For getting Skype bot credentials:
+
+  - Create a Microsoft App and get its App ID and App secret on [Microsoft Apps](https://apps.dev.microsoft.com/)
+  - Create the Skype bot and use the App ID and App Secret (Private key) on the [Microsoft My Bots](https://developer.microsoft.com/en-us/skype/bots/manage)
+
+
 ### Further information
 
 For more information on configuring different bot types, see [API Documentation](API.md).
