@@ -1,6 +1,6 @@
 # Claudia Bot Builder
 
-_Claudia Bot Builder_ helps developers create and deploy chat-bots for Facebook Messenger, Slack (slash commands for now), Skype and Telegram in minutes to AWS Lambda. It simplifies the messaging workflows, automatically sets up the correct web hooks, and guides you through configuration steps, so that you can focus on important business problems and not have to worry about infrastructure code. Here's a simple example:
+_Claudia Bot Builder_ helps developers create and deploy chat-bots for various platforms in minutes to AWS Lambda. It simplifies the messaging workflows, automatically sets up the correct web hooks, and guides you through configuration steps, so that you can focus on important business problems and not have to worry about infrastructure code. Here's a simple example:
 
 ```javascript
 const botBuilder = require('claudia-bot-builder');
@@ -12,6 +12,13 @@ module.exports = botBuilder(request =>
 ```
 
 This code is enough to operate bots for all four supported platforms. Claudia Bot Builder automatically parses the incoming messages into a common format, so you can handle it easily. It also automatically packages the response into the correct message template for the requesting bot, so you do not have to worry about individual bot protocols.
+
+## Supported platforms
+
+* Facebook Messenger
+* Slack (slash commands for now)
+* Skype 
+* Telegram 
 
 ## Creating bots
 
