@@ -49,11 +49,10 @@ Claudia.js (and the bot builder extension) just uses the standard AWS Node.js SD
   claudia create --region us-east-1 --api-module bot --configure-fb-bot
   ```
 
-6. When prompted fort the page access token, provide the Page access token for your bot. If you do not have one, create a new bot page in Facebook, as explained in the [Facebook Messenger Getting Started Guide](https://developers.facebook.com/docs/messenger-platform/quickstart).
+6. The installer will print the web hook URL and the verification token, which you can copy to your Facebook
+Messenger page. If you do not have one, create a new bot page in Facebook, as explained in the [Facebook Messenger Getting Started Guide](https://developers.facebook.com/docs/messenger-platform/quickstart).
 
-7. The deployment process, when it completes, will print out the bot Web hook URL. You can copy and paste that to your Facebook bot configuration. 
-
-8. All done, talk to your bot from the Facebook page.
+7. You can then generate the page access token from Facebook. Copy that back to Claudia, and you're almost done. In a few moments, your bot will be live, and anyone on Facebook can talk to it. 
 
 
 ### Telegram bot configuration
