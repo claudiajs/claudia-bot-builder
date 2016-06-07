@@ -21,7 +21,7 @@ Claudia.js (and the bot builder extension) just uses the standard AWS Node.js SD
   npm init
   ```
 
-2. Add the `claudia-bot-builder` as a project dependency (`-S` is critically important here, to save the dependency to `package.json`:
+2. Add the `claudia-bot-builder` as a project dependency (`-S` is critically important here, to save the dependency to `package.json`):
 
   ```bash
   npm install claudia-bot-builder -S
