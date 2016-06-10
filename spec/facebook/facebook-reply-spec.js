@@ -60,6 +60,18 @@ describe('Facebook Reply', () => {
       });
     }).then(done, done.fail);
   });
+  it('sends requests in sequence', done => {
+    var fiveHundred = new Array(101).join('blok ');
+
+    https.request.pipe(() => {
+      Promise.resolve().then(() => {
+        expect(https.request.calls.length).toEqual(1);
+        done();
+      });
+    });
+
+    reply('user123', fiveHundred, 'ACCESS123');
+  });
   it('sends complex messages without transforming into a text object', done => {
     https.request.pipe(callOptions => {
       expect(JSON.parse(callOptions.body)).toEqual({
