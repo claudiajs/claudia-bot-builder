@@ -17,4 +17,19 @@ describe('Facebook parse', () => {
     var msg = {sender: {id: 'tom'}, message: { text: 'Hello' }};
     expect(parse(msg)).toEqual({ sender: 'tom', text: 'Hello', originalRequest: msg, type: 'facebook'});
   });
+  it('returns a parsed object for postback messages', () => {
+    var msg = {
+      'sender': { 'id': '998295386950466' },
+      'recipient': { 'id': '243307226049107' },
+      'timestamp': 1465558466933,
+      'postback': { 'payload': 'Q23306627' }
+    };
+    expect(parse(msg)).toEqual({
+      sender: '998295386950466',
+      text: 'Q23306627',
+      originalRequest: msg,
+      postback: true,
+      type: 'facebook'
+    });
+  });
 });
