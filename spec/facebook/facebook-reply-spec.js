@@ -55,7 +55,7 @@ describe('Facebook Reply', () => {
           id: 'user123'
         },
         message: {
-          text: new Array((505 - 320)/5).join('blok ')
+          text: new Array((500 - 320)/5).join('blok ') + 'blok'
         }
       });
     }).then(done, done.fail);
