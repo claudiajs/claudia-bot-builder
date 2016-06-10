@@ -11,4 +11,7 @@ describe('breakText', () => {
   it('breaks words that are too long', () => {
     expect(breakText('abcdef 123456789', 5)).toEqual(['abcde', 'f', '1234', '56789']);
   });
+  it('does not explode on blank strings', () => {
+    expect(breakText('', 5)).toEqual(['']);
+  });
 });
