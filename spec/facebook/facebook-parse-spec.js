@@ -1,5 +1,5 @@
 /*global describe, it, expect, require */
-var parse = require('../lib/facebook/parse');
+var parse = require('../../lib/facebook/parse');
 describe('Facebook parse', () => {
   it('returns nothing if the format is invalid', () => {
     expect(parse('string')).toBeUndefined();
