@@ -33,7 +33,6 @@
     "claudia-api-builder": "^1.2.1",
     "minimal-request-promise": "^1.0.0",
     "oh-no-i-insist": "^1.0.0",
-    "prompt": "^1.0.0",
     "souffleur": "^1.0.0"
   },
   "devDependencies": {
