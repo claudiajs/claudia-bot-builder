@@ -1,16 +1,16 @@
 # Claudia Bot Builder
 
-<img src="https://claudiajs.github.io/claudiajs.com/assets/claudiajs.svg" height="300" align="right" />
-
 _Claudia Bot Builder_ helps developers create and deploy chat-bots for various platforms in minutes to AWS Lambda. It simplifies the messaging workflows, automatically sets up the correct web hooks, and guides you through configuration steps, so that you can focus on important business problems and not have to worry about infrastructure code. Here's a simple example:
 
 ```javascript
 const botBuilder = require('claudia-bot-builder');
 const excuse = require('huh');
 
-module.exports = botBuilder(request => 
-  `Thanks for sending ${request.text}. Your message is very important to us, but ${excuse.get()}`
-);
+module.exports = botBuilder(function (request) {
+  return 'Thanks for sending ' + request.text +
+    'Your message is very important to us, but ' +
+    excuse.get();
+});
 ```
 
 This code is enough to operate bots for all four supported platforms. Claudia Bot Builder automatically parses the incoming messages into a common format, so you can handle it easily. It also automatically packages the response into the correct message template for the requesting bot, so you do not have to worry about individual bot protocols.
