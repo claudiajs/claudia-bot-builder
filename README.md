@@ -1,5 +1,7 @@
 # Claudia Bot Builder
 
+<img src="https://claudiajs.github.io/claudiajs.com/assets/claudiajs.svg" height="300" align="right" />
+
 _Claudia Bot Builder_ helps developers create and deploy chat-bots for various platforms in minutes to AWS Lambda. It simplifies the messaging workflows, automatically sets up the correct web hooks, and guides you through configuration steps, so that you can focus on important business problems and not have to worry about infrastructure code. Here's a simple example:
 
 ```javascript
@@ -15,14 +17,18 @@ This code is enough to operate bots for all four supported platforms. Claudia Bo
 
 ## Supported platforms
 
-* Facebook Messenger
-* Slack (slash commands for now)
+* Facebook Messenger Follow the instructions from the [Facebook Messenger Getting Started](https://developers.facebook.com/docs/messenger-platform/quickstart) guide, then submit the app for [App Review](https://developers.facebook.com/docs/messenger-platform/app-review)
+* Slack (slash commands for now). Follow the instructions from [Slack API Docs](https://api.slack.com/) to set up an app with a slash command, then [Create a Slack Button](https://api.slack.com/docs/slack-button) so people can add your app to their channels 
 * Skype 
 * Telegram 
 
 ## Creating bots
 
 Check out the [Getting Started](GETTING_STARTED.md) guide for information on how to set up a simple bot in minutes and [API Documentation](API.md) for detailed information on the API.
+
+## Examples 
+
+See the [Chat-Bots section](https://github.com/claudiajs/example-projects#chat-bots) of the Claudia.js example projects list
 
 ## Contributing
 
