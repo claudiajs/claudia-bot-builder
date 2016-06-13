@@ -1,7 +1,7 @@
 {
   "name": "claudia-bot-builder",
   "version": "1.0.0",
-  "description": "Create and deploy chat-bots for various platforms in minutes to AWS Lambda",
+  "description": "Create chat-bots for various platforms and deploy to AWS Lambda quickly",
   "main": "index.js",
   "scripts": {
     "pretest": "eslint lib spec *.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/stojanovic/bot-builder.git"
+    "url": "https://github.com/claudiajs/claudia-bot-builder"
   },
   "keywords": [
     "claudia",
