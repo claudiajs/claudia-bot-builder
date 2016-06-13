@@ -1,5 +1,5 @@
 /*global describe, it, jasmine, expect, beforeEach*/
-var botBuilder = require('../lib/bot-builder'),
+var botBuilder = require('../../lib/bot-builder'),
   https = require('https');
 describe('Facebook Bot integration test', () => {
   var messageHandler,

@@ -1,10 +1,10 @@
 /*global require, describe, it, expect, beforeEach, jasmine*/
 'use strict';
-var underTest = require('../lib/facebook/setup');
+var underTest = require('../../lib/facebook/setup');
 describe('Facebook setup', () => {
   var api, bot, logError, parser, responder, botPromise, botResolve, botReject;
   beforeEach(() => {
-    api = jasmine.createSpyObj('api', ['get', 'post']);
+    api = jasmine.createSpyObj('api', ['get', 'post', 'addPostDeployStep']);
     botPromise = new Promise((resolve, reject) => {
       botResolve = resolve;
       botReject = reject;

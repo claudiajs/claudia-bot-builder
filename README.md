@@ -1,23 +1,53 @@
-# Bot Builder
+# Claudia Bot Builder
 
+_Claudia Bot Builder_ helps developers create and deploy chat-bots for various platforms in minutes to AWS Lambda. It simplifies the messaging workflows, automatically sets up the correct web hooks, and guides you through configuration steps, so that you can focus on important business problems and not have to worry about infrastructure code. Here's a simple example:
 
-## Running tests
+```javascript
+const botBuilder = require('claudia-bot-builder');
+const excuse = require('huh');
 
-Run all
-
-```bash
-npm run test
+module.exports = botBuilder(function (request) {
+  return 'Thanks for sending ' + request.text +
+    'Your message is very important to us, but ' +
+    excuse.get();
+});
 ```
 
-Run only some tests
+This code is enough to operate bots for all four supported platforms. Claudia Bot Builder automatically parses the incoming messages into a common format, so you can handle it easily. It also automatically packages the response into the correct message template for the requesting bot, so you do not have to worry about individual bot protocols.
 
-```bash
-npm run test -- filter=prefix
-```
+## Supported platforms
 
-get detailed name reporting
+* Facebook Messenger Follow the instructions from the [Facebook Messenger Getting Started](https://developers.facebook.com/docs/messenger-platform/quickstart) guide, then submit the app for [App Review](https://developers.facebook.com/docs/messenger-platform/app-review)
+* Slack (slash commands for now). Follow the instructions from [Slack API Docs](https://api.slack.com/) to set up an app with a slash command, then [Create a Slack Button](https://api.slack.com/docs/slack-button) so people can add your app to their channels 
+* Skype 
+* Telegram 
 
-```bash
-npm run test -- full
-```
+## Creating bots
 
+Check out the [Getting Started](GETTING_STARTED.md) guide for information on how to set up a simple bot in minutes and [API Documentation](API.md) for detailed information on the API.
+
+## Examples 
+
+See the [Chat-Bots section](https://github.com/claudiajs/example-projects#chat-bots) of the Claudia.js example projects list
+
+## Contributing
+
+Contributions are greatly appreciated. See the [Contributors' guide](CONTRIBUTING.md) for information on running and testing code.
+
+## What's new since...?
+
+See the [Release History](RELEASES.md)
+
+## Questions/Comments?
+
+[![Join the chat at https://gitter.im/claudiajs/claudia](https://badges.gitter.im/claudiajs/claudia.svg)](https://gitter.im/claudiajs/claudia?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+## Authors
+
+* [Slobodan Stojanovic](https://github.com/stojanovic)
+* [Alexander Simovic](https://github.com/simalexan)
+* [Gojko Adzic](https://github.com/gojko)
+
+## License 
+
+MIT -- see [LICENSE](LICENSE)

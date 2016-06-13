@@ -1,33 +1,46 @@
 {
-  "name": "bot-builder",
+  "name": "claudia-bot-builder",
   "version": "1.0.0",
-  "description": "Simple bot builder for AWS Lambda and node.js",
+  "description": "Create chat-bots for various platforms and deploy to AWS Lambda quickly",
   "main": "index.js",
   "scripts": {
-    "start": "ntl",
     "pretest": "eslint lib spec *.js",
-    "test": "node spec/support/jasmine-runner.js",
-    "deploy-gojko": "claudia update --version gojko"
+    "test": "node spec/support/jasmine-runner.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/stojanovic/bot-builder.git"
+    "url": "https://github.com/claudiajs/claudia-bot-builder"
   },
-  "author": "Slobodan Stojanovic <slobodan@cloudhorizon.com> (http://slobodan.me/)",
+  "keywords": [
+    "claudia",
+    "aws",
+    "lambda",
+    "apigateway",
+    "bot",
+    "chatbot",
+    "messenger",
+    "telegram",
+    "skype",
+    "slack"
+  ],
+  "author": "Slobodan Stojanovic <slobodan@cloudhorizon.com> (http://slobodan.me/), ",
+  "contributors": [
+    "Alexander Simovic (https://github.com/simalexan)",
+    "Gojko Adzic <gojko@gojko.com> (https://gojko.net)"
+  ],
   "license": "MIT",
   "dependencies": {
-    "claudia-api-builder": "^1.1.0",
-    "huh": "^1.1.4",
+    "claudia-api-builder": "^1.2.1",
     "minimal-request-promise": "^1.0.0",
-    "oh-no-i-insist": "^1.0.0"
+    "oh-no-i-insist": "^1.0.0",
+    "souffleur": "^1.0.0"
   },
   "devDependencies": {
-    "claudia": "^1.3.1",
+    "claudia": "^1.4.1",
     "eslint": "^2.11.1",
     "eslint-config-defaults": "^9.0.0",
-    "fake-http-request": "^1.2.0",
+    "fake-http-request": "^1.3.0",
     "jasmine": "^2.4.1",
-    "jasmine-spec-reporter": "^2.4.0",
-    "ntl": "^1.1.2"
+    "jasmine-spec-reporter": "^2.4.0"
   }
 }
