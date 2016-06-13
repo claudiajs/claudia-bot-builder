@@ -1,5 +1,7 @@
 # Claudia Bot Builder
 
+[![Build Status](https://travis-ci.org/claudiajs/claudia-bot-builder.svg)](https://travis-ci.org/claudiajs/claudia-bot-builder)
+
 _Claudia Bot Builder_ helps developers create and deploy chat-bots for various platforms in minutes to AWS Lambda. It simplifies the messaging workflows, automatically sets up the correct web hooks, and guides you through configuration steps, so that you can focus on important business problems and not have to worry about infrastructure code. Here's a simple example:
 
 ```javascript
