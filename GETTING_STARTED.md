@@ -54,12 +54,17 @@ Messenger page. If you do not have one, create a new bot page in Facebook, as ex
 
 7. You can then generate the page access token from Facebook. Copy that back to Claudia, and you're almost done. In a few moments, your bot will be live, and anyone on Facebook can talk to it. 
 
+### Slack slash command configuration
+
+- Follow the instructions from [Slack API Docs](https://api.slack.com/) to set up an app with a slash command. 
+- Use `--configure-slack-slash-command` when deploying with Claudia to configure the access tokens.
+- [Create a Slack Button](https://api.slack.com/docs/slack-button) so people can add your app to their channels.
+
 
 ### Telegram bot configuration
 
-For getting a Telegram bot access token - use their [BotFather](https://telegram.me/BotFather) bot for creating bots. 
-
-Use `--configure-telegram-bot` when deploying with Claudia to configure the access token in your bot.
+- For getting a Telegram bot access token - use their [BotFather](https://telegram.me/BotFather) bot for creating bots. 
+- Use `--configure-telegram-bot` when deploying with Claudia to configure the access token in your bot.
 
 
 ### Skype bot configuration
