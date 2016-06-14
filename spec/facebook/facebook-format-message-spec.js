@@ -123,7 +123,7 @@ describe('Facebook format message', () => {
       expect(generic.bubbles[0].buttons[0].url).not.toBeDefined();
     });
 
-    it('should add a button with title and payload if you pass valid format', () => {
+    it('should add a button with title and url if you pass valid format', () => {
       generic
         .addBubble('Test')
         .addButton('Title 1', 'http://google.com');
@@ -201,8 +201,98 @@ describe('Facebook format message', () => {
     });
   });
 
-  xdescribe('Button template', () => {
+  describe('Button template', () => {
+    it('should be a class', () => {
+      let button = new formatFbMessage.button('Test');
 
+      expect(typeof formatFbMessage.button).toBe('function');
+      expect(button instanceof formatFbMessage.button).toBeTruthy();
+    });
+
+    it('should throw an error if button text is not provided', () => {
+      expect(() => new formatFbMessage.button()).toThrowError('Button template text cannot be empty');
+    });
+
+    it('should throw an error if button text is longer than 80 characters', () => {
+      expect(() => new formatFbMessage.button('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua')).toThrowError('Button template text cannot be longer than 80 characters');
+    });
+
+    it('should create a button template with the text when valid text is provided', () => {
+      let button = new formatFbMessage.button('Test');
+
+      expect(button.text).toBe('Test');
+    });
+
+    it('should throw an error if you add a button without the title', () => {
+      let button = new formatFbMessage.button('Test');
+
+      expect(() => button.addButton()).toThrowError('Button title cannot be empty');
+    });
+
+    it('should throw an error if you add a button without the value', () => {
+      let button = new formatFbMessage.button('Test');
+
+      expect(() => button.addButton('Title')).toThrowError('Bubble value is required');
+    });
+
+    it('should add a button with title and payload if you pass valid format', () => {
+      let button = new formatFbMessage.button('Test');
+      button.addButton('Title 1', 1);
+
+      expect(button.buttons.length).toBe(1);
+      expect(button.buttons[0].title).toBe('Title 1');
+      expect(button.buttons[0].type).toBe('postback');
+      expect(button.buttons[0].payload).toBe(1);
+      expect(button.buttons[0].url).not.toBeDefined();
+    });
+
+    it('should add a button with title and url if you pass valid format', () => {
+      let button = new formatFbMessage.button('Test');
+      button.addButton('Title 1', 'http://google.com');
+
+      expect(button.buttons.length).toBe(1);
+      expect(button.buttons[0].title).toBe('Title 1');
+      expect(button.buttons[0].type).toBe('web_url');
+      expect(button.buttons[0].url).toBe('http://google.com');
+      expect(button.buttons[0].payload).not.toBeDefined();
+    });
+
+    it('should add 3 buttons with valid titles and formats', () => {
+      let button = new formatFbMessage.button('Test');
+      button
+        .addButton('b1', 'v1')
+        .addButton('b2', 'v2')
+        .addButton('b3', 'v3');
+
+      expect(button.buttons.length).toBe(3);
+      expect(button.buttons[0].title).toBe('b1');
+      expect(button.buttons[0].payload).toBe('v1');
+      expect(button.buttons[1].title).toBe('b2');
+      expect(button.buttons[1].payload).toBe('v2');
+      expect(button.buttons[2].title).toBe('b3');
+      expect(button.buttons[2].payload).toBe('v3');
+    });
+
+    it('should return a formated object in the end', () => {
+      expect(
+        new formatFbMessage.button('Test')
+          .addButton('Title 1', 1)
+          .get()
+      ).toEqual({
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'button',
+            text: 'Test',
+            buttons: [{
+              type: 'postback',
+              title: 'Title 1',
+              payload: 1
+            }]
+          }
+        }
+      });
+    });
   });
 
   xdescribe('Receipt template', () => {
