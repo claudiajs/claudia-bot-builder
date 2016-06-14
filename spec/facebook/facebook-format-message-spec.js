@@ -299,7 +299,37 @@ describe('Facebook format message', () => {
 
   });
 
-  xdescribe('Image attachment', () => {
+  describe('Image attachment', () => {
+    it('should be a class', () => {
+      let image = new formatFbMessage.image('http://google.com');
 
+      expect(typeof formatFbMessage.image).toBe('function');
+      expect(image instanceof formatFbMessage.image).toBeTruthy();
+    });
+
+    it('should throw an error if you add an image without the url', () => {
+      expect(() => new formatFbMessage.image()).toThrowError('Image template requires a valid URL as a first paramether');
+    });
+
+    it('should throw an error if you add an image with invalid url', () => {
+      expect(() => new formatFbMessage.image('google')).toThrowError('Image template requires a valid URL as a first paramether');
+    });
+
+    it('should add an image with given URL if URL is valid', () => {
+      let image = new formatFbMessage.image('http://google.com/path/to/image.png');
+
+      expect(image.url).toBe('http://google.com/path/to/image.png');
+    });
+
+    it('should return a formated object in the end', () => {
+      expect(
+        new formatFbMessage.image('http://google.com/path/to/image.png').get()
+      ).toEqual({
+        attachment: {
+          type: 'image',
+          url: 'http://google.com/path/to/image.png'
+        }
+      });
+    });
   });
 });
