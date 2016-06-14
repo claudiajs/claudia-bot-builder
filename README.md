@@ -1,6 +1,8 @@
 # Claudia Bot Builder
 
-_Claudia Bot Builder_ helps developers create and deploy chat-bots for various platforms in minutes to AWS Lambda. It simplifies the messaging workflows, automatically sets up the correct web hooks, and guides you through configuration steps, so that you can focus on important business problems and not have to worry about infrastructure code. Here's a simple example:
+_Claudia Bot Builder_ helps developers create and deploy chat-bots for various platforms in minutes to AWS Lambda. It simplifies the messaging workflows, automatically sets up the correct web hooks, and guides you through configuration steps, so that you can focus on important business problems and not have to worry about infrastructure code. Check out [this video](https://vimeo.com/170647056) to see how you can create and deploy a bot quickly.
+
+Here's a simple example:
 
 ```javascript
 const botBuilder = require('claudia-bot-builder');
