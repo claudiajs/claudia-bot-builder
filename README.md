@@ -28,6 +28,10 @@ This code is enough to operate bots for all four supported platforms. Claudia Bo
 
 Check out the [Getting Started](GETTING_STARTED.md) guide for information on how to set up a simple bot in minutes and [API Documentation](API.md) for detailed information on the API.
 
+Or check out this video for a quick tour:
+
+[![](video-screenshot.jpg?)](https://vimeo.com/170647056)
+
 ## Examples
 
 See the [Chat-Bots section](https://github.com/claudiajs/example-projects#chat-bots) of the Claudia.js example projects list
