@@ -2,7 +2,15 @@
 
 [![Build Status](https://travis-ci.org/claudiajs/claudia-bot-builder.svg)](https://travis-ci.org/claudiajs/claudia-bot-builder)
 
-_Claudia Bot Builder_ helps developers create and deploy chat-bots for various platforms in minutes to AWS Lambda. It simplifies the messaging workflows, automatically sets up the correct web hooks, and guides you through configuration steps, so that you can focus on important business problems and not have to worry about infrastructure code. Here's a simple example:
+[![Join the chat at https://gitter.im/claudiajs/claudia](https://badges.gitter.im/claudiajs/claudia.svg)](https://gitter.im/claudiajs/claudia?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+_Claudia Bot Builder_ helps developers create and deploy chat-bots for various platforms in minutes to AWS Lambda. It simplifies the messaging workflows, automatically sets up the correct web hooks, and guides you through configuration steps, so that you can focus on important business problems and not have to worry about infrastructure code.
+
+Check out [this video](https://vimeo.com/170647056) to see how you can create and deploy a bot quickly:
+
+[![](https://claudiajs.github.io/claudiajs.com/assets/claudia-bot-builder-video.jpg)](https://vimeo.com/170647056)
+
+Here's a simple example:
 
 ```javascript
 const botBuilder = require('claudia-bot-builder');
@@ -39,10 +47,6 @@ Contributions are greatly appreciated. See the [Contributors' guide](CONTRIBUTIN
 ## What's new since...?
 
 See the [Release History](RELEASES.md)
-
-## Questions/Comments?
-
-[![Join the chat at https://gitter.im/claudiajs/claudia](https://badges.gitter.im/claudiajs/claudia.svg)](https://gitter.im/claudiajs/claudia?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Authors
 
