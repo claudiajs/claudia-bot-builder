@@ -1,6 +1,6 @@
 /*global require, describe, it, expect, beforeEach, jasmine*/
 'use strict';
-var underTest = require('../lib/facebook/setup');
+var underTest = require('../../lib/facebook/setup');
 describe('Facebook setup', () => {
   var api, bot, logError, parser, responder, botPromise, botResolve, botReject;
   beforeEach(() => {

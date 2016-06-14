@@ -16,18 +16,25 @@ Claudia.js (and the bot builder extension) just uses the standard AWS Node.js SD
 ### Creating a simple Facebook bot
 
 1. Create and initialise a new NPM project in an empty directory:
+
   ```bash
   npm init
   ```
-2. Add the `claudia-bot-builder` as a project dependency (`-S` is critically important here, to save the dependency to `package.json`:
+
+2. Add the `claudia-bot-builder` as a project dependency (`-S` is critically important here, to save the dependency to `package.json`):
+
   ```bash
   npm install claudia-bot-builder -S
   ```
+
 3. Install `claudia` as a global utility, if you do not have it already:
+
   ```bash
   npm install claudia -g
   ```
+
 4. Create a file for your bot (for example, `bot.js`)
+
   ```javascript
   const botBuilder = require('claudia-bot-builder');
 
@@ -35,13 +42,17 @@ Claudia.js (and the bot builder extension) just uses the standard AWS Node.js SD
     `Thanks for sending ${request.text}.`
   );
   ```
+
 5. Create a new bot in AWS, and configure it for Facebook Messenger. If you did not use `bot.js` as the name for your bot file, change the `--api-module` argument below accordingly.
+
   ```bash
   claudia create --region us-east-1 --api-module bot --configure-fb-bot
   ```
-6. When prompted fort the page access token, provide the Page access token for your bot. If you do not have one, create a new bot page in Facebook, as explained in the [Facebook Messenger Getting Started Guide](https://developers.facebook.com/docs/messenger-platform/quickstart).
-7. The deployment process, when it completes, will print out the bot Web hook URL. You can copy and paste that to your Facebook bot configuration. 
-8. All done, talk to your bot from the Facebook page.
+
+6. The installer will print the web hook URL and the verification token, which you can copy to your Facebook
+Messenger page. If you do not have one, create a new bot page in Facebook, as explained in the [Facebook Messenger Getting Started Guide](https://developers.facebook.com/docs/messenger-platform/quickstart).
+
+7. You can then generate the page access token from Facebook. Copy that back to Claudia, and you're almost done. In a few moments, your bot will be live, and anyone on Facebook can talk to it. 
 
 
 ### Telegram bot configuration

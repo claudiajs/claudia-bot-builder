@@ -1,5 +1,5 @@
 /*global describe, it, jasmine, expect, beforeEach*/
-var botBuilder = require('../lib/bot-builder'),
+var botBuilder = require('../../lib/bot-builder'),
   https = require('https');
 describe('Facebook Bot integration test', () => {
   var messageHandler,
@@ -34,7 +34,7 @@ describe('Facebook Bot integration test', () => {
   beforeEach(() => {
     messageHandler = jasmine.createSpy('messageHandler');
     lambdaContextSpy = jasmine.createSpyObj('lambdaContext', ['done']);
-    underTest = botBuilder(messageHandler);
+    underTest = botBuilder(messageHandler, () => {});
   });
 
   describe('API integration wiring', () => {
