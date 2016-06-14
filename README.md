@@ -1,6 +1,11 @@
 # Claudia Bot Builder
 
-_Claudia Bot Builder_ helps developers create and deploy chat-bots for various platforms in minutes to AWS Lambda. It simplifies the messaging workflows, automatically sets up the correct web hooks, and guides you through configuration steps, so that you can focus on important business problems and not have to worry about infrastructure code. Check out [this video](https://vimeo.com/170647056) to see how you can create and deploy a bot quickly.
+_Claudia Bot Builder_ helps developers create and deploy chat-bots for various platforms in minutes to AWS Lambda. It simplifies the messaging workflows, automatically sets up the correct web hooks, and guides you through configuration steps, so that you can focus on important business problems and not have to worry about infrastructure code.
+
+Check out [this video](https://vimeo.com/170647056) to see how you can create and deploy a bot quickly:
+
+[![](https://claudiajs.github.io/claudiajs.com/assets/claudia-bot-builder-video.jpg)](https://vimeo.com/170647056)
+
 
 Here's a simple example:
 
@@ -27,10 +32,6 @@ This code is enough to operate bots for all four supported platforms. Claudia Bo
 ## Creating bots
 
 Check out the [Getting Started](GETTING_STARTED.md) guide for information on how to set up a simple bot in minutes and [API Documentation](API.md) for detailed information on the API.
-
-Or check out this video for a quick tour:
-
-[![](video-screenshot.jpg?)](https://vimeo.com/170647056)
 
 ## Examples
 
