@@ -9,11 +9,11 @@ This document outlines how to create and deploy a very simple bot to AWS Lambda 
 * An AWS account with the permissions to create Lambda functions, API Gateway end-points and IAM roles. 
 * [Claudia.js](https://claudiajs.com) 1.4.0 or later
 
-## Setting up the AWS credentials
+### Setting up the AWS credentials
 
 Claudia.js (and the bot builder extension) just uses the standard AWS Node.js SDK, so if you have that configured, there is no additional configuration required. See [Configuring Access Credentials](https://github.com/claudiajs/claudia/blob/master/getting_started.md#configuring-access-credentials) in the Claudia.js getting started guide for more information.
 
-### Creating a simple Facebook bot
+## Creating a simple Facebook bot
 
 1. Create and initialise a new NPM project in an empty directory:
 
@@ -43,39 +43,38 @@ Claudia.js (and the bot builder extension) just uses the standard AWS Node.js SD
   );
   ```
 
-5. Create a new bot in AWS, and configure it for Facebook Messenger. If you did not use `bot.js` as the name for your bot file, change the `--api-module` argument below accordingly.
+5. Create a new bot in AWS. If you did not use `bot.js` as the name for your bot file, change the `--api-module` argument below accordingly.
 
   ```bash
-  claudia create --region us-east-1 --api-module bot --configure-fb-bot
+  claudia create --region us-east-1 --api-module bot
   ```
 
-6. The installer will print the web hook URL and the verification token, which you can copy to your Facebook
-Messenger page. If you do not have one, create a new bot page in Facebook, as explained in the [Facebook Messenger Getting Started Guide](https://developers.facebook.com/docs/messenger-platform/quickstart).
+### Facebook messenger configuration
 
-7. You can then generate the page access token from Facebook. Copy that back to Claudia, and you're almost done. In a few moments, your bot will be live, and anyone on Facebook can talk to it. 
+- create a new bot page in Facebook and a messenger app, as explained in the [Facebook Messenger Getting Started Guide](https://developers.facebook.com/docs/messenger-platform/quickstart).
+- use `claudia update --configure-fb-bot` to get the Webhook URL and the verification token, which you can copy to your Facebook Messenger configuration. 
+- Generate the page access token from Facebook, and copy that back to Claudia when asked.
 
 ### Slack slash command configuration
 
 - Follow the instructions from [Slack API Docs](https://api.slack.com/) to set up an app with a slash command. 
-- Use `--configure-slack-slash-command` when deploying with Claudia to configure the access tokens.
+- Use `claudia update --configure-slack-slash-command` to configure the access tokens.
 - [Create a Slack Button](https://api.slack.com/docs/slack-button) so people can add your app to their channels.
 
 
 ### Telegram bot configuration
 
 - For getting a Telegram bot access token - use their [BotFather](https://telegram.me/BotFather) bot for creating bots. 
-- Use `--configure-telegram-bot` when deploying with Claudia to configure the access token in your bot.
+- Use `claudia update --configure-telegram-bot` to configure the access token in your bot.
 
 
 ### Skype bot configuration
 
-For getting Skype bot credentials:
-
 - Create a Microsoft App and get its App ID and App secret on [Microsoft Apps](https://apps.dev.microsoft.com/)
 - Create the Skype bot and use the App ID and App Secret (Private key) on the [Microsoft My Bots](https://developer.microsoft.com/en-us/skype/bots/manage)
-- Use `--configure-skype-bot` when deploying with Claudia to configure the access details in your bot.
+- Use `claudia update --configure-skype-bot` to configure the access details in your bot.
 
-### Further information
+## Further information
 
 For more information on configuring different bot types, see [API Documentation](API.md).
 
