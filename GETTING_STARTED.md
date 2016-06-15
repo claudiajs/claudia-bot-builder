@@ -70,9 +70,9 @@ Claudia.js (and the bot builder extension) just uses the standard AWS Node.js SD
 
 ### Skype bot configuration
 
-- Create a Microsoft App and get its App ID and App secret on [Microsoft Apps](https://apps.dev.microsoft.com/)
-- Create the Skype bot and use the App ID and App Secret (Private key) on the [Microsoft My Bots](https://developer.microsoft.com/en-us/skype/bots/manage)
-- Use `claudia update --configure-skype-bot` to configure the access details in your bot.
+- Create a Microsoft App and get its App ID and App password at [Microsoft Apps](https://apps.dev.microsoft.com/)
+- Use `claudia update --configure-skype-bot` to configure the access details in your bot
+- Create the Skype bot using the webhook URL printed by the installer at the [Skype Bots Page](https://developer.microsoft.com/en-us/skype/bots/manage/Create)
 
 ## Further information
 
