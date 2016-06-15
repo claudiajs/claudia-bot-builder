@@ -13,7 +13,7 @@ This document outlines how to create and deploy a very simple bot to AWS Lambda 
 
 Claudia.js (and the bot builder extension) just uses the standard AWS Node.js SDK, so if you have that configured, there is no additional configuration required. See [Configuring Access Credentials](https://github.com/claudiajs/claudia/blob/master/getting_started.md#configuring-access-credentials) in the Claudia.js getting started guide for more information.
 
-## Creating a simple Facebook bot
+## Creating a simple bot
 
 1. Create and initialise a new NPM project in an empty directory:
 
@@ -33,7 +33,7 @@ Claudia.js (and the bot builder extension) just uses the standard AWS Node.js SD
   npm install claudia -g
   ```
 
-4. Create a file for your bot (for example, `bot.js`)
+4. Create a file for your bot (for example, `bot.js`):
 
   ```javascript
   const botBuilder = require('claudia-bot-builder');
@@ -58,7 +58,7 @@ Claudia.js (and the bot builder extension) just uses the standard AWS Node.js SD
 ### Slack slash command configuration
 
 - Follow the instructions from [Slack API Docs](https://api.slack.com/) to set up an app with a slash command. 
-- Use `claudia update --configure-slack-slash-command` to configure the access tokens.
+- Use `claudia update --configure-slack-slash-command` t to configure the access tokens.
 - [Create a Slack Button](https://api.slack.com/docs/slack-button) so people can add your app to their channels.
 
 
