@@ -51,9 +51,10 @@ Claudia.js (and the bot builder extension) just uses the standard AWS Node.js SD
 
 ### Facebook messenger configuration
 
-- create a new bot page in Facebook and a messenger app, as explained in the [Facebook Messenger Getting Started Guide](https://developers.facebook.com/docs/messenger-platform/quickstart).
-- use `claudia update --configure-fb-bot` to get the Webhook URL and the verification token, which you can copy to your Facebook Messenger configuration. 
+- Create a new bot page in Facebook and a messenger app, as explained in the [Facebook Messenger Getting Started Guide](https://developers.facebook.com/docs/messenger-platform/quickstart).
+- Use `claudia update --configure-fb-bot` to get the Webhook URL and the verification token, which you can copy to your Facebook Messenger configuration. 
 - Generate the page access token from Facebook, and copy that back to Claudia when asked.
+- Submit the app for [App Review](https://developers.facebook.com/docs/messenger-platform/app-review) if you want to make the bot public
 
 ### Slack slash command configuration
 

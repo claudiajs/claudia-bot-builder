@@ -26,8 +26,8 @@ This code is enough to operate bots for all four supported platforms. Claudia Bo
 
 ## Supported platforms
 
-* Facebook Messenger Follow the instructions from the [Facebook Messenger Getting Started](https://developers.facebook.com/docs/messenger-platform/quickstart) guide, then submit the app for [App Review](https://developers.facebook.com/docs/messenger-platform/app-review)
-* Slack (slash commands for now). Follow the instructions from [Slack API Docs](https://api.slack.com/) to set up an app with a slash command, then [Create a Slack Button](https://api.slack.com/docs/slack-button) so people can add your app to their channels
+* Facebook Messenger 
+* Slack (slash commands only for now) 
 * Skype
 * Telegram
 
