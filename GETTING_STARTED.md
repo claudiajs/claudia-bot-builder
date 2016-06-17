@@ -59,7 +59,7 @@ Claudia.js (and the bot builder extension) just uses the standard AWS Node.js SD
 ### Slack slash command configuration
 
 - Follow the instructions from [Slack API Docs](https://api.slack.com/) to set up an app with a slash command. 
-- Use `claudia update --configure-slack-slash-command` t to configure the access tokens.
+- Use `claudia update --configure-slack-slash-command` to configure the access tokens.
 - [Create a Slack Button](https://api.slack.com/docs/slack-button) so people can add your app to their channels.
 
 
