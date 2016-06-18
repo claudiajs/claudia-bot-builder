@@ -76,6 +76,9 @@ describe('Facebook Reply', () => {
   it('sends multiple messages in sequence if array is passed', () => {
     let answers = ['foo', 'bar'];
     https.request.pipe(() => {
+      if (https.request.calls.length === 1)
+        return Promise.resolve();
+
       Promise.resolve().then(() => {
         expect(https.request.calls.length).toEqual(2);
       });
