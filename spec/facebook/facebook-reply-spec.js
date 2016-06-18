@@ -2,6 +2,7 @@
 var reply = require('../../lib/facebook/reply'),
   https = require('https');
 describe('Facebook Reply', () => {
+  'use strict';
   beforeEach(() =>{
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
   });
@@ -71,6 +72,15 @@ describe('Facebook Reply', () => {
     });
 
     reply('user123', fiveHundred, 'ACCESS123');
+  });
+  it('sends multiple messages in sequence if array is passed', () => {
+    let answers = ['foo', 'bar'];
+    https.request.pipe(() => {
+      Promise.resolve().then(() => {
+        expect(https.request.calls.length).toEqual(2);
+      });
+    });
+    reply('user123', answers, 'ACCESS123');
   });
   it('sends complex messages without transforming into a text object', done => {
     https.request.pipe(callOptions => {
