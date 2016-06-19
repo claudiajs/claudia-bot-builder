@@ -1,6 +1,6 @@
 # Claudia Bot Builder release history
 
-## 1.1.0, X June 2016
+## 1.1.0, 19 June 2016
 
 - separates Slack App slash command and slash command integration configuration
 - adds Facebook message builder for structured messages
