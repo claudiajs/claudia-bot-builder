@@ -56,11 +56,16 @@ Claudia.js (and the bot builder extension) just uses the standard AWS Node.js SD
 - Generate the page access token from Facebook, and copy that back to Claudia when asked.
 - Submit the app for [App Review](https://developers.facebook.com/docs/messenger-platform/app-review) if you want to make the bot public
 
-### Slack slash command configuration
+### Slack App slash command configuration
 
 - Follow the instructions from [Slack API Docs](https://api.slack.com/) to set up an app with a slash command. 
-- Use `claudia update --configure-slack-slash-command` to configure the access tokens.
+- Use `claudia update --configure-slack-slash-app` to configure the access tokens.
 - [Create a Slack Button](https://api.slack.com/docs/slack-button) so people can add your app to their channels.
+
+### Slack slash command integration configuration
+
+- Follow the instructions from [Slack API Docs](https://my.slack.com/services/new/slash-commands) to creeate a slash command for your team. 
+- Use `claudia update --configure-slack-slash-command` to configure the token.
 
 
 ### Telegram bot configuration
