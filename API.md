@@ -73,9 +73,9 @@ Methods:
 | Method    | Required | Arguments   | Returns             | Description |
 |-----------|----------|-------------|---------------------|-------------|
 | addBubble | Yes      | title (string, required), subtitle (string)    | `this` for chaining | Each Generic template can have 1 to 10 elements/bubbles, before you add anything to it. It requires element's title, but it can also accept element's subtitle |
-| addUrl    | No       | A valid URL | `this` for chaining | Adds an url to a current element, requires a valid URL |
-| addImage  | No       | A valid URL | `this` for chaining | Adds an image to a current element, requires a valid URL |
-| addButton | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, at least one button is required, and maximum 3 of them is allowed |
+| addUrl    | No       | A valid URL | `this` for chaining | Adds an url to a current element, requires a valid URL, also requires `addBubble` to be added first |
+| addImage  | No       | A valid URL | `this` for chaining | Adds an image to a current element, requires a valid URL, also requires `addBubble` to be added first |
+| addButton | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, at least one button is required, and maximum 3 of them is allowed. It also requires `addBubble` to be added first |
 | get       | Yes      | No args.    | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 *_Required arguments_, Messenger requires all elements to have those values, the message builder will throw an error if you don't provide it.
@@ -118,7 +118,7 @@ _Arguments_:
 Methods:
 
 | Method    | Required | Arguments   | Returns             | Description |
-|-----------|----------|-------------|---------------------|-------------|)
+|-----------|----------|-------------|---------------------|-------------|
 | addButton | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, at least one button is required, and maximum 3 of them is allowed |
 | get       | Yes      | No args.    | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
@@ -146,6 +146,60 @@ module.exports = botBuilder(request => {
 
 The Receipt Template can be used to send receipts for orders.
 
+__API__:
+
+`receipt` (class) - Class that allows you to build Receipt template messages  
+_Arguments_:
+
+- `name`, string (required) - recipient's Name
+- `orderNumber`, string (required) - order number, must be unique
+- `currency`, string (required) - currency for order
+- `paymentMethod`, string (required) - payment method details, this can be a custom string. ex: 'Visa 1234'
+
+- `text`, string (required) - a text to display above the button(s).
+
+__Methods__:
+
+| Method    | Required | Arguments   | Returns             | Description |
+|-----------|----------|-------------|---------------------|-------------|
+| addTimestamp | No    | timestamp (valid JS date object, required) | `this` for chaining | timestamp of the order |
+| addOrderUrl | No     | url (valid URL, required) | `this` for chaining | order URL |
+| addItem   | Yes, at least one | title (string, required) | `this` for chaining | add an item to a receipt, at least one item is required. Beside title, each item can have subtitle, quantity, price, currencty and image, methods bellow explains how to add them |
+| addSubtitle | No    | subtitle (string, required) | `this` for chaining | current item's subtitle, requires `addItem` first |
+| addQuantity | No    | quantity (number, required) | `this` for chaining | current item's quantity, requires `addItem` first |
+| addPrice    | No    | price (number, required) | `this` for chaining | current item's price, requires `addItem` first |
+| addCurrency | No    | currency (string, required) | `this` for chaining | current item's currency, requires `addItem` first |
+| addImage    | No    | image (string, required) | `this` for chaining | current item's image, requires `addItem` first |
+| addShippingAddress | No | street1 (string, required), street2 (string, can be `null`), city (string, required), zip (string, required), state (string, required), country (string, required) | `this` for chaining | shipping address if applicable |
+| addAdjustment | No | name (string), amount (number) | `this` for chaining | payment adjustments, multiple adjustments are allowed |
+| addSubtotal | No | subtotal (number, required) | `this` for chaining | subtotal |
+| addShippingCost | No | shippingCost (number, required) | `this` for chaining | shipping cost |
+| addTax | No | tax (number, required) | `this` for chaining | total tax |
+| addTotal | Yes | total (number, required) | `this` for chaining | total cost |
+| get | Yes      | No args.    | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
+
+__Example__:
+
+```js
+const botBuilder = require('claudia-bot-builder');
+const fbTemplate = require('claudia-bot-builder').fbTemplate;
+
+module.exports = botBuilder(request => {
+  if (request.type === 'facebook') {
+    return new fbTemplate.receipt('Pizza order', 'ORDER-123', '$', 'Paypal')
+      .addTimestamp(new Date())
+      .addItem('Pizza')
+        .addSubtitle('32cm')
+        .addQuantity(1)
+        .addPrice(4.99)
+      .addShippingAddress('Some street 123', null, 'San Francisco', '123',  'CA', 'US')
+      .addTotal(4.99)
+      .get();
+  }
+});
+
+```
+
 #### Image attachment
 
 Image attachment allows you to send, obviously, an image :) 
@@ -169,13 +223,17 @@ const fbTemplate = require('claudia-bot-builder').fbTemplate;
 
 module.exports = botBuilder(request => {
   if (request.type === 'facebook') {
-    reuturn new fbTemplate.image('https://github.com/claudiajs/claudiajs.com/blob/master/assets/claudiajs.png');
+    return new fbTemplate.image('https://github.com/claudiajs/claudiajs.com/blob/master/assets/claudiajs.png');
   }
 });
 ```
 
 
 #### Handling errors
+
+_Facebook Template Message builder_ checks if the messages you are generating are following Facebook Messenger guidelines and limits, in case they are not an error will be thrown.
+
+More info about limits and guidelines can be found in [Messenger's Send API Referece](https://developers.facebook.com/docs/messenger-platform/send-api-reference).
 
 ## Bot configuration
 
