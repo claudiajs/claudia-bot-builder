@@ -33,7 +33,7 @@ This code is enough to operate bots for all four supported platforms. Claudia Bo
 
 ## Creating bots
 
-Check out the [Getting Started](GETTING_STARTED.md) guide for information on how to set up a simple bot in minutes and [API Documentation](API.md) for detailed information on the API.
+Check out the [Getting Started](docs/GETTING_STARTED.md) guide for information on how to set up a simple bot in minutes and [API Documentation](docs/API.md) for detailed information on the API.
 
 ## Examples
 
