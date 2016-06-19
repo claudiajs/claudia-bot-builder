@@ -21,14 +21,14 @@ More info about each type of structured messages can be found in [Facebook Messe
 
 The Generic Template can take an image, title, subtitle, description and buttons. This template can support multiple bubbles per message and display them as a horizontal list.
 
-__API__:
+### API
 
 `generic` (class) - Class that allows you to build Generic template messages  
 _Arguments_:
 
 - none
 
-Methods:
+### Methods
 
 | Method    | Required | Arguments   | Returns             | Description |
 |-----------|----------|-------------|---------------------|-------------|
@@ -40,7 +40,7 @@ Methods:
 
 *_Required arguments_, Messenger requires all elements to have those values, the message builder will throw an error if you don't provide it.
 
-__Example__:
+### Example
 
 ```js
 const botBuilder = require('claudia-bot-builder');
@@ -68,14 +68,14 @@ module.exports = botBuilder(request => {
 
 The Button Template is useful when you want to present simple text with options, it has the same buttons as Generic template, but it doesn't allow element image and URL, it also doesn't allow multiple elements.
 
-__API__:
+### API
 
 `generic` (class) - Class that allows you to build Button template messages  
 _Arguments_:
 
 - `text`, string (required) - a text to display above the button(s).
 
-Methods:
+### Methods
 
 | Method    | Required | Arguments   | Returns             | Description |
 |-----------|----------|-------------|---------------------|-------------|
@@ -84,7 +84,7 @@ Methods:
 
 *_Required arguments_, Messenger requires all elements to have those values, the message builder will throw an error if you don't provide it.
 
-__Example__:
+### Example
 
 ```
 const botBuilder = require('claudia-bot-builder');
@@ -106,7 +106,7 @@ module.exports = botBuilder(request => {
 
 The Receipt Template can be used to send receipts for orders.
 
-__API__:
+### API
 
 `receipt` (class) - Class that allows you to build Receipt template messages  
 _Arguments_:
@@ -118,7 +118,7 @@ _Arguments_:
 
 - `text`, string (required) - a text to display above the button(s).
 
-__Methods__:
+### Methods
 
 | Method    | Required | Arguments   | Returns             | Description |
 |-----------|----------|-------------|---------------------|-------------|
@@ -138,7 +138,7 @@ __Methods__:
 | addTotal | Yes | total (number, required) | `this` for chaining | total cost |
 | get | Yes      | No args.    | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
-__Example__:
+### Example
 
 ```js
 const botBuilder = require('claudia-bot-builder');
@@ -164,18 +164,18 @@ module.exports = botBuilder(request => {
 
 Image attachment allows you to send, obviously, an image :) 
 
-__API__:
+### API
 
 `image` (class) - Class that allows you to send an image attachment message  
 _Arguments_:
 
 - `url`, string (required) - a valid URL for an image.
 
-__Methods__:
+### Methods
 
 No methods
 
-__Example__:
+### Example
 
 ```js
 const botBuilder = require('claudia-bot-builder');
