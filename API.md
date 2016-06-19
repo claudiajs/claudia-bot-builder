@@ -69,11 +69,11 @@ Methods:
 
 | Method    | Required | Arguments   | Returns             | Description |
 |-----------|----------|-------------|---------------------|-------------|
-| addBubble | Yes      | title*, subtitle    | `this` for chaining | Each Generic template can have 1 to 10 elements/bubbles, before you add anything to it |
-| addUrl    | No       | A valid URL | `this` for chaining | ... |
-| addImage  | No       | A valid URL | `this` for chaining | ... |
-| addBubble | Yes      | title*, subtitle | `this` for chaining | ... |
-| get       | Yes      | No args.    | Formatted JSON      | ... |
+| addBubble | Yes      | title (string, required), subtitle (string)    | `this` for chaining | Each Generic template can have 1 to 10 elements/bubbles, before you add anything to it. It requires element's title, but it can also accept element's subtitle |
+| addUrl    | No       | A valid URL | `this` for chaining | Adds an url to a current element, requires a valid URL |
+| addImage  | No       | A valid URL | `this` for chaining | Adds an image to a current element, requires a valid URL |
+| addButton | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url` |
+| get       | Yes      | No args.    | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 *Required arguments.
 
@@ -84,7 +84,7 @@ const botBuilder = require('claudia-bot-builder');
 const fbTemplate = require('claudia-bot-builder').fbTemplate;
 
 module.exports = botBuilder(request => {
-  if (request.type === 'facebook) {
+  if (request.type === 'facebook') {
     const generic = new fbTemplate.generic();
     
     return generic
