@@ -27,7 +27,7 @@ This code is enough to operate bots for all four supported platforms. Claudia Bo
 ## Supported platforms
 
 * Facebook Messenger 
-* Slack (slash commands only for now) 
+* Slack (channel slash commands and apps with slash commands) 
 * Skype
 * Telegram
 
