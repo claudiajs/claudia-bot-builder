@@ -72,10 +72,10 @@ Methods:
 | addBubble | Yes      | title (string, required), subtitle (string)    | `this` for chaining | Each Generic template can have 1 to 10 elements/bubbles, before you add anything to it. It requires element's title, but it can also accept element's subtitle |
 | addUrl    | No       | A valid URL | `this` for chaining | Adds an url to a current element, requires a valid URL |
 | addImage  | No       | A valid URL | `this` for chaining | Adds an image to a current element, requires a valid URL |
-| addButton | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url` |
+| addButton | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, at least one button is required, and maximum 3 of them is allowed |
 | get       | Yes      | No args.    | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
-*Required arguments.
+*_Required arguments_, Messenger requires all elements to have those values, the message builder will throw an error if you don't provide it.
 
 __Example__:
 
@@ -103,9 +103,44 @@ module.exports = botBuilder(request => {
 
 #### Button template
 
+The Button Template is useful when you want to present simple text with options, it has the same buttons as Generic template, but it doesn't allow element image and URL, it also doesn't allow multiple elements.
+
+__API__:
+
+`generic` (class) - Class that allows you to build Generic template messages
+
+Methods:
+
+| Method    | Required | Arguments   | Returns             | Description |
+|-----------|----------|-------------|---------------------|-------------|
+| addButton | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, at least one button is required, and maximum 3 of them is allowed |
+| get       | Yes      | No args.    | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
+
+*_Required arguments_, Messenger requires all elements to have those values, the message builder will throw an error if you don't provide it.
+
+__Example__:
+
+```
+const botBuilder = require('claudia-bot-builder');
+const fbTemplate = require('claudia-bot-builder').fbTemplate;
+
+module.exports = botBuilder(request => {
+  if (request.type === 'facebook') {
+    return new fbTemplate.button('How are you?')
+      .addButton('Awesome', 'AWESOME')
+      .addButton('Great', 'GREAT')
+      .addButton('🎵🎵🎵', 'https://youtu.be/m5TwT69i1lU')
+      .get();
+  }
+});
+
+```
+
 #### Receipt template
 
 #### Image attachment
+
+#### Handling errors
 
 ## Bot configuration
 
