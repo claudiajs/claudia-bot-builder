@@ -26,7 +26,9 @@ If you reply with a string, the response will be packaged in a bot-specific form
 
 Individual bots support more complex responses, such as buttons, attachments and so on. You can send all those responses by replying with an object, instead of a string. In that case, _Claudia Bot Builder_ does not transform the response at all, and just passes it back to the sender. It's then your responsibility to ensure that the resulting object is in the correct format for the bot engine. Use `request.type` to discover the bot engine sending the requests.
 
-Additionally, _Claudia Bot Builder_ exports a template message builder for Facebook and you can use it to generate more complex responses including buttons, receipts and attachments.
+If you reply with an array multiple messages will be sent in sequence. Each array item can be text or already formatted object and it'll follow the same rules explained above. At the moment, this is supported for Facebook Messenger only.
+
+Additionally, _Claudia Bot Builder_ exports a _Facebook Template Message builder_ for generating more complex responses including buttons, receipts and attachments.
 
 ### Synchronous replies
 
@@ -40,7 +42,7 @@ If you plan to reply asynchronously, make sure to configure your lambda function
 
 ### Facebook Template Message builder
 
-Facebook Template Message builder allows you to generate more complex messages for Facebook Messenger without writing JSON files manually.
+_Facebook Template Message builder_ allows you to generate more complex messages for Facebook Messenger without writing JSON files manually.
 
 To use it, just require `fbTemplate` function from _Claudia Bot Builder_:
 
