@@ -26,6 +26,8 @@ If you reply with a string, the response will be packaged in a bot-specific form
 
 Individual bots support more complex responses, such as buttons, attachments and so on. You can send all those responses by replying with an object, instead of a string. In that case, _Claudia Bot Builder_ does not transform the response at all, and just passes it back to the sender. It's then your responsibility to ensure that the resulting object is in the correct format for the bot engine. Use `request.type` to discover the bot engine sending the requests.
 
+Additionally, _Claudia Bot Builder_ exports a template message builder for Facebook and you can use it to generate more complex responses including buttons, receipts and attachments.
+
 ### Synchronous replies
 
 Just return the result from the function. 
@@ -36,12 +38,82 @@ Return a `Promise` from the callback function, and resolve the promise later wit
 
 If you plan to reply asynchronously, make sure to configure your lambda function so it does not get killed prematurely. By default, Lambda functions are only allowed to run for 3 seconds. See [update-function-configuration](http://docs.aws.amazon.com/cli/latest/reference/lambda/update-function-configuration.html) in the AWS Command Line tools for information on how to change the default timeout.
 
+### Facebook Template Message builder
+
+Facebook Template Message builder allows you to generate more complex messages for Facebook Messenger without writing JSON files manually.
+
+To use it, just require `fbTemplate` function from _Claudia Bot Builder_:
+
+```js
+const fbTemplate = require('claudia-bot-builder').fbTemplate;
+```
+
+`fbTemplate` exports an object that contains 4 classes that allows you to generate 4 different types of Facebook Messenger structured messages:
+
+- Generic template messages
+- Button template messages
+- Receipt template messages
+- Image attachment messages
+
+More info about each type of structured messages can be found in [Facebook Messenger's Complete guide](https://developers.facebook.com/docs/messenger-platform/implementation#send_message).
+
+#### Generic template
+
+The Generic Template can take an image, title, subtitle, description and buttons. This template can support multiple bubbles per message and display them as a horizontal list.
+
+__API__:
+
+`generic` (class) - Class that allows you to build Generic template messages
+
+Methods:
+
+| Method    | Required | Arguments   | Returns             | Description |
+|-----------|----------|-------------|---------------------|-------------|
+| addBubble | Yes      | title*, subtitle    | `this` for chaining | Each Generic template can have 1 to 10 elements/bubbles, before you add anything to it |
+| addUrl    | No       | A valid URL | `this` for chaining | ... |
+| addImage  | No       | A valid URL | `this` for chaining | ... |
+| addBubble | Yes      | title*, subtitle | `this` for chaining | ... |
+| get       | Yes      | No args.    | Formatted JSON      | ... |
+
+*Required arguments.
+
+__Example__:
+
+```js
+const botBuilder = require('claudia-bot-builder');
+const fbTemplate = require('claudia-bot-builder').fbTemplate;
+
+module.exports = botBuilder(request => {
+  if (request.type === 'facebook) {
+    const generic = new fbTemplate.generic();
+    
+    return generic
+      .addBubble('Claudia.js', 'Deploy Node.js microservices to AWS easily')
+        .addUrl('https://claudiajs.com')
+        .addImage('https://github.com/claudiajs/claudiajs.com/blob/master/assets/claudiajs.png')
+        .addButton('Say hello', 'HELLO')
+        .addButton('Go to Github', 'https://github.com/claudiajs/claudia')
+      .addBubble('Claudia Bot Builder')
+      	.addImage('https://github.com/claudiajs/claudiajs.com/blob/master/assets/claudia-bot-builder-video.jpg')
+      	.addButton('Go to Github', 'https://github.com/claudiajs/claudia-bot-builder')
+      .get();
+  }
+});
+```
+
+#### Button template
+
+#### Receipt template
+
+#### Image attachment
+
 ## Bot configuration
 
 _Claudia Bot Builder_ automates most of the configuration tasks, and stores access keys and tokens into API Gateway stage variables. You can configure those interactively while executing `claudia create` or `claudia update` by passing an additional argument from the command line:
 
 * For Facebook messenger bots, use `--configure-fb-bot`
-* For Slack slash commands, use `--configure-slack-slash-command`
+* For Slack App slash commands, use `--configure-slack-slash-app`
+* For Slack slash commands for your team, use `--configure-slack-slash-command`
 * For Skype, use `--configure-skype-bot`
 * For Telegram, use `--configure-telegram-bot`
 
