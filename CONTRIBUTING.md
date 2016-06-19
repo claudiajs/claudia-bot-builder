@@ -13,19 +13,19 @@ We use [Jasmine](https://jasmine.github.io/) for unit and integration tests. Unl
 Run all the tests:
 
 ```bash
-npm run test
+npm test
 ```
 
 Run only some tests:
 
 ```bash
-npm run test -- filter=prefix
+npm test -- filter=prefix
 ```
 
 Get detailed hierarchical test name reporting:
 
 ```bash
-npm run test -- full
+npm test -- full
 ```
 
 ## Before submitting a pull request
