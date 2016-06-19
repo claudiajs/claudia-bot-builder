@@ -63,7 +63,10 @@ The Generic Template can take an image, title, subtitle, description and buttons
 
 __API__:
 
-`generic` (class) - Class that allows you to build Generic template messages
+`generic` (class) - Class that allows you to build Generic template messages  
+_Arguments_:
+
+- none
 
 Methods:
 
@@ -107,12 +110,15 @@ The Button Template is useful when you want to present simple text with options,
 
 __API__:
 
-`generic` (class) - Class that allows you to build Generic template messages
+`generic` (class) - Class that allows you to build Button template messages  
+_Arguments_:
+
+- `text`, string (required) - a text to display above the button(s).
 
 Methods:
 
 | Method    | Required | Arguments   | Returns             | Description |
-|-----------|----------|-------------|---------------------|-------------|
+|-----------|----------|-------------|---------------------|-------------|)
 | addButton | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, at least one button is required, and maximum 3 of them is allowed |
 | get       | Yes      | No args.    | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
@@ -138,7 +144,36 @@ module.exports = botBuilder(request => {
 
 #### Receipt template
 
+The Receipt Template can be used to send receipts for orders.
+
 #### Image attachment
+
+Image attachment allows you to send, obviously, an image :) 
+
+__API__:
+
+`image` (class) - Class that allows you to send an image attachment message  
+_Arguments_:
+
+- `url`, string (required) - a valid URL for an image.
+
+__Methods__:
+
+No methods
+
+__Example__:
+
+```js
+const botBuilder = require('claudia-bot-builder');
+const fbTemplate = require('claudia-bot-builder').fbTemplate;
+
+module.exports = botBuilder(request => {
+  if (request.type === 'facebook') {
+    reuturn new fbTemplate.image('https://github.com/claudiajs/claudiajs.com/blob/master/assets/claudiajs.png');
+  }
+});
+```
+
 
 #### Handling errors
 
