@@ -67,24 +67,37 @@ describe('Facebook Reply', () => {
     https.request.pipe(() => {
       Promise.resolve().then(() => {
         expect(https.request.calls.length).toEqual(1);
-        done();
-      });
+      }).then(done);
     });
 
     reply('user123', fiveHundred, 'ACCESS123');
   });
-  it('sends multiple messages in sequence if array is passed', () => {
-    let answers = ['foo', 'bar'];
-    https.request.pipe(() => {
-      if (https.request.calls.length === 1)
-        return Promise.resolve();
-
-      Promise.resolve().then(() => {
-        expect(https.request.calls.length).toEqual(2);
+  describe('when an array is passed', () => {
+    it('does not send the second request until the first one completes', done => {
+      let answers = ['foo', 'bar'];
+      https.request.pipe(() => {
+        Promise.resolve().then(() => {
+          expect(https.request.calls.length).toEqual(1);
+        }).then(done);
       });
+      reply('user123', answers, 'ACCESS123');
     });
-    reply('user123', answers, 'ACCESS123');
+    it('sends the requests in sequence', done => {
+      let answers = ['foo', 'bar'];
+      https.request.pipe(function () {
+        this.respond('200', 'OK');
+        if (https.request.calls.length === 2) {
+          expect(JSON.parse(https.request.calls[0].body[0])).toEqual({recipient:{id:'user123'},message:{text:'foo'}});
+          expect(JSON.parse(https.request.calls[1].body[0])).toEqual({recipient:{id:'user123'},message:{text:'bar'}});
+          done();
+        }
+      });
+      reply('user123', answers, 'ACCESS123');
+
+    });
+
   });
+
   it('sends complex messages without transforming into a text object', done => {
     https.request.pipe(callOptions => {
       expect(JSON.parse(callOptions.body)).toEqual({
