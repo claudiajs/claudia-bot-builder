@@ -11,9 +11,13 @@ describe('Slack parse', () => {
     expect(parse([1, 2, 3])).toBeUndefined();
   });
 
-  it('returns nothing if the text or user_id are missing', () => {
-    expect(parse({user_id: 'tom'})).toBeUndefined();
+  it('returns nothing if user_id is missing', () => {
     expect(parse({text: 'pete'})).toBeUndefined();
+  });
+
+  it('returns an empty text if the text is missing (for button responses)', () => {
+    var msg = { user_id: 123 };
+    expect(parse(msg)).toEqual({ sender: 123, text: '', originalRequest: msg, type: 'slack-slash-command'});
   });
 
   it('returns a parsed object when text and user_id are present', () => {
