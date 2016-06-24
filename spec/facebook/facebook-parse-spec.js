@@ -15,7 +15,7 @@ describe('Facebook parse', () => {
   });
   it('returns a parsed object when there message and sender are present', () => {
     var msg = {sender: {id: 'tom'}, message: { text: 'Hello' }};
-    expect(parse(msg, {})).toEqual({ sender: 'tom', text: 'Hello', originalRequest: msg, type: 'facebook', env: {}});
+    expect(parse(msg, {})).toEqual({ sender: 'tom', text: 'Hello', originalRequest: msg, type: 'facebook'});
   });
   it('returns a parsed object for postback messages', () => {
     var msg = {
@@ -29,8 +29,7 @@ describe('Facebook parse', () => {
       text: 'Q23306627',
       originalRequest: msg,
       postback: true,
-      type: 'facebook',
-      env: {}
+      type: 'facebook'
     });
   });
 });

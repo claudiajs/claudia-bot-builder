@@ -67,13 +67,13 @@ describe('Facebook setup', () => {
       });
       it('breaks down the message and puts it into the parser', () => {
         handler({body: singleMessageTemplate, env: {facebookAccessToken: 'ABC'}});
-        expect(parser).toHaveBeenCalledWith({'A': 'B'}, {facebookAccessToken: 'ABC'});
+        expect(parser).toHaveBeenCalledWith({'A': 'B'});
       });
       it('passes the parsed value to the bot if a message can be parsed', (done) => {
         parser.and.returnValue('MSG1');
         handler({body: singleMessageTemplate});
         Promise.resolve().then(() => {
-          expect(bot).toHaveBeenCalledWith('MSG1');
+          expect(bot).toHaveBeenCalledWith('MSG1', { body: singleMessageTemplate });
         }).then(done, done.fail);
       });
       it('does not invoke the bot if the message cannot be parsed', (done) => {
@@ -221,19 +221,19 @@ describe('Facebook setup', () => {
       it('parses messages in sequence', () => {
         handler({body: multiMessageTemplate, env: {facebookAccessToken: 'ABC'}});
         expect(parser.calls.count()).toBe(4);
-        expect(parser).toHaveBeenCalledWith({'A': 'B'}, {facebookAccessToken: 'ABC'});
-        expect(parser).toHaveBeenCalledWith({'C': 'D'}, {facebookAccessToken: 'ABC'});
-        expect(parser).toHaveBeenCalledWith({'E': 'F'}, {facebookAccessToken: 'ABC'});
-        expect(parser).toHaveBeenCalledWith({'G': 'H'}, {facebookAccessToken: 'ABC'});
+        expect(parser).toHaveBeenCalledWith({'A': 'B'});
+        expect(parser).toHaveBeenCalledWith({'C': 'D'});
+        expect(parser).toHaveBeenCalledWith({'E': 'F'});
+        expect(parser).toHaveBeenCalledWith({'G': 'H'});
       });
       it('calls the bot for each message individually', (done) => {
         handler({body: multiMessageTemplate, env: {facebookAccessToken: 'ABC'}});
         Promise.resolve().then(() => {
           expect(bot.calls.count()).toEqual(4);
-          expect(bot).toHaveBeenCalledWith({sender: 'sender1', text: 'text1'});
-          expect(bot).toHaveBeenCalledWith({sender: 'sender2', text: 'text2'});
-          expect(bot).toHaveBeenCalledWith({sender: 'sender3', text: 'text3'});
-          expect(bot).toHaveBeenCalledWith({sender: 'sender4', text: 'text4'});
+          expect(bot).toHaveBeenCalledWith({sender: 'sender1', text: 'text1'}, {body: multiMessageTemplate, env: {facebookAccessToken: 'ABC'}});
+          expect(bot).toHaveBeenCalledWith({sender: 'sender2', text: 'text2'}, {body: multiMessageTemplate, env: {facebookAccessToken: 'ABC'}});
+          expect(bot).toHaveBeenCalledWith({sender: 'sender3', text: 'text3'}, {body: multiMessageTemplate, env: {facebookAccessToken: 'ABC'}});
+          expect(bot).toHaveBeenCalledWith({sender: 'sender4', text: 'text4'}, {body: multiMessageTemplate, env: {facebookAccessToken: 'ABC'}});
         }).then(done, done.fail);
       });
       it('calls the responders for each bot response individually', (done) => {
