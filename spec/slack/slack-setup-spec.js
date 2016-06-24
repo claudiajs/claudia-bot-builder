@@ -34,7 +34,7 @@ describe('Slack setup', () => {
 
   describe('webhook/message processor', () => {
     it('wires the POST request for Slack Slash command to the message processor', () => {
-      expect(api.post.calls.count()).toEqual(1);
+      expect(api.post.calls.count()).toEqual(2);
       expect(api.post).toHaveBeenCalledWith('/slack/slash-command', jasmine.any(Function));
     });
 
