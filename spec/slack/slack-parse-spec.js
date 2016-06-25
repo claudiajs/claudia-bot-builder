@@ -11,11 +11,11 @@ describe('Slack parse', () => {
     expect(parse([1, 2, 3])).toBeUndefined();
   });
 
-  it('returns nothing if user_id is missing', () => {
+  it('returns nothing if user_id and actions are missing', () => {
     expect(parse({text: 'pete'})).toBeUndefined();
   });
 
-  it('returns an empty text if the text is missing (for button responses)', () => {
+  it('returns an empty text if the text is missing', () => {
     var msg = { user_id: 123 };
     expect(parse(msg)).toEqual({ sender: 123, text: '', originalRequest: msg, type: 'slack-slash-command'});
   });
@@ -23,5 +23,10 @@ describe('Slack parse', () => {
   it('returns a parsed object when text and user_id are present', () => {
     var msg = { user_id: 123, text: 'Hello' };
     expect(parse(msg)).toEqual({ sender: 123, text: 'Hello', originalRequest: msg, type: 'slack-slash-command'});
+  });
+
+  it('returns a parsed object when actions are present', () => {
+    var msg = { user: { id: 123, name: 'username' }, actions: [{name: 'test', value: 'action'}] };
+    expect(parse(msg)).toEqual({ sender: 123, text: '', originalRequest: msg, type: 'slack-message-action', postback: true});
   });
 });
