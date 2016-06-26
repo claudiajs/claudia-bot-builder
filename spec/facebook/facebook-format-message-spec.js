@@ -572,7 +572,9 @@ describe('Facebook format message', () => {
       ).toEqual({
         attachment: {
           type: 'image',
-          url: 'http://google.com/path/to/image.png'
+          payload: {
+            url: 'http://google.com/path/to/image.png'
+          }
         }
       });
     });

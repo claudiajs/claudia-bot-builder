@@ -15,7 +15,7 @@ describe('Facebook parse', () => {
   });
   it('returns a parsed object when there message and sender are present', () => {
     var msg = {sender: {id: 'tom'}, message: { text: 'Hello' }};
-    expect(parse(msg)).toEqual({ sender: 'tom', text: 'Hello', originalRequest: msg, type: 'facebook'});
+    expect(parse(msg, {})).toEqual({ sender: 'tom', text: 'Hello', originalRequest: msg, type: 'facebook'});
   });
   it('returns a parsed object for postback messages', () => {
     var msg = {
@@ -24,7 +24,7 @@ describe('Facebook parse', () => {
       'timestamp': 1465558466933,
       'postback': { 'payload': 'Q23306627' }
     };
-    expect(parse(msg)).toEqual({
+    expect(parse(msg, {})).toEqual({
       sender: '998295386950466',
       text: 'Q23306627',
       originalRequest: msg,

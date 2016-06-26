@@ -59,7 +59,7 @@ describe('Telegram setup', () => {
         parser.and.returnValue('MSG1');
         handler({body: singleMessageTemplate});
         Promise.resolve().then(() => {
-          expect(bot).toHaveBeenCalledWith('MSG1');
+          expect(bot).toHaveBeenCalledWith('MSG1', {body: singleMessageTemplate});
         }).then(done, done.fail);
       });
       it('does not invoke the bot if the message cannot be parsed', (done) => {
