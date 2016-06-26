@@ -5,14 +5,18 @@ The Claudia Bot Builder is based on a simple callback API. Whenever a message is
 ```javascript
 const botBuilder = require('claudia-bot-builder');
 
-module.exports = botBuilder(request =>
-  `I got ${request.text}`
-);
+module.exports = botBuilder(function (message, request) { 
+  return `I got ${request.text}`;
+});
 ```
 
-## Request object structure
+The first argument is the message object, as explained below. 
 
-The request object contains the following fields
+The second argument (since version `1.2.0`) is the [Claudia API Builder](https://github.com/claudiajs/claudia-api-builder/blob/master/docs/api.md#the-request-object) request object, with all the details of the HTTP request and Lambda context.
+
+## Message object structure
+
+The message object contains the following fields
 
 * `text`: `string` the text of the message received, extracted from a bot-specific format. In most cases, if you just want to reply to text messages, this is the only piece of information you'll need.
 * `type`: `string` the type of the end-point receiving the message. It can be `facebook`, `slack-slash-command`, `skype` or `telegram` 
