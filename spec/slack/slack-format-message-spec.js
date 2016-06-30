@@ -55,5 +55,42 @@ describe('Slack format message', () => {
       expect(message.template.attachments.length).toBe(1);
       expect(message.template.attachments[0].fallback).toBe('Slack told us that you are not able to see this attachment 😢');
     });
+
+    it('should add an attachment with custom fallback and callback id if they are provided', () => {
+      let message = new formatSlackMessage().addAttachment('CB', 'Fallback');
+      expect(message.template.attachments.length).toBe(1);
+      expect(message.template.attachments[0].callback_id).toBe('CB');
+      expect(message.template.attachments[0].fallback).toBe('Fallback');
+    });
+
+    it('should throw an error if you use addTitle without adding a title', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addTitle()).toThrowError('Title text is required for addTitle method');
+    });
+
+    it('should add a title for the attachment if you use addTitle method', () => {
+      let message = new formatSlackMessage().addAttachment().addTitle('This is a title');
+      expect(message.template.attachments[0].title).toBe('This is a title');
+    });
+
+    it('should throw an error if you use addText without adding a text', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addText()).toThrowError('Text is required for addText method');
+    });
+
+    it('should add a text for the attachment if you use addText method', () => {
+      let message = new formatSlackMessage().addAttachment().addText('text');
+      expect(message.template.attachments[0].text).toBe('text');
+    });
+
+    it('should throw an error if you use addPretext without adding a text', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addPretext()).toThrowError('Text is required for addPretext method');
+    });
+
+    it('should add a pretext for the attachment if you use addText method', () => {
+      let message = new formatSlackMessage().addAttachment().addPretext('pretext');
+      expect(message.template.attachments[0].pretext).toBe('pretext');
+    });
   });
 });
