@@ -63,6 +63,26 @@ describe('Slack format message', () => {
       expect(message.template.attachments[0].fallback).toBe('Fallback');
     });
 
+    it('should add 20 attachments', () => {
+      let message = new formatSlackMessage()
+        .addAttachment().addAttachment().addAttachment().addAttachment().addAttachment()
+        .addAttachment().addAttachment().addAttachment().addAttachment().addAttachment()
+        .addAttachment().addAttachment().addAttachment().addAttachment().addAttachment()
+        .addAttachment().addAttachment().addAttachment().addAttachment().addAttachment();
+
+      expect(message.template.attachments.length).toBe(20);
+    });
+
+    it('should throw an error if you add more than 20 attachments', () => {
+      let message = new formatSlackMessage()
+        .addAttachment().addAttachment().addAttachment().addAttachment().addAttachment()
+        .addAttachment().addAttachment().addAttachment().addAttachment().addAttachment()
+        .addAttachment().addAttachment().addAttachment().addAttachment().addAttachment()
+        .addAttachment().addAttachment().addAttachment().addAttachment().addAttachment();
+
+      expect(() => message.addAttachment()).toThrowError('You can not add more than 20 attachments');
+    });
+
     it('should throw an error if you use addTitle without adding a title', () => {
       let message = new formatSlackMessage().addAttachment();
       expect(() => message.addTitle()).toThrowError('Title text is required for addTitle method');
@@ -161,6 +181,114 @@ describe('Slack format message', () => {
     it('should add a color if data is valid', () => {
       let message = new formatSlackMessage().addAttachment().addColor('#B4D455');
       expect(message.template.attachments[0].color).toBe('#B4D455');
+    });
+
+    it('should throw an error if you call addTimestamp with anything but Date object', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addTimestamp('Something')).toThrowError('Timestamp needs to be a valid Date object');
+    });
+
+    it('should add a timestamp if you call addTimestamp method', () => {
+      let message = new formatSlackMessage().addAttachment().addTimestamp(new Date('2016-06-14T20:55:31.438Z'));
+      expect(message.template.attachments[0].ts).toBe(new Date('2016-06-14T20:55:31.438Z').getTime());
+    });
+
+    it('should throw an error if you call addField without providing an info', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addField()).toThrowError('Title and value are required for addField method');
+    });
+
+    it('should add a field with provided values', () => {
+      let message = new formatSlackMessage().addAttachment().addField('title', 'value');
+      expect(message.template.attachments[0].fields.length).toBe(1);
+      expect(message.template.attachments[0].fields[0].title).toBe('title');
+      expect(message.template.attachments[0].fields[0].value).toBe('value');
+      expect(message.template.attachments[0].fields[0].short).toBe(false);
+    });
+
+    it('should throw an error if you addAction without valid data', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addAction()).toThrowError('Text, name and value are requeired for addAction method');
+    });
+
+    it('should add an action', () => {
+      let message = new formatSlackMessage().addAttachment().addAction('FooBar', 'foo', 'bar');
+      expect(message.template.attachments[0].actions.length).toBe(1);
+      expect(message.template.attachments[0].actions[0].text).toBe('FooBar');
+      expect(message.template.attachments[0].actions[0].name).toBe('foo');
+      expect(message.template.attachments[0].actions[0].value).toBe('bar');
+      expect(message.template.attachments[0].actions[0].type).toBe('button');
+    });
+
+    it('should add an action with style', () => {
+      let message = new formatSlackMessage().addAttachment().addAction('FooBar', 'foo', 'bar', 'primary');
+      expect(message.template.attachments[0].actions.length).toBe(1);
+      expect(message.template.attachments[0].actions[0].text).toBe('FooBar');
+      expect(message.template.attachments[0].actions[0].name).toBe('foo');
+      expect(message.template.attachments[0].actions[0].value).toBe('bar');
+      expect(message.template.attachments[0].actions[0].style).toBe('primary');
+    });
+
+    it('should add multiple actions', () => {
+      let message = new formatSlackMessage().addAttachment()
+        .addAction('A1', 'foo', 'bar')
+        .addAction('A2', 'foo', 'bar')
+        .addAction('A3', 'foo', 'bar')
+        .addAction('A4', 'foo', 'bar')
+        .addAction('A5', 'foo', 'bar');
+      expect(message.template.attachments[0].actions.length).toBe(5);
+    });
+
+    it('should throw an error if you try to add more than 5 actions', () => {
+      let message = new formatSlackMessage().addAttachment()
+        .addAction('A1', 'foo', 'bar')
+        .addAction('A2', 'foo', 'bar')
+        .addAction('A3', 'foo', 'bar')
+        .addAction('A4', 'foo', 'bar')
+        .addAction('A5', 'foo', 'bar');
+      expect(() => message.addAction('A6', 'foo', 'bar')).toThrowError('You can not add more than 5 actions');
+    });
+
+    it('should throw an error if you try to add confirmation before adding an action', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addConfirmation()).toThrowError('At least one action is requeired for getLatestAction method');
+    });
+
+    it('should throw an error if you try to add confirmation without valid data', () => {
+      let message = new formatSlackMessage().addAttachment().addAction('FooBar', 'foo', 'bar');
+      expect(() => message.addConfirmation()).toThrowError('Title and text are required for addConfirmation method');
+    });
+
+    it('should add a confirmation', () => {
+      let message = new formatSlackMessage().addAttachment().addAction('FooBar', 'foo', 'bar').addConfirmation('Title', 'Text');
+      expect(message.template.attachments[0].actions[0].confirm.title).toBe('Title');
+      expect(message.template.attachments[0].actions[0].confirm.text).toBe('Text');
+      expect(message.template.attachments[0].actions[0].confirm.ok_text).toBe('Ok');
+      expect(message.template.attachments[0].actions[0].confirm.dismiss_text).toBe('Dismiss');
+    });
+
+    it('should add a confirmation to the last action', () => {
+      let message = new formatSlackMessage()
+        .addAttachment()
+          .addAction('First', 'foo', 'bar')
+          .addAction('Second', 'foo', 'bar')
+          .addAction('Last', 'foo', 'bar')
+            .addConfirmation('Title', 'Text', 'Yes', 'No');
+      expect(message.template.attachments[0].actions[message.template.attachments[0].actions.length - 1].confirm.title).toBe('Title');
+      expect(message.template.attachments[0].actions[message.template.attachments[0].actions.length - 1].confirm.text).toBe('Text');
+      expect(message.template.attachments[0].actions[message.template.attachments[0].actions.length - 1].confirm.ok_text).toBe('Yes');
+      expect(message.template.attachments[0].actions[message.template.attachments[0].actions.length - 1].confirm.dismiss_text).toBe('No');
+    });
+
+    it('should return an json object', () => {
+      let message = new formatSlackMessage('Something').channelMessage(true).get();
+      expect(typeof message).toBe('object');
+      expect(message).toEqual({
+        text: 'Something',
+        response_type: 'in_channel',
+        mrkdwn: true,
+        attachments: []
+      });
     });
   });
 });
