@@ -92,5 +92,75 @@ describe('Slack format message', () => {
       let message = new formatSlackMessage().addAttachment().addPretext('pretext');
       expect(message.template.attachments[0].pretext).toBe('pretext');
     });
+
+    it('should throw an error if you try to addUrl without providing it', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addImage()).toThrowError('addImage method requires a valid URL');
+    });
+
+    it('should throw an error if you try to addUrl with invalid url', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addImage('http:invalid-url')).toThrowError('addImage method requires a valid URL');
+    });
+
+    it('should add an image if you call addUrl with valid URL', () => {
+      let message = new formatSlackMessage().addAttachment().addImage('http://claudiajs.org/path/to/image.png');
+      expect(message.template.attachments[0].image_url).toBe('http://claudiajs.org/path/to/image.png');
+    });
+
+    it('should throw an error if you try to addThumbnail without providing it', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addThumbnail()).toThrowError('addThumbnail method requires a valid URL');
+    });
+
+    it('should throw an error if you try to addThumbnail with invalid url', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addThumbnail('http:invalid-url')).toThrowError('addThumbnail method requires a valid URL');
+    });
+
+    it('should add an image if you call addThumbnail with valid URL', () => {
+      let message = new formatSlackMessage().addAttachment().addThumbnail('http://claudiajs.org/path/to/image.png');
+      expect(message.template.attachments[0].thumb_url).toBe('http://claudiajs.org/path/to/image.png');
+    });
+
+    it('should throw an error if you try to addAuthor without providing author name', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addAuthor()).toThrowError('Name is required for addAuthor method');
+    });
+
+    it('should add an author if you provide valid data', () => {
+      let message = new formatSlackMessage().addAttachment().addAuthor('Jorge Luis Borges', 'http://claudiajs.org/path/to/icon.png', 'http://claudiajs.org/');
+      expect(message.template.attachments[0].author_name).toBe('Jorge Luis Borges');
+      expect(message.template.attachments[0].author_icon).toBe('http://claudiajs.org/path/to/icon.png');
+      expect(message.template.attachments[0].author_link).toBe('http://claudiajs.org/');
+    });
+
+    it('should ignore author link if format is not valid', () => {
+      let message = new formatSlackMessage().addAttachment().addAuthor('Jorge Luis Borges', 'http://claudiajs.org/path/to/icon.png', 'http:invalid-url');
+      expect(message.template.attachments[0].author_name).toBe('Jorge Luis Borges');
+      expect(message.template.attachments[0].author_icon).toBe('http://claudiajs.org/path/to/icon.png');
+      expect(message.template.attachments[0].author_link).toBeFalsy();
+    });
+
+    it('should throw an error if you try to addFooter without providing a text', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addFooter()).toThrowError('Text is required for addFooter method');
+    });
+
+    it('should add a footer if data is valid', () => {
+      let message = new formatSlackMessage().addAttachment().addFooter('test', 'http://claudiajs.org/path/to/icon.png');
+      expect(message.template.attachments[0].footer).toBe('test');
+      expect(message.template.attachments[0].footer_icon).toBe('http://claudiajs.org/path/to/icon.png');
+    });
+
+    it('should throw an error if you try to addColor without providing it', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addColor()).toThrowError('Color is required for addColor method');
+    });
+
+    it('should add a color if data is valid', () => {
+      let message = new formatSlackMessage().addAttachment().addColor('#B4D455');
+      expect(message.template.attachments[0].color).toBe('#B4D455');
+    });
   });
 });
