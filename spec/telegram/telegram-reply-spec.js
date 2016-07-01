@@ -17,7 +17,11 @@ describe('Telegram Reply', () => {
       }));
       done();
     });
-    reply('some123ChatId', 'ello Telegram', 'ACCESS123');
+    reply(
+      {sender: 'some123ChatId', text: 'ello Telegram', originalRequest: {message: {}}, type: 'telegram'},
+      'ello Telegram',
+      'ACCESS123'
+    );
   });
 
   it('sends text messages as a string', done => {
@@ -28,12 +32,20 @@ describe('Telegram Reply', () => {
       });
       done();
     });
-    reply('some123ChatId', 'ello Telegram', 'ACCESS123');
+    reply(
+      {sender: 'some123ChatId', text: 'ello Telegram', originalRequest: {message: {}}, type: 'telegram'},
+      'ello Telegram',
+      'ACCESS123'
+    );
   });
 
   it('does not resolve before the https endpoint responds', done => {
     https.request.pipe(done);
-    reply('some123ChatId', 'ello Telegram', 'ACCESS123').then(done.fail, done.fail);
+    reply(
+      {sender: 'some123ChatId', text: 'ello Telegram', originalRequest: {message: {}}, type: 'telegram'},
+      'ello Telegram',
+      'ACCESS123'
+    ).then(done.fail, done.fail);
   });
   
   it('resolves when the https endpoint responds with 200', done => {
@@ -42,7 +54,11 @@ describe('Telegram Reply', () => {
         https.request.calls[0].respond('200', 'OK', 'ello Telegram');
       }, 10);
     });
-    reply('some123ChatId', 'ello Telegram', 'ACCESS123').then(done, done.fail);
+    reply(
+      {sender: 'some123ChatId', text: 'ello Telegram', originalRequest: {message: {}}, type: 'telegram'},
+      'ello Telegram',
+      'ACCESS123'
+    ).then(done, done.fail);
   });
 
 });
