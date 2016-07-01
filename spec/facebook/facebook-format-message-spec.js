@@ -8,6 +8,99 @@ describe('Facebook format message', () => {
     expect(typeof formatFbMessage).toBe('object');
   });
 
+  describe('Text', () => {
+    it('should be a class', () => {
+      const message = new formatFbMessage.text('text');
+      expect(typeof formatFbMessage.text).toBe('function');
+      expect(message instanceof formatFbMessage.text).toBeTruthy();
+    });
+
+    it('should throw an error if text is not provided', () => {
+      expect(() => new formatFbMessage.text()).toThrowError('Text is required for text template');
+    });
+
+    it('should add a text', () => {
+      const message = new formatFbMessage.text('Some text');
+      expect(message.text).toBe('Some text');
+    });
+
+    it('should return a simple text object', () => {
+      const message = new formatFbMessage.text('Some text');
+      expect(message.get()).toEqual({
+        text: 'Some text'
+      });
+    });
+
+    it('should throw an error if addQuickReply arguments are not provided', () => {
+      const message = new formatFbMessage.text('Some text');
+      expect(() => message.addQuickReply()).toThrowError('Both text and payload are required for quick reply');
+    });
+
+    it('should throw an error if addQuickReply payload is too long', () => {
+      const message = new formatFbMessage.text('Some text');
+      let payload = new Array(102).join('0123456789');
+      expect(() => message.addQuickReply('title', payload)).toThrowError('Payload can not be more than 1000 characters long');
+    });
+
+    it('should add a quick reply', () => {
+      const message = new formatFbMessage.text('Some text')
+        .addQuickReply('title', 'PAYLOAD');
+      expect(message.quickReplies.length).toBe(1);
+      expect(message.quickReplies[0].title).toBe('title');
+      expect(message.quickReplies[0].payload).toBe('PAYLOAD');
+    });
+
+    it('should add 10 quick replies', () => {
+      const message = new formatFbMessage.text('Some text')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD');
+      expect(message.quickReplies.length).toBe(10);
+    });
+
+    it('should throw an error if there\'s more than 10 quick replies', () => {
+      const message = new formatFbMessage.text('Some text')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD');
+      expect(() => message.addQuickReply('title', 'PAYLOAD')).toThrowError('There can not be more than 10 quick replies');
+    });
+
+    it('should trim the title if it is too long', () => {
+      let title = new Array(4).join('0123456789');
+      const message = new formatFbMessage.text('Some text')
+        .addQuickReply(title, 'PAYLOAD');
+      expect(message.quickReplies[0].title).toBe('01234567890123456789');
+    });
+
+    it('should return a json with text and quick replies', () => {
+      const message = new formatFbMessage.text('Some text')
+        .addQuickReply('title', 'PAYLOAD');
+      expect(message.get()).toEqual({
+        text: 'Some text',
+        quick_replies: [{
+          title: 'title',
+          payload: 'PAYLOAD',
+          content_type: 'text'
+        }]
+      });
+    });
+  });
+
   describe('Generic template', () => {
     let generic;
 
