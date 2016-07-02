@@ -1,5 +1,12 @@
 # Claudia Bot Builder release history
 
+## 1.3.0, 2 July 2016
+
+- add Slack message builder
+- add support for Telegram inline messages
+- add support for Facebook Messenger quick reply
+- add support for longer top level domain names
+
 ## 1.2.0, 25 June 2016
 
 - add support for Slack message actions
