@@ -7,7 +7,7 @@ _Claudia Bot Builder_ helps developers create and deploy chat-bots for various p
 
 Check out [this two minute video](https://vimeo.com/170647056) to see how you can create and deploy a bot quickly:
 
-[![](https://claudiajs.github.io/claudiajs.com/assets/claudia-bot-builder-video.jpg)](https://vimeo.com/170647056)
+[![](https://claudiajs.com/assets/claudia-bot-builder-video.jpg)](https://vimeo.com/170647056)
 
 Here's a simple example:
 
