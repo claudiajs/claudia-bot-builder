@@ -11,13 +11,12 @@ describe('Telegram parse', () => {
     expect(parse({})).toBeUndefined();
     expect(parse([1, 2, 3])).toBeUndefined();
   });
-  it('returns false if the text and/or the chat id are missing', () => {
-    expect(parse({chat: 'some123ChatId', text: 'ello Telegram'})).toBeUndefined();
-    expect(parse({chat: {id: 'some123ChatId'}})).toBeUndefined();
-    expect(parse({text: 'pete'})).toBeUndefined();
+  it('returns false the chat id are missing', () => {
+    expect(parse({message: {chat: 'some123ChatId', text: 'ello Telegram'}})).toBeUndefined();
+    expect(parse({message: {text: 'pete'}})).toBeUndefined();
   });
-  it('returns a parsed object when the text and chat id are present', () => {
-    var msg = {chat: {id: 'some123ChatId'}, text: 'ello Telegram' };
-    expect(parse(msg)).toEqual({ sender: 'some123ChatId', text: 'ello Telegram', originalRequest: 'some123ChatId', type: 'telegram'});
+  it('returns a parsed object when chat id is present', () => {
+    var msg = {message: {chat: {id: 'some123ChatId'}, text: 'ello Telegram' }};
+    expect(parse(msg)).toEqual({ sender: 'some123ChatId', text: 'ello Telegram', originalRequest: msg, type: 'telegram'});
   });
 });

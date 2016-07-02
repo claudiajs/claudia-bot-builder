@@ -19,16 +19,37 @@ describe('Facebook parse', () => {
   });
   it('returns a parsed object for postback messages', () => {
     var msg = {
-      'sender': { 'id': '998295386950466' },
-      'recipient': { 'id': '243307226049107' },
-      'timestamp': 1465558466933,
-      'postback': { 'payload': 'Q23306627' }
+      sender: { id: '12345' },
+      recipient: { id: '67890' },
+      timestamp: 1465558466933,
+      postback: { payload: 'POSTBACK' }
     };
-    expect(parse(msg, {})).toEqual({
-      sender: '998295386950466',
-      text: 'Q23306627',
+    expect(parse(msg)).toEqual({
+      sender: '12345',
+      text: 'POSTBACK',
       originalRequest: msg,
       postback: true,
+      type: 'facebook'
+    });
+  });
+  it('returns a parsed object for a quick reply', () => {
+    var msg = {
+      sender: { id: '12345' },
+      recipient: { id: '67890' },
+      timestamp: 1465558466933,
+      message: {
+        text: 'Some text',
+        mid: 'mid.1464990849238:b9a22a2bcb1de31773',
+        seq: 69,
+        quick_reply: {
+          payload: 'QUICK_REPLY'
+        }
+      }
+    };
+    expect(parse(msg)).toEqual({
+      sender: '12345',
+      text: 'Some text',
+      originalRequest: msg,
       type: 'facebook'
     });
   });

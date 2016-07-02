@@ -10,12 +10,51 @@ const fbTemplate = require('claudia-bot-builder').fbTemplate;
 
 `fbTemplate` exports an object that contains 4 classes that allows you to generate 5 different types of Facebook Messenger structured messages:
 
+- Text messages (this is not template, but we need to have them because of quick answers)
 - Generic template messages
 - Button template messages
 - Receipt template messages
 - Image attachment messages
 
 More info about each type of structured messages can be found in [Facebook Messenger's Complete guide](https://developers.facebook.com/docs/messenger-platform/implementation#send_message).
+
+## Text messages
+
+Text messages returns a simple text. In case you don't need to add quick responses reply with a simple text and _Cluaudia Bot Builder_ will do the rest.
+
+## API
+
+`text` (class) - Class that allows you to build text messages with quick replies  
+_Arguments_:
+
+- `text`, string (required) - a simple text to send as a reply.
+
+### Methods
+
+| Method    | Required | Arguments   | Returns             | Description |
+|-----------|----------|-------------|---------------------|-------------|
+| addQuickReply | No   | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| get | Yes | No args. | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
+
+### Example
+
+```js
+const botBuilder = require('claudia-bot-builder');
+const fbTemplate = require('claudia-bot-builder').fbTemplate;
+
+module.exports = botBuilder(request => {
+  if (request.type === 'facebook') {
+    const message = new fbTemplate.text('What\'s your favorite House in Game Of Thrones');
+    
+    return message
+      .addQuickReply('Stark', 'STARK')
+      .addQuickReply('Lannister', 'LANNISTER')
+      .addQuickReply('Targaryen', 'TARGARYEN')
+      .addQuickReply('None of the above', 'OTHER')
+      .get();
+  }
+});
+```
 
 ## Generic template
 
@@ -36,6 +75,7 @@ _Arguments_:
 | addUrl    | No       | A valid URL | `this` for chaining | Adds an url to a current element, requires a valid URL, also requires `addBubble` to be added first |
 | addImage  | No       | A valid URL | `this` for chaining | Adds an image to a current element, requires a valid URL, also requires `addBubble` to be added first |
 | addButton | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, at least one button is required, and maximum 3 of them is allowed. It also requires `addBubble` to be added first |
+| addQuickReply | No   | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
 | get       | Yes      | No args.    | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 *_Required arguments_, Messenger requires all elements to have those values, the message builder will throw an error if you don't provide it.
@@ -80,6 +120,7 @@ _Arguments_:
 | Method    | Required | Arguments   | Returns             | Description |
 |-----------|----------|-------------|---------------------|-------------|
 | addButton | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, at least one button is required, and maximum 3 of them is allowed |
+| addQuickReply | No   | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
 | get       | Yes      | No args.    | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 *_Required arguments_, Messenger requires all elements to have those values, the message builder will throw an error if you don't provide it.
@@ -136,6 +177,7 @@ _Arguments_:
 | addShippingCost | No | shippingCost (number, required) | `this` for chaining | shipping cost |
 | addTax | No | tax (number, required) | `this` for chaining | total tax |
 | addTotal | Yes | total (number, required) | `this` for chaining | total cost |
+| addQuickReply | No   | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
 | get | Yes      | No args.    | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 ### Example
@@ -173,7 +215,10 @@ _Arguments_:
 
 ### Methods
 
-No methods
+| Method    | Required | Arguments   | Returns             | Description |
+|-----------|----------|-------------|---------------------|-------------|
+| addQuickReply | No   | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| get | Yes | No args. | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 ### Example
 

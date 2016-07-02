@@ -44,15 +44,18 @@ describe('Telegram setup', () => {
       it('breaks down the message and puts it into the parser', () => {
         handler({body: singleMessageTemplate});
         expect(parser).toHaveBeenCalledWith({
-          'message_id': 32423423,
-          'from': {
-            id: 12321,
-            first_name: 'Testy',
-            last_name: 'Lasty',
-            username: 'testy_lasty'
-          },
-          'date': 1457764198246,
-          'chat': { 'id': 123123, 'type': 'private' }
+          'update_id': 2837645,
+          'message': {
+            'message_id': 32423423,
+            'from': {
+              id: 12321,
+              first_name: 'Testy',
+              last_name: 'Lasty',
+              username: 'testy_lasty'
+            },
+            'date': 1457764198246,
+            'chat': {'id': 123123, 'type': 'private'}
+          }
         });
       });
       it('passes the parsed value to the bot if a message can be parsed', (done) => {
@@ -73,14 +76,14 @@ describe('Telegram setup', () => {
         parser.and.returnValue({sender: 'user1', text: 'MSG1'});
         botResolve('Yes Yes');
         handler({body: singleMessageTemplate, env: {telegramAccessToken: 'some123AccessToken'}}).then(() => {
-          expect(responder).toHaveBeenCalledWith('user1', 'Yes Yes', 'some123AccessToken');
+          expect(responder).toHaveBeenCalledWith({sender: 'user1', text: 'MSG1'}, 'Yes Yes', 'some123AccessToken');
         }).then(done, done.fail);
       });
       it('can work with bot responses as strings', (done) => {
         bot.and.returnValue('Yes!');
         parser.and.returnValue({sender: 'user1', text: 'MSG1'});
         handler({body: singleMessageTemplate, env: {telegramAccessToken: 'some123AccessToken'}}).then(() => {
-          expect(responder).toHaveBeenCalledWith('user1', 'Yes!', 'some123AccessToken');
+          expect(responder).toHaveBeenCalledWith({sender: 'user1', text: 'MSG1'}, 'Yes!', 'some123AccessToken');
         }).then(done, done.fail);
 
       });
