@@ -8,7 +8,7 @@ To use it, just require `fbTemplate` function from _Claudia Bot Builder_:
 const fbTemplate = require('claudia-bot-builder').fbTemplate;
 ```
 
-`fbTemplate` exports an object that contains 4 classes that allows you to generate 4 different types of Facebook Messenger structured messages:
+`fbTemplate` exports an object that contains 4 classes that allows you to generate 5 different types of Facebook Messenger structured messages:
 
 - Generic template messages
 - Button template messages
@@ -44,7 +44,7 @@ _Arguments_:
 
 ```js
 const botBuilder = require('claudia-bot-builder');
-const fbTemplate = require('claudia-bot-builder').fbTemplate;
+const fbTemplate = botBuilder.fbTemplate;
 
 module.exports = botBuilder(request => {
   if (request.type === 'facebook') {
@@ -88,7 +88,7 @@ _Arguments_:
 
 ```
 const botBuilder = require('claudia-bot-builder');
-const fbTemplate = require('claudia-bot-builder').fbTemplate;
+const fbTemplate = botBuilder.fbTemplate;
 
 module.exports = botBuilder(request => {
   if (request.type === 'facebook') {
@@ -142,7 +142,7 @@ _Arguments_:
 
 ```js
 const botBuilder = require('claudia-bot-builder');
-const fbTemplate = require('claudia-bot-builder').fbTemplate;
+const fbTemplate = botBuilder.fbTemplate;
 
 module.exports = botBuilder(request => {
   if (request.type === 'facebook') {
@@ -179,7 +179,7 @@ No methods
 
 ```js
 const botBuilder = require('claudia-bot-builder');
-const fbTemplate = require('claudia-bot-builder').fbTemplate;
+const fbTemplate = botBuilder.fbTemplate;
 
 module.exports = botBuilder(request => {
   if (request.type === 'facebook') {
