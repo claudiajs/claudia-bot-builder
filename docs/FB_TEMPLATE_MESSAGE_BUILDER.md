@@ -22,7 +22,7 @@ More info about each type of structured messages can be found in [Facebook Messe
 
 Text messages returns a simple text. In case you don't need to add quick responses reply with a simple text and _Cluaudia Bot Builder_ will do the rest.
 
-## API
+### API
 
 `text` (class) - Class that allows you to build text messages with quick replies  
 _Arguments_:
@@ -40,7 +40,7 @@ _Arguments_:
 
 ```js
 const botBuilder = require('claudia-bot-builder');
-const fbTemplate = require('claudia-bot-builder').fbTemplate;
+const fbTemplate = botBuilder.fbTemplate;
 
 module.exports = botBuilder(request => {
   if (request.type === 'facebook') {

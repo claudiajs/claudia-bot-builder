@@ -32,8 +32,12 @@ Individual bots support more complex responses, such as buttons, attachments and
 
 If you reply with an array multiple messages will be sent in sequence. Each array item can be text or already formatted object and it'll follow the same rules explained above. At the moment, this is supported for Facebook Messenger only.
 
-Additionally, _Claudia Bot Builder_ exports a _Facebook Template Message builder_ for generating more complex responses including buttons, receipts and attachments.  
-For the details see [Facebook Template Message builder documentation](FB_TEMPLATE_MESSAGE_BUILDER.md).
+Additionally, _Claudia Bot Builder_ exports message generators for for generating more complex responses including buttons and attachments for Facebook and Slack.  
+
+For the details see:
+
+- [Facebook Template Message builder documentation](FB_TEMPLATE_MESSAGE_BUILDER.md)
+- [Slack Message builder documentation](SLACK_MESSAGE_MESSAGE_BUILDER.md)
 
 ### Synchronous replies
 
