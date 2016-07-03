@@ -1,5 +1,10 @@
 # Claudia Bot Builder release history
 
+## 1.3.1, 3 July 2016
+
+- fix video thumbnail on npmjs.org
+- add colors for console setup
+
 ## 1.3.0, 2 July 2016
 
 - add Slack message builder
