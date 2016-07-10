@@ -5,12 +5,12 @@ The Claudia Bot Builder is based on a simple callback API. Whenever a message is
 ```javascript
 const botBuilder = require('claudia-bot-builder');
 
-module.exports = botBuilder(function (message, request) { 
+module.exports = botBuilder(function (message, request) {
   return `I got ${request.text}`;
 });
 ```
 
-The first argument is the message object, as explained below. 
+The first argument is the message object, as explained below.
 
 The second argument (since version `1.2.0`) is the [Claudia API Builder](https://github.com/claudiajs/claudia-api-builder/blob/master/docs/api.md#the-request-object) request object, with all the details of the HTTP request and Lambda context.
 
@@ -19,10 +19,12 @@ The second argument (since version `1.2.0`) is the [Claudia API Builder](https:/
 The message object contains the following fields
 
 * `text`: `string` the text of the message received, extracted from a bot-specific format. In most cases, if you just want to reply to text messages, this is the only piece of information you'll need.
-* `type`: `string` the type of the end-point receiving the message. It can be `facebook`, `slack-slash-command`, `skype` or `telegram` 
+* `type`: `string` the type of the end-point receiving the message. It can be `facebook`, `slack-slash-command`, `skype` or `telegram`
 * `originalRequest`: `object` the complete original message, in a bot-specific format, useful if you want to do more than just reply to text messages.
 * `sender`: `string` the identifier of the sender
 * `postback`: `boolean` true if the message is the result of a post-back (for example clicking on a button created by a previous message in Facebook). It will be `undefined` (falsy) for completely new messages.
+
+_Note_: FB Messenger message echo, delivery and read report will not be parsed.
 
 ## Reply formats
 
@@ -41,11 +43,11 @@ For the details see:
 
 ### Synchronous replies
 
-Just return the result from the function. 
+Just return the result from the function.
 
 ### Asynchronous replies
 
-Return a `Promise` from the callback function, and resolve the promise later with a string or object. The convention is the same as for synchronous replies. 
+Return a `Promise` from the callback function, and resolve the promise later with a string or object. The convention is the same as for synchronous replies.
 
 If you plan to reply asynchronously, make sure to configure your lambda function so it does not get killed prematurely. By default, Lambda functions are only allowed to run for 3 seconds. See [update-function-configuration](http://docs.aws.amazon.com/cli/latest/reference/lambda/update-function-configuration.html) in the AWS Command Line tools for information on how to change the default timeout.
 
