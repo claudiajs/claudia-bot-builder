@@ -24,7 +24,7 @@ The message object contains the following fields
 * `sender`: `string` the identifier of the sender
 * `postback`: `boolean` true if the message is the result of a post-back (for example clicking on a button created by a previous message in Facebook). It will be `undefined` (falsy) for completely new messages.
 
-_Note_: FB Messenger message echo, delivery and read report will not be parsed.
+_Note_: FB Messenger message echoes, delivery and read reports will not be parsed.
 
 ## Reply formats
 
