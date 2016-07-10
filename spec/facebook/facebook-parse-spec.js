@@ -53,4 +53,44 @@ describe('Facebook parse', () => {
       type: 'facebook'
     });
   });
+  it('does not parse the object if it is delivery report', () => {
+    var msg = {
+      sender: { id: '12345' },
+      recipient: { id: '67890' },
+      timestamp: 1465558466933,
+      delivery: {
+        mids: ['mid.1458668856218:ed81099e15d3f4f233'],
+        watermark: 1458668856253,
+        seq: 37
+      }
+    };
+    expect(parse(msg)).toBeFalsy();
+  });
+  it('does not parse the object if it is read report', () => {
+    var msg = {
+      sender: { id: '12345' },
+      recipient: { id: '67890' },
+      timestamp: 1465558466933,
+      read: {
+        watermark: 1458668856253,
+        seq: 38
+      }
+    };
+    expect(parse(msg)).toBeFalsy();
+  });
+  it('does not parse the object if it is an echo message', () => {
+    var msg = {
+      sender: { id: '12345' },
+      recipient: { id: '67890' },
+      timestamp: 1465558466933,
+      message: {
+        is_echo: true,
+        app_id: 1517776481860111,
+        metadata: 'DEVELOPER_DEFINED_METADATA_STRING',
+        mid: 'mid.1457764197618:41d102a3e1ae206a38',
+        seq: 73
+      }
+    };
+    expect(parse(msg)).toBeFalsy();
+  });
 });
