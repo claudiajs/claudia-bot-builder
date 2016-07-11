@@ -387,6 +387,63 @@ describe('Facebook format message', () => {
   });
 
   describe('Receipt template', () => {
+    let fbExample = {
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'receipt',
+          recipient_name: 'Stephane Crozatier',
+          order_number: '12345678902',
+          currency: 'USD',
+          payment_method: 'Visa 2345',
+          order_url: 'http://petersapparel.parseapp.com/order?order_id=123456',
+          timestamp: 1428444852,
+          elements: [
+            {
+              title: 'Classic White T-Shirt',
+              subtitle: '100% Soft and Luxurious Cotton',
+              quantity: 2,
+              price: 50,
+              currency: 'USD',
+              image_url: 'http://petersapparel.parseapp.com/img/whiteshirt.png'
+            },
+            {
+              title: 'Classic Gray T-Shirt',
+              subtitle: '100% Soft and Luxurious Cotton',
+              quantity: 1,
+              price: 25,
+              currency: 'USD',
+              image_url: 'http://petersapparel.parseapp.com/img/grayshirt.png'
+            }
+          ],
+          address: {
+            street_1: '1 Hacker Way',
+            street_2: '',
+            city: 'Menlo Park',
+            postal_code: '94025',
+            state: 'CA',
+            country: 'US'
+          },
+          summary: {
+            subtotal: 75.00,
+            shipping_cost: 4.95,
+            total_tax: 6.19,
+            total_cost: 56.14
+          },
+          adjustments: [
+            {
+              name: 'New Customer Discount',
+              amount: 20
+            },
+            {
+              name: '$10 Off Coupon',
+              amount: 10
+            }
+          ]
+        }
+      }
+    };
+
     it('should be a class', () => {
       let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
 
@@ -633,6 +690,34 @@ describe('Facebook format message', () => {
         .addItem('Title 1');
 
       expect(() => receipt.addShippingAddress('Bulevar Nikole Tesle 42', null, 'Belgrade', 11070, 'Serbia')).toThrowError('Country is required for addShippingAddress method');
+    });
+
+    it('should parse an example for FB documentation', () => {
+      let receipt = new formatFbMessage.receipt('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345')
+        .addTimestamp(new Date(1428444852))
+        .addOrderUrl('http://petersapparel.parseapp.com/order?order_id=123456')
+        .addItem('Classic White T-Shirt')
+          .addSubtitle('100% Soft and Luxurious Cotton')
+          .addQuantity(2)
+          .addPrice(50)
+          .addCurrency('USD')
+          .addImage('http://petersapparel.parseapp.com/img/whiteshirt.png')
+        .addItem('Classic Gray T-Shirt')
+          .addSubtitle('100% Soft and Luxurious Cotton')
+          .addQuantity(1)
+          .addPrice(25)
+          .addCurrency('USD')
+          .addImage('http://petersapparel.parseapp.com/img/grayshirt.png')
+        .addShippingAddress('1 Hacker Way', '', 'Menlo Park', '94025',  'CA', 'US')
+        .addSubtotal(75.00)
+        .addShippingCost(4.95)
+        .addTax(6.19)
+        .addTotal(56.14)
+        .addAdjustment('New Customer Discount', 20)
+        .addAdjustment('$10 Off Coupon', 10)
+        .get();
+
+      expect(receipt).toEqual(fbExample);
     });
 
   });
