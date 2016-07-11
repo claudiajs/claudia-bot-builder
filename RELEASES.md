@@ -1,5 +1,9 @@
 # Claudia Bot Builder release history
 
+## 1.3.3, 11 July 2016
+
+- fix FB Messenger receipt template
+
 ## 1.3.2, 10 July 2016
 
 - do not parse FB Messenger message echoes, delivery and read reports
