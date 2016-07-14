@@ -1,5 +1,9 @@
 # Claudia Bot Builder release history
 
+## 1.4.0, 14 July 2016
+
+- add support for Slack delayed reply
+
 ## 1.3.3, 11 July 2016
 
 - fix FB Messenger receipt template
