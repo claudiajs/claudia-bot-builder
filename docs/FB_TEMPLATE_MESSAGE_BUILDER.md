@@ -45,7 +45,7 @@ const fbTemplate = botBuilder.fbTemplate;
 module.exports = botBuilder(request => {
   if (request.type === 'facebook') {
     const message = new fbTemplate.text('What\'s your favorite House in Game Of Thrones');
-    
+
     return message
       .addQuickReply('Stark', 'STARK')
       .addQuickReply('Lannister', 'LANNISTER')
@@ -89,7 +89,7 @@ const fbTemplate = botBuilder.fbTemplate;
 module.exports = botBuilder(request => {
   if (request.type === 'facebook') {
     const generic = new fbTemplate.generic();
-    
+
     return generic
       .addBubble('Claudia.js', 'Deploy Node.js microservices to AWS easily')
         .addUrl('https://claudiajs.com')
@@ -188,14 +188,28 @@ const fbTemplate = botBuilder.fbTemplate;
 
 module.exports = botBuilder(request => {
   if (request.type === 'facebook') {
-    return new fbTemplate.receipt('Pizza order', 'ORDER-123', '$', 'Paypal')
-      .addTimestamp(new Date())
-      .addItem('Pizza')
-        .addSubtitle('32cm')
+    return new fbTemplate.receipt('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345')
+      .addTimestamp(new Date(1428444852))
+      .addOrderUrl('http://petersapparel.parseapp.com/order?order_id=123456')
+      .addItem('Classic White T-Shirt')
+        .addSubtitle('100% Soft and Luxurious Cotton')
+        .addQuantity(2)
+        .addPrice(50)
+        .addCurrency('USD')
+        .addImage('http://petersapparel.parseapp.com/img/whiteshirt.png')
+      .addItem('Classic Gray T-Shirt')
+        .addSubtitle('100% Soft and Luxurious Cotton')
         .addQuantity(1)
-        .addPrice(4.99)
-      .addShippingAddress('Some street 123', null, 'San Francisco', '123',  'CA', 'US')
-      .addTotal(4.99)
+        .addPrice(25)
+        .addCurrency('USD')
+        .addImage('http://petersapparel.parseapp.com/img/grayshirt.png')
+      .addShippingAddress('1 Hacker Way', '', 'Menlo Park', '94025',  'CA', 'US')
+      .addSubtotal(75.00)
+      .addShippingCost(4.95)
+      .addTax(6.19)
+      .addTotal(56.14)
+      .addAdjustment('New Customer Discount', 20)
+      .addAdjustment('$10 Off Coupon', 10)
       .get();
   }
 });
@@ -204,7 +218,7 @@ module.exports = botBuilder(request => {
 
 ## Image attachment
 
-Image attachment allows you to send, obviously, an image :) 
+Image attachment allows you to send, obviously, an image :)
 
 ### API
 
