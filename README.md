@@ -35,7 +35,7 @@ This code is enough to operate bots for all four supported platforms. Claudia Bo
 
 [![](https://nodei.co/npm/claudia-bot-builder.svg?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/claudia-bot-builder)
 
-Check out the [Getting Started](docs/GETTING_STARTED.md) guide for information on how to set up a simple bot in minutes and [API Documentation](docs/API.md) for detailed information on the API.
+Check out the [Getting Started](https://claudiajs.com/tutorials/hello-world-chatbot.html) guide for information on how to set up a simple bot in minutes and [API Documentation](docs/API.md) for detailed information on the API.
 
 ## Examples
 
