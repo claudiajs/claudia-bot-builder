@@ -154,7 +154,7 @@ _Arguments_:
 
 - `name`, string (required) - recipient's Name
 - `orderNumber`, string (required) - order number, must be unique
-- `currency`, string (required) - currency for order
+- `currency`, string (required) - currency for order, FB requires valid ISO 4217 currency code, for the list of valid codes check [ISO 4217 page on Wikipedia](https://en.wikipedia.org/wiki/ISO_4217#Active_codes).
 - `paymentMethod`, string (required) - payment method details, this can be a custom string. ex: 'Visa 1234'
 
 - `text`, string (required) - a text to display above the button(s).
