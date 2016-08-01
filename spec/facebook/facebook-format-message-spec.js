@@ -199,7 +199,7 @@ describe('Facebook format message', () => {
       generic
         .addBubble('Test');
 
-      expect(() => generic.addButton('Title')).toThrowError('Bubble value is required');
+      expect(() => generic.addButton('Title')).toThrowError('Button value is required');
     });
 
     it('should add a button with title and payload if you pass valid format', () => {
@@ -323,7 +323,7 @@ describe('Facebook format message', () => {
     it('should throw an error if you add a button without the value', () => {
       let button = new formatFbMessage.button('Test');
 
-      expect(() => button.addButton('Title')).toThrowError('Bubble value is required');
+      expect(() => button.addButton('Title')).toThrowError('Button value is required');
     });
 
     it('should add a button with title and payload if you pass valid format', () => {
