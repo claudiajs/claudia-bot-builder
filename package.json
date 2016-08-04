@@ -33,7 +33,8 @@
     "claudia-api-builder": "^1.5.1",
     "minimal-request-promise": "^1.3.0",
     "oh-no-i-insist": "^1.0.0",
-    "souffleur": "^1.0.0"
+    "souffleur": "^1.0.0",
+    "tsscmp": "^1.0.5"
   },
   "devDependencies": {
     "claudia": "^1.4.1",
