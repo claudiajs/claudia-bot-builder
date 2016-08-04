@@ -1,5 +1,9 @@
 # Claudia Bot Builder release history
 
+## 1.4.1, 4 August 2016
+
+- using Claudia API Builder 1.5.1, should improve performance for bots connecting to third party services.
+
 ## 1.4.0, 14 July 2016
 
 - add support for Slack delayed reply
