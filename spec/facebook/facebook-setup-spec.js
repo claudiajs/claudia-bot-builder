@@ -71,14 +71,14 @@ describe('Facebook setup', () => {
       });
       it('passes the parsed value to the bot if a message can be parsed', (done) => {
         parser.and.returnValue('MSG1');
-        handler({body: singleMessageTemplate});
+        handler({body: singleMessageTemplate, env: {}});
         Promise.resolve().then(() => {
-          expect(bot).toHaveBeenCalledWith('MSG1', { body: singleMessageTemplate });
+          expect(bot).toHaveBeenCalledWith('MSG1', { body: singleMessageTemplate, env: {} });
         }).then(done, done.fail);
       });
       it('does not invoke the bot if the message cannot be parsed', (done) => {
         parser.and.returnValue(false);
-        handler({body: singleMessageTemplate}).then((message) => {
+        handler({body: singleMessageTemplate, env: {}}).then((message) => {
           expect(message).toBe('ok');
           expect(bot).not.toHaveBeenCalled();
         }).then(done, done.fail);
@@ -103,7 +103,7 @@ describe('Facebook setup', () => {
       it('logs error when the bot rejects without responding', (done) => {
         parser.and.returnValue('MSG1');
 
-        handler({body: singleMessageTemplate}).then((message) => {
+        handler({body: singleMessageTemplate, env: {}}).then((message) => {
           expect(message).toBe('ok');
           expect(responder).not.toHaveBeenCalled();
           expect(logError).toHaveBeenCalledWith('No No');
