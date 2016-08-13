@@ -93,14 +93,14 @@ describe('Facebook Bot integration test', () => {
         }, lambdaContextSpy);
 
         https.request.pipe(callOptions => {
-          expect(callOptions).toEqual({
+          expect(callOptions).toEqual(jasmine.objectContaining({
             method: 'POST',
             hostname: 'graph.facebook.com',
             path: '/v2.6/me/messages?access_token=12345',
-            port: 443,
+            protocol: 'https:',
             headers: { 'Content-Type': 'application/json' },
             body: '{"recipient":{"id":"USER_ID"},"message":{"text":"YES"}}'
-          });
+          }));
           done();
         });
       });
