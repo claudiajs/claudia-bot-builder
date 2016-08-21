@@ -60,7 +60,7 @@ describe('Slack setup', () => {
 
   describe('slash command webhook and message processor', () => {
     it('wires the POST request for Slack Slash command to the message processor', () => {
-      expect(api.post.calls.count()).toEqual(2);
+      expect(api.post.calls.count()).toEqual(4);
       expect(api.post.calls.argsFor(0)).toEqual(['/slack/slash-command', jasmine.any(Function)]);
     });
 
@@ -176,7 +176,7 @@ describe('Slack setup', () => {
 
   describe('message actions webhook and message processor', () => {
     it('wires the POST request for Slack message actions to the message processor', () => {
-      expect(api.post.calls.count()).toEqual(2);
+      expect(api.post.calls.count()).toEqual(4);
       expect(api.post.calls.argsFor(1)).toEqual(['/slack/message-action', jasmine.any(Function)]);
     });
 
