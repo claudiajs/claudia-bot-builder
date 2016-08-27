@@ -41,6 +41,34 @@ Check out the [Getting Started](https://claudiajs.com/tutorials/hello-world-chat
 
 See the [Chat-Bots section](https://github.com/claudiajs/example-projects#chat-bots) of the Claudia.js example projects list
 
+## Frequently asked questions
+
+1. **How to run it locally?**
+
+   You can't. At least not easy. Claudia Bot Builder doesn't have a stand alone http server in the background (such as Express, Hapi, etc.), instead it uses API Gateway and it's not trivial to simulate similar environment locally.
+
+2. **How to test your bot?**
+
+   Your chat bot is just a Lambda function, which means it is just a simple JavaScript function and you should be able to, at least in theory, run everything locally as simple automated tests.
+   
+   The most important thing is to design testable Lambda functions, [this guide](https://claudiajs.com/tutorials/designing-testable-lambdas.html) will help you to do that.
+   
+   Integration tests can be a bit more complex if you have some integrations with external or AWS services. Check [this guide](https://claudiajs.com/tutorials/testing-locally.html) to see how to write integration tests and run automated tests locally.
+   
+3. **My Facebook messenger bot responds to my messages only. Why it's not responding to everyone?**
+
+   Facebook has [a review process](https://developers.facebook.com/docs/messenger-platform/app-review) for chat bots. Make sure your bot is approved.
+   
+4. **Can I send Slack slash command delayed responses?**
+
+   Yes, here's [the tutorial for that](https://claudiajs.com/tutorials/slack-delayed-responses.html).
+
+
+Have a question that is not on this list? Feel free to ask it on [Claudia chat on Gitter](https://gitter.im/claudiajs/claudia).
+
+_Please, do not use GitHub issues for asking questions or requesting assistance/support, use it only to report bugs._
+
+
 ## Contributing
 
 Contributions are greatly appreciated. See the [Contributors' guide](CONTRIBUTING.md) for information on running and testing code.
