@@ -9,9 +9,9 @@ describe('Skype Token', () => {
   describe('getting the access token makes a request if the token is undefined', () => {
     it('includes the Skype AppId and Skype App Secret in the request body with the proper content length', done => {
       var credentialsData = qs.encode({
+        grant_type: 'client_credentials',
         client_id: 'someSkypeAppId123',
         client_secret: 'someSkypePrivateKey123',
-        grant_type: 'client_credentials',
         scope: 'https://graph.microsoft.com/.default'
       });
       
@@ -21,8 +21,9 @@ describe('Skype Token', () => {
           hostname: 'login.microsoftonline.com',
           path: '/common/oauth2/v2.0/token',
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Content-Length': Buffer.byteLength(credentialsData)
+            'cache-control': 'no-cache',
+            'content-type': 'application/x-www-form-urlencoded',
+            'content-length': Buffer.byteLength(credentialsData)
           },
           body: credentialsData
         }));
