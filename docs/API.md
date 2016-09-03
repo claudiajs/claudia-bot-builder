@@ -26,15 +26,6 @@ The message object contains the following fields
 
 _Note_: FB Messenger message echoes, delivery and read reports will not be parsed.
 
-## Message verification
-
-_Claudia Bot Builder_ will verify message payload as recommended for each platform.
-However, Facebook Messenger beside token validation offers additional security via `X-Hub-Signature` header, but it requires your Facebook App Secret.
-
-This security step is also available in _Claudia Bot Builder_ but it is optional in current version. This will become mandatory in the next major version, so please run `claudia update` with `--configure-fb-bot` flag and set your Facebook App Secret on your next update or any time before the next major version.
-
-You can read more about security check for Facebook Messenger in [Messenger's documentation](https://developers.facebook.com/docs/messenger-platform/webhook-reference#security).
-
 ## Reply formats
 
 If you reply with a string, the response will be packaged in a bot-specific format representing a simple text message. _Claudia Bot Builder_ helps in that way to handle generic simple text responses easily.
