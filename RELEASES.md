@@ -1,5 +1,10 @@
 # Claudia Bot Builder release history
 
+## 1.4.4, 3 September 2016
+
+- upgrade Skype bot to v3 API
+- temporary remove FB security because of the problem with unicode with attachments
+
 ## 1.4.1, 4 August 2016
 
 - using Claudia API Builder 1.5.1, should improve performance for bots connecting to third party services.
