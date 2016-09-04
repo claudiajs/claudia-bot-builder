@@ -26,8 +26,8 @@ This code is enough to operate bots for all four supported platforms. Claudia Bo
 
 ## Supported platforms
 
-* Facebook Messenger 
-* Slack (channel slash commands and apps with slash commands) 
+* Facebook Messenger
+* Slack (channel slash commands and apps with slash commands)
 * Skype
 * Telegram
 
@@ -50,15 +50,15 @@ See the [Chat-Bots section](https://github.com/claudiajs/example-projects#chat-b
 2. **How to test your bot?**
 
    Your chat bot is just a Lambda function, which means it is just a simple JavaScript function and you should be able to, at least in theory, run everything locally as simple automated tests.
-   
+
    The most important thing is to design testable Lambda functions, [this guide](https://claudiajs.com/tutorials/designing-testable-lambdas.html) will help you to do that.
-   
+
    Integration tests can be a bit more complex if you have some integrations with external or AWS services. Check [this guide](https://claudiajs.com/tutorials/testing-locally.html) to see how to write integration tests and run automated tests locally.
-   
+
 3. **My Facebook messenger bot responds to my messages only. Why it's not responding to everyone?**
 
    Facebook has [a review process](https://developers.facebook.com/docs/messenger-platform/app-review) for chat bots. Make sure your bot is approved.
-   
+
 4. **Can I send Slack slash command delayed responses?**
 
    Yes, here's [the tutorial for that](https://claudiajs.com/tutorials/slack-delayed-responses.html).
@@ -76,6 +76,15 @@ Contributions are greatly appreciated. See the [Contributors' guide](CONTRIBUTIN
 ## What's new since...?
 
 See the [Release History](RELEASES.md)
+
+## Cool things built with _Claudia bot Builder_
+
+- [DotCom Bot](http://dotcom.montoyaindustries.com) - Search & buy domain names and check @usernames fast on Slack & Facebook Messenger!
+- [Eksplorer](http://eksplo.weebly.com) - The Facebook chat bot that will help you discover amazing things in your neighborhood.
+- [Fact Bot](https://github.com/claudiajs/example-projects/tree/master/bot-with-buttons) - The bot will query WikiData for anything you send it and print out the facts.
+- [Space Explorer Bot](https://github.com/stojanovic/space-explorer-bot) - A simple Messenger chat bot that uses NASA's API to get the data and images about the Space.
+
+Building something cool with Claudia Bot Builder? Let us know or send a PR to update this list!
 
 ## Authors
 
