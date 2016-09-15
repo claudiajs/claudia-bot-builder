@@ -7,9 +7,11 @@ describe('Telegram parse', () => {
     var msg = {callback_query: {id: 'some123CbId', message: {chat: {id: 'some123ChatId'}, text: 'ello Telegram' }}};
     expect(parse(msg)).toEqual({originalRequest: msg, type: 'telegram'});
   });
-  it('returns false the chat id are missing', () => {
-    expect(parse({message: {chat: 'some123ChatId', text: 'ello Telegram'}})).toBeUndefined();
-    expect(parse({message: {text: 'pete'}})).toBeUndefined();
+  it('returns original messageObject if the chat id are missing', () => {
+    var msg1 = {message: {chat: 'some123ChatId', text: 'ello Telegram'}};
+    expect(parse(msg1)).toEqual({originalRequest: msg1, type: 'telegram'});
+    var msg2 = {message: {text: 'pete'}};
+    expect(parse(msg2)).toEqual({originalRequest: msg2, type: 'telegram'});
   });
   it('returns a parsed object when chat id is present', () => {
     var msg = {message: {chat: {id: 'some123ChatId'}, text: 'ello Telegram' }};

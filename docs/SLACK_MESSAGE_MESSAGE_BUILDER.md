@@ -51,7 +51,7 @@ const slackTemplate = botBuilder.slackTemplate;
 
 module.exports = botBuilder(request => {
   if (request.type === 'slack') {
-    const message = new botBuilder('This is sample text');
+    const message = new slackTemplate('This is sample text');
     
     return message
       .addAttachment('A1')
