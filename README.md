@@ -1,6 +1,9 @@
 # Claudia Bot Builder
 
-[![Build Status](https://travis-ci.org/claudiajs/claudia-api-builder.svg?branch=master)](https://travis-ci.org/claudiajs/claudia-api-builder)
+[![npm](https://img.shields.io/npm/v/claudia-bot-builder.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/claudia-bot-builder)
+[![npm](https://img.shields.io/npm/dt/claudia-bot-builder.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/claudia-bot-builder)
+[![npm](https://img.shields.io/npm/l/claudia-bot-builder.svg?maxAge=2592000?style=plastic)](https://github.com/claudiajs/claudia-bot-builder/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/claudiajs/claudia-bot-builder.svg?branch=master)](https://travis-ci.org/claudiajs/claudia-bot-builder)
 [![Join the chat at https://gitter.im/claudiajs/claudia](https://badges.gitter.im/claudiajs/claudia.svg)](https://gitter.im/claudiajs/claudia?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 _Claudia Bot Builder_ helps developers create and deploy chat-bots for various platforms in minutes to AWS Lambda. It simplifies the messaging workflows, automatically sets up the correct web hooks, and guides you through configuration steps, so that you can focus on important business problems and not have to worry about infrastructure code.
