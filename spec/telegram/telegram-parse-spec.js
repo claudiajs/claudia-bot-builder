@@ -3,17 +3,15 @@
 var parse = require('../../lib/telegram/parse');
 
 describe('Telegram parse', () => {
-  it('returns nothing if the format is invalid', () => {
-    expect(parse('string')).toBeUndefined();
-    expect(parse()).toBeUndefined();
-    expect(parse(false)).toBeUndefined();
-    expect(parse(123)).toBeUndefined();
-    expect(parse({})).toBeUndefined();
-    expect(parse([1, 2, 3])).toBeUndefined();
+  it('returns original messageObject if format is not a message or inline_query to avoid failing silently', () => {
+    var msg = {callback_query: {id: 'some123CbId', message: {chat: {id: 'some123ChatId'}, text: 'ello Telegram' }}};
+    expect(parse(msg)).toEqual({originalRequest: msg, type: 'telegram'});
   });
-  it('returns false the chat id are missing', () => {
-    expect(parse({message: {chat: 'some123ChatId', text: 'ello Telegram'}})).toBeUndefined();
-    expect(parse({message: {text: 'pete'}})).toBeUndefined();
+  it('returns original messageObject if the chat id are missing', () => {
+    var msg1 = {message: {chat: 'some123ChatId', text: 'ello Telegram'}};
+    expect(parse(msg1)).toEqual({originalRequest: msg1, type: 'telegram'});
+    var msg2 = {message: {text: 'pete'}};
+    expect(parse(msg2)).toEqual({originalRequest: msg2, type: 'telegram'});
   });
   it('returns a parsed object when chat id is present', () => {
     var msg = {message: {chat: {id: 'some123ChatId'}, text: 'ello Telegram' }};
