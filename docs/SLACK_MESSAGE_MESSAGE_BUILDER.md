@@ -28,7 +28,7 @@ _Arguments_:
 | channelMessage | No | value (boolean, required) | `this` for chaining | By default all slash commands are private, this makes them visible for everyone |
 | getLatestAttachment | No | No args. | `this` for chaining | Returns the last attachment, used internally |
 | addAttachment | No | callbackId (string, required), fallback (string, optional) | `this` for chaining | Adds an attachment and sets a fallback and callback_id for it |
-| addTitle | No | text (string, required) | `this` for chaining | Adds a title to the latest attachment |
+| addTitle | No | text (string, required), link (url, optional) | `this` for chaining | Adds a title to the latest attachment |
 | addText | No | text (string, required) | `this` for chaining | Adds a text to the latest attachment |
 | addPretext | No | text (string, required) | `this` for chaining | Adds a pretext to the latest attachment |
 | addImage | No | imageUrl (url, required) | `this` for chaining | Adds an image to the latest attachment |
