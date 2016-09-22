@@ -8,7 +8,7 @@ Here's how it works:
 
 2. If you pass the object in format:
 
-   ```
+   ```js
    {
      text: 'Some text',
      parse_mode: 'Markdown',
@@ -23,8 +23,10 @@ Here's how it works:
 
 3. If you send a message in format:
 
-   ```
-   method: 'sendMessage',
-   body: {}
+   ```js
+   {
+     method: 'sendMessage',
+     body: {}
+   }
    ```
    it'll do the same thing as step 2 for `reply.body` but it'll also allow you to overwrite reply method, ie. to send a message instead of answering as inline query.
