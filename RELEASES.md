@@ -1,5 +1,10 @@
 # Claudia Bot Builder release history
 
+## 2.0.0, 27 September 2016
+
+- upgrading to use claudia-api-builder 2.0.0
+- requires using claudia 2.x to deploy
+
 ## 1.4.4, 3 September 2016
 
 - upgrade Skype bot to v3 API
