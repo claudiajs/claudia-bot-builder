@@ -30,14 +30,14 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "claudia-api-builder": "^1.5.1",
+    "claudia-api-builder": "^2.0.0",
     "minimal-request-promise": "^1.3.0",
     "oh-no-i-insist": "^1.0.0",
     "souffleur": "^1.0.0",
     "tsscmp": "^1.0.5"
   },
   "devDependencies": {
-    "claudia": "^1.4.1",
+    "claudia": "^2.0.0",
     "eslint": "^2.11.1",
     "eslint-config-defaults": "^9.0.0",
     "fake-http-request": "^1.3.0",

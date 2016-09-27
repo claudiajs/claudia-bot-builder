@@ -2,24 +2,25 @@
 var botBuilder = require('../lib/bot-builder');
 describe('BotBuilder', () => {
   var messageHandler, underTest, lambdaContextSpy;
-  
+
   beforeEach(() => {
     messageHandler = jasmine.createSpy('messageHandler');
     lambdaContextSpy = jasmine.createSpyObj('lambdaContext', ['done']);
     underTest = botBuilder(messageHandler);
   });
-  
+
   it('configures a Claudia Rest API', () => {
-    expect(underTest.apiConfig().version).toEqual(2);
+    expect(underTest.apiConfig().version).toEqual(3);
   });
 
-  it('sets up a GET route for /', () => {
-    underTest.router({
-      context: {
-        path: '/',
-        method: 'GET'
+  it('sets up a GET route for /', (done) => {
+    underTest.proxyRouter({
+      requestContext: {
+        resourcePath: '/',
+        httpMethod: 'GET'
       }
-    }, lambdaContextSpy);
-    expect(lambdaContextSpy.done).toHaveBeenCalledWith(null, 'Ok');
+    }, lambdaContextSpy).then(() => {
+      expect(lambdaContextSpy.done).toHaveBeenCalledWith(null, jasmine.objectContaining({body: '"Ok"'}));
+    }).then(done, done.fail);
   });
 });

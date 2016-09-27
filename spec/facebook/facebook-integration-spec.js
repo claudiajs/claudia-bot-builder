@@ -43,51 +43,53 @@ describe('Facebook Bot integration test', () => {
         expect(underTest.apiConfig().routes.facebook.GET.success.contentType).toEqual('text/plain');
       });
 
-      it('returns hub challenge if the tokens match', () => {
-        underTest.router({
-          context: {
-            path: '/facebook',
-            method: 'GET'
+      it('returns hub challenge if the tokens match', (done) => {
+        underTest.proxyRouter({
+          requestContext: {
+            resourcePath: '/facebook',
+            httpMethod: 'GET'
           },
-          queryString: {
+          queryStringParameters: {
             'hub.verify_token': '12345',
             'hub.challenge': 'XHCG'
           },
-          env: {
+          stageVariables: {
             facebookVerifyToken: '12345'
           }
-        }, lambdaContextSpy);
-        expect(lambdaContextSpy.done).toHaveBeenCalledWith(null, 'XHCG');
+        }, lambdaContextSpy).then(() => {
+          expect(lambdaContextSpy.done).toHaveBeenCalledWith(null, jasmine.objectContaining({body:'XHCG'}));
+        }).then(done, done.fail);
       });
 
-      it('returns Error challenge if the tokens do not match', () => {
-        underTest.router({
-          context: {
-            path: '/facebook',
-            method: 'GET'
+      it('returns Error challenge if the tokens do not match', (done) => {
+        underTest.proxyRouter({
+          requestContext: {
+            resourcePath: '/facebook',
+            httpMethod: 'GET'
           },
-          queryString: {
+          queryStringParameters: {
             'hub.verify_token': '123x',
             'hub.challenge': 'XHCG'
           },
-          env: {
+          stageVariables: {
             facebookVerifyToken: '12345'
           }
-        }, lambdaContextSpy);
-        expect(lambdaContextSpy.done).toHaveBeenCalledWith(null, 'Error');
+        }, lambdaContextSpy).then(() => {
+          expect(lambdaContextSpy.done).toHaveBeenCalledWith(null, jasmine.objectContaining({body:'Error'}));
+        }).then(done, done.fail);
       });
     });
     describe('message handling', () => {
       it('sends the response using https to facebook', done => {
         messageHandler.and.returnValue(Promise.resolve('YES'));
 
-        underTest.router({
-          context: {
-            path: '/facebook',
-            method: 'POST'
+        underTest.proxyRouter({
+          requestContext: {
+            resourcePath: '/facebook',
+            httpMethod: 'POST'
           },
           body: singleMessageTemplate,
-          env: {
+          stageVariables: {
             facebookAccessToken: '12345'
           }
         }, lambdaContextSpy);
