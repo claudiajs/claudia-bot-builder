@@ -89,7 +89,7 @@ describe('Slack setup', () => {
       });
 
       expect(responder.calls.count()).toEqual(1);
-      expect(responder).toHaveBeenCalledWith('unmatched token slack-token slack-invalid-token slack-webhook-token slack-invalid-verification-token');
+      expect(responder).toHaveBeenCalledWith('unmatched token slack-token');
     });
 
     it('replies with Error when webhook tokens do not match for a webhook message', () => {
@@ -104,7 +104,7 @@ describe('Slack setup', () => {
       });
 
       expect(responder.calls.count()).toEqual(1);
-      expect(responder).toHaveBeenCalledWith('unmatched token slack-webhook-token slack-token slack-invalid-webhook-token slack-verification-token');
+      expect(responder).toHaveBeenCalledWith('unmatched token slack-webhook-token');
     });
 
     it('invokes parser if the slash command request is valid with the slack token', () => {
@@ -265,7 +265,7 @@ describe('Slack setup', () => {
       });
 
       expect(responder.calls.count()).toEqual(1);
-      expect(responder).toHaveBeenCalledWith('unmatched token slack-verification-token slack-invalid-token slack-invalid-verification-token');
+      expect(responder).toHaveBeenCalledWith('unmatched token slack-verification-token');
     });
 
     it('invokes parser if the request contains a valid verification token', () => {
