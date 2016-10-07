@@ -33,10 +33,43 @@ describe('Telegram Reply', () => {
       done();
     });
     reply(
-      {sender: 'some123ChatId', text: 'Hello Telegram', originalRequest: {message: {}}, type: 'telegram'},
+      {sender: 'some123ChatId', originalRequest: {}},
       'Hello Telegram',
       'ACCESS123'
     );
+  });
+
+  describe('when an array is passed', () => {
+    it('does not send the second request until the first one completes', done => {
+      let answers = ['foo', 'bar'];
+      https.request.pipe(() => {
+        Promise.resolve().then(() => {
+          expect(https.request.calls.length).toEqual(1);
+        }).then(done);
+      });
+      reply(
+        {sender: 'some123ChatId', originalRequest: {}, type: 'telegram'},
+        answers,
+        'ACCESS123'
+      );
+    });
+    it('sends the requests in sequence', done => {
+      let answers = ['foo', 'bar'];
+      https.request.pipe(function () {
+        this.respond('200', 'OK');
+        if (https.request.calls.length === 2) {
+          expect(JSON.parse(https.request.calls[0].body[0])).toEqual({chat_id:'some123ChatId',text:'foo'});
+          expect(JSON.parse(https.request.calls[1].body[0])).toEqual({chat_id:'some123ChatId',text:'bar'});
+          done();
+        }
+      });
+      reply(
+        {sender: 'some123ChatId', originalRequest: {}, type: 'telegram'},
+        answers,
+        'ACCESS123'
+      );
+    });
+
   });
 
   it('sends custom object as message if user provide an object without method', done => {
