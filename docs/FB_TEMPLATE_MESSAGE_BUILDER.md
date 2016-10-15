@@ -1,5 +1,17 @@
 # Facebook Template Message builder
 
+In this guide:
+
+1. [Intro](#intro)
+2. [Text messages](#text-messages)
+3. [Generic template](#generic-template)
+4. [Button template](#button-template)
+5. [Receipt template](#receipt-template)
+6. [Image attachment](#image-attachment)
+7. [Handling errors](#handling-errors)
+
+## Intro
+
 _Facebook Template Message builder_ allows you to generate more complex messages for Facebook Messenger without writing JSON files manually.
 
 To use it, just require `fbTemplate` function from _Claudia Bot Builder_:
@@ -73,7 +85,7 @@ _Arguments_:
 |-----------|----------|-------------|---------------------|-------------|
 | addBubble | Yes      | title (string, required), subtitle (string)    | `this` for chaining | Each Generic template can have 1 to 10 elements/bubbles, before you add anything to it. It requires element's title, but it can also accept element's subtitle |
 | addUrl    | No       | A valid URL | `this` for chaining | Adds an url to a current element, requires a valid URL, also requires `addBubble` to be added first |
-| addImage  | No       | A valid URL | `this` for chaining | Adds an image to a current element, requires a valid URL, also requires `addBubble` to be added first |
+| addImage  | No       | A valid absolute URL | `this` for chaining | Adds an image to a current element, requires a valid URL, also requires `addBubble` to be added first |
 | addButton | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, at least one button is required, and maximum 3 of them is allowed. It also requires `addBubble` to be added first |
 | addQuickReply | No   | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
 | get       | Yes      | No args.    | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
@@ -170,7 +182,7 @@ _Arguments_:
 | addQuantity | No    | quantity (number, required) | `this` for chaining | current item's quantity, requires `addItem` first |
 | addPrice    | No    | price (number, required) | `this` for chaining | current item's price, requires `addItem` first |
 | addCurrency | No    | currency (string, required) | `this` for chaining | current item's currency, requires `addItem` first |
-| addImage    | No    | image (string, required) | `this` for chaining | current item's image, requires `addItem` first |
+| addImage    | No    | image (string, required) | `this` for chaining | current item's image, requires `addItem` first and accepts valid absolute urls only |
 | addShippingAddress | No | street1 (string, required), street2 (string, can be `null`), city (string, required), zip (string, required), state (string, required), country (string, required) | `this` for chaining | shipping address if applicable |
 | addAdjustment | No | name (string), amount (number) | `this` for chaining | payment adjustments, multiple adjustments are allowed |
 | addSubtotal | No | subtotal (number, required) | `this` for chaining | subtotal |
@@ -225,7 +237,7 @@ Image attachment allows you to send, obviously, an image :)
 `image` (class) - Class that allows you to send an image attachment message  
 _Arguments_:
 
-- `url`, string (required) - a valid URL for an image.
+- `url`, string (required) - a valid absolute URL for an image.
 
 ### Methods
 
