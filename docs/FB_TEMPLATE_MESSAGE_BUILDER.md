@@ -8,7 +8,11 @@ In this guide:
 4. [Button template](#button-template)
 5. [Receipt template](#receipt-template)
 6. [Image attachment](#image-attachment)
-7. [Handling errors](#handling-errors)
+7. [Audio attachment](#audio-attachment)
+8. [Video attachment](#video-attachment)
+9. [File attachment](#file-attachment)
+10. [Other attachments](#other-attachments)
+11. [Handling errors](#handling-errors)
 
 ## Intro
 
@@ -20,13 +24,16 @@ To use it, just require `fbTemplate` function from _Claudia Bot Builder_:
 const fbTemplate = require('claudia-bot-builder').fbTemplate;
 ```
 
-`fbTemplate` exports an object that contains 4 classes that allows you to generate 5 different types of Facebook Messenger structured messages:
+`fbTemplate` exports an object that contains multiple classes that allows you to generate different types of Facebook Messenger structured messages:
 
 - Text messages (this is not template, but we need to have them because of quick answers)
 - Generic template messages
 - Button template messages
 - Receipt template messages
 - Image attachment messages
+- Audio attachment messages
+- Video attachment messages
+- File attachment messages
 
 More info about each type of structured messages can be found in [Facebook Messenger's Complete guide](https://developers.facebook.com/docs/messenger-platform/implementation#send_message).
 
@@ -36,17 +43,21 @@ Text messages returns a simple text. In case you don't need to add quick respons
 
 ### API
 
-`text` (class) - Class that allows you to build text messages with quick replies  
+`Text` (class) - Class that allows you to build text messages with quick replies  
+
+_Note:_ Claudia bot builders versions < 2.1 have just a lower case class `text`, same method works for versions >= 2.1, but it's deprecated and it will be removed in next major version.
+
+
 _Arguments_:
 
 - `text`, string (required) - a simple text to send as a reply.
 
 ### Methods
 
-| Method    | Required | Arguments   | Returns             | Description |
-|-----------|----------|-------------|---------------------|-------------|
-| addQuickReply | No   | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
-| get | Yes | No args. | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
+| Method        | Required | Arguments                                | Returns                           | Description                              |
+| ------------- | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining               | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| get           | Yes      | No args.                                 | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 ### Example
 
@@ -54,9 +65,9 @@ _Arguments_:
 const botBuilder = require('claudia-bot-builder');
 const fbTemplate = botBuilder.fbTemplate;
 
-module.exports = botBuilder(request => {
-  if (request.type === 'facebook') {
-    const message = new fbTemplate.text('What\'s your favorite House in Game Of Thrones');
+module.exports = botBuilder(message => {
+  if (message.type === 'facebook') {
+    const message = new fbTemplate.Text('What\'s your favorite House in Game Of Thrones');
 
     return message
       .addQuickReply('Stark', 'STARK')
@@ -74,21 +85,25 @@ The Generic Template can take an image, title, subtitle, description and buttons
 
 ### API
 
-`generic` (class) - Class that allows you to build Generic template messages  
+`Generic` (class) - Class that allows you to build Generic template messages  
+
+_Note:_ Claudia bot builders versions < 2.1 have just a lower case class `generic`, same method works for versions >= 2.1, but it's deprecated and it will be removed in next major version.
+
+
 _Arguments_:
 
 - none
 
 ### Methods
 
-| Method    | Required | Arguments   | Returns             | Description |
-|-----------|----------|-------------|---------------------|-------------|
-| addBubble | Yes      | title (string, required), subtitle (string)    | `this` for chaining | Each Generic template can have 1 to 10 elements/bubbles, before you add anything to it. It requires element's title, but it can also accept element's subtitle |
-| addUrl    | No       | A valid URL | `this` for chaining | Adds an url to a current element, requires a valid URL, also requires `addBubble` to be added first |
-| addImage  | No       | A valid absolute URL | `this` for chaining | Adds an image to a current element, requires a valid URL, also requires `addBubble` to be added first |
-| addButton | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, at least one button is required, and maximum 3 of them is allowed. It also requires `addBubble` to be added first |
-| addQuickReply | No   | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
-| get       | Yes      | No args.    | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
+| Method        | Required | Arguments                                | Returns             | Description                              |
+| ------------- | -------- | ---------------------------------------- | ------------------- | ---------------------------------------- |
+| addBubble     | Yes      | title (string, required), subtitle (string) | `this` for chaining | Each Generic template can have 1 to 10 elements/bubbles, before you add anything to it. It requires element's title, but it can also accept element's subtitle |
+| addUrl        | No       | A valid URL                              | `this` for chaining | Adds an url to a current element, requires a valid URL, also requires `addBubble` to be added first |
+| addImage      | No       | A valid absolute URL                     | `this` for chaining | Adds an image to a current element, requires a valid URL, also requires `addBubble` to be added first |
+| addButton     | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, at least one button is required, and maximum 3 of them is allowed. It also requires `addBubble` to be added first |
+| addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| get           | Yes      | No args.                                 | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 *_Required arguments_, Messenger requires all elements to have those values, the message builder will throw an error if you don't provide it.
 
@@ -98,9 +113,9 @@ _Arguments_:
 const botBuilder = require('claudia-bot-builder');
 const fbTemplate = botBuilder.fbTemplate;
 
-module.exports = botBuilder(request => {
-  if (request.type === 'facebook') {
-    const generic = new fbTemplate.generic();
+module.exports = botBuilder(message => {
+  if (message.type === 'facebook') {
+    const generic = new fbTemplate.Generic();
 
     return generic
       .addBubble('Claudia.js', 'Deploy Node.js microservices to AWS easily')
@@ -122,18 +137,22 @@ The Button Template is useful when you want to present simple text with options,
 
 ### API
 
-`generic` (class) - Class that allows you to build Button template messages  
+`Button` (class) - Class that allows you to build Button template messages  
+
+_Note:_ Claudia bot builders versions < 2.1 have just a lower case class `button`, same method works for versions >= 2.1, but it's deprecated and it will be removed in next major version.
+
+
 _Arguments_:
 
 - `text`, string (required) - a text to display above the button(s).
 
 ### Methods
 
-| Method    | Required | Arguments   | Returns             | Description |
-|-----------|----------|-------------|---------------------|-------------|
-| addButton | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, at least one button is required, and maximum 3 of them is allowed |
-| addQuickReply | No   | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
-| get       | Yes      | No args.    | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
+| Method        | Required | Arguments                                | Returns             | Description                              |
+| ------------- | -------- | ---------------------------------------- | ------------------- | ---------------------------------------- |
+| addButton     | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, at least one button is required, and maximum 3 of them is allowed |
+| addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| get           | Yes      | No args.                                 | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 *_Required arguments_, Messenger requires all elements to have those values, the message builder will throw an error if you don't provide it.
 
@@ -143,16 +162,15 @@ _Arguments_:
 const botBuilder = require('claudia-bot-builder');
 const fbTemplate = botBuilder.fbTemplate;
 
-module.exports = botBuilder(request => {
-  if (request.type === 'facebook') {
-    return new fbTemplate.button('How are you?')
+module.exports = botBuilder(message => {
+  if (message.type === 'facebook') {
+    return new fbTemplate.Button('How are you?')
       .addButton('Awesome', 'AWESOME')
       .addButton('Great', 'GREAT')
       .addButton('🎵🎵🎵', 'https://youtu.be/m5TwT69i1lU')
       .get();
   }
 });
-
 ```
 
 ## Receipt template
@@ -161,7 +179,11 @@ The Receipt Template can be used to send receipts for orders.
 
 ### API
 
-`receipt` (class) - Class that allows you to build Receipt template messages  
+`Receipt` (class) - Class that allows you to build Receipt template messages  
+
+_Note:_ Claudia bot builders versions < 2.1 have just a lower case class `receipt`, same method works for versions >= 2.1, but it's deprecated and it will be removed in next major version.
+
+
 _Arguments_:
 
 - `name`, string (required) - recipient's Name
@@ -173,24 +195,24 @@ _Arguments_:
 
 ### Methods
 
-| Method    | Required | Arguments   | Returns             | Description |
-|-----------|----------|-------------|---------------------|-------------|
-| addTimestamp | No    | timestamp (valid JS date object, required) | `this` for chaining | timestamp of the order |
-| addOrderUrl | No     | url (valid URL, required) | `this` for chaining | order URL |
-| addItem   | Yes, at least one | title (string, required) | `this` for chaining | add an item to a receipt, at least one item is required. Beside title, each item can have subtitle, quantity, price, currencty and image, methods bellow explains how to add them |
-| addSubtitle | No    | subtitle (string, required) | `this` for chaining | current item's subtitle, requires `addItem` first |
-| addQuantity | No    | quantity (number, required) | `this` for chaining | current item's quantity, requires `addItem` first |
-| addPrice    | No    | price (number, required) | `this` for chaining | current item's price, requires `addItem` first |
-| addCurrency | No    | currency (string, required) | `this` for chaining | current item's currency, requires `addItem` first |
-| addImage    | No    | image (string, required) | `this` for chaining | current item's image, requires `addItem` first and accepts valid absolute urls only |
-| addShippingAddress | No | street1 (string, required), street2 (string, can be `null`), city (string, required), zip (string, required), state (string, required), country (string, required) | `this` for chaining | shipping address if applicable |
-| addAdjustment | No | name (string), amount (number) | `this` for chaining | payment adjustments, multiple adjustments are allowed |
-| addSubtotal | No | subtotal (number, required) | `this` for chaining | subtotal |
-| addShippingCost | No | shippingCost (number, required) | `this` for chaining | shipping cost |
-| addTax | No | tax (number, required) | `this` for chaining | total tax |
-| addTotal | Yes | total (number, required) | `this` for chaining | total cost |
-| addQuickReply | No   | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
-| get | Yes      | No args.    | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
+| Method             | Required          | Arguments                                | Returns             | Description                              |
+| ------------------ | ----------------- | ---------------------------------------- | ------------------- | ---------------------------------------- |
+| addTimestamp       | No                | timestamp (valid JS date object, required) | `this` for chaining | timestamp of the order                   |
+| addOrderUrl        | No                | url (valid URL, required)                | `this` for chaining | order URL                                |
+| addItem            | Yes, at least one | title (string, required)                 | `this` for chaining | add an item to a receipt, at least one item is required. Beside title, each item can have subtitle, quantity, price, currencty and image, methods bellow explains how to add them |
+| addSubtitle        | No                | subtitle (string, required)              | `this` for chaining | current item's subtitle, requires `addItem` first |
+| addQuantity        | No                | quantity (number, required)              | `this` for chaining | current item's quantity, requires `addItem` first |
+| addPrice           | No                | price (number, required)                 | `this` for chaining | current item's price, requires `addItem` first |
+| addCurrency        | No                | currency (string, required)              | `this` for chaining | current item's currency, requires `addItem` first |
+| addImage           | No                | image (string, required)                 | `this` for chaining | current item's image, requires `addItem` first and accepts valid absolute urls only |
+| addShippingAddress | No                | street1 (string, required), street2 (string, can be `null`), city (string, required), zip (string, required), state (string, required), country (string, required) | `this` for chaining | shipping address if applicable           |
+| addAdjustment      | No                | name (string), amount (number)           | `this` for chaining | payment adjustments, multiple adjustments are allowed |
+| addSubtotal        | No                | subtotal (number, required)              | `this` for chaining | subtotal                                 |
+| addShippingCost    | No                | shippingCost (number, required)          | `this` for chaining | shipping cost                            |
+| addTax             | No                | tax (number, required)                   | `this` for chaining | total tax                                |
+| addTotal           | Yes               | total (number, required)                 | `this` for chaining | total cost                               |
+| addQuickReply      | No                | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| get                | Yes               | No args.                                 | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 ### Example
 
@@ -198,9 +220,9 @@ _Arguments_:
 const botBuilder = require('claudia-bot-builder');
 const fbTemplate = botBuilder.fbTemplate;
 
-module.exports = botBuilder(request => {
-  if (request.type === 'facebook') {
-    return new fbTemplate.receipt('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345')
+module.exports = botBuilder(message => {
+  if (message.type === 'facebook') {
+    return new fbTemplate.Receipt('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345')
       .addTimestamp(new Date(1428444852))
       .addOrderUrl('http://petersapparel.parseapp.com/order?order_id=123456')
       .addItem('Classic White T-Shirt')
@@ -225,7 +247,6 @@ module.exports = botBuilder(request => {
       .get();
   }
 });
-
 ```
 
 ## Image attachment
@@ -234,17 +255,21 @@ Image attachment allows you to send, obviously, an image :)
 
 ### API
 
-`image` (class) - Class that allows you to send an image attachment message  
+`Image` (class) - Class that allows you to send an image attachment message  
+
+_Note:_ Claudia bot builders versions < 2.1 have just a lower case class `image`, same method works for versions >= 2.1, but it's deprecated and it will be removed in next major version.
+
+
 _Arguments_:
 
 - `url`, string (required) - a valid absolute URL for an image.
 
 ### Methods
 
-| Method    | Required | Arguments   | Returns             | Description |
-|-----------|----------|-------------|---------------------|-------------|
-| addQuickReply | No   | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
-| get | Yes | No args. | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
+| Method        | Required | Arguments                                | Returns                           | Description                              |
+| ------------- | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining               | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| get           | Yes      | No args.                                 | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 ### Example
 
@@ -252,16 +277,173 @@ _Arguments_:
 const botBuilder = require('claudia-bot-builder');
 const fbTemplate = botBuilder.fbTemplate;
 
-module.exports = botBuilder(request => {
-  if (request.type === 'facebook') {
-    return new fbTemplate.image('https://github.com/claudiajs/claudiajs.com/blob/master/assets/claudiajs.png');
+module.exports = botBuilder(message => {
+  if (message.type === 'facebook') {
+    return new fbTemplate
+      .Image('https://github.com/claudiajs/claudiajs.com/blob/master/assets/claudiajs.png')
+      .get();
   }
 });
 ```
+
+## Audio attachment
+
+Audio attachment allows you to send audio files.
+
+### API
+
+`Audio` (class) - Class that allows you to send an audio attachment message  
+
+_Note:_ Claudia bot builders versions < 2.1 have just a lower case class `audio`, same method works for versions >= 2.1, but it's deprecated and it will be removed in next major version.
+
+
+_Arguments_:
+
+- `url`, string (required) - a valid absolute URL for an audio file.
+
+### Methods
+
+| Method        | Required | Arguments                                | Returns                           | Description                              |
+| ------------- | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining               | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| get           | Yes      | No args.                                 | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
+
+### Example
+
+```js
+const botBuilder = require('claudia-bot-builder');
+const fbTemplate = botBuilder.fbTemplate;
+
+module.exports = botBuilder(message => {
+  if (message.type === 'facebook') {
+    return new fbTemplate
+      .Audio('http://media.xiph.org/BBB/bbb3d/audio/bbb3d_sunflower_soundtrack_stereo.mp3')
+      .get();
+  }
+});
+```
+
+## Video attachment
+
+Video attachment allows you to send video files.
+
+### API
+
+`Video` (class) - Class that allows you to send an video attachment message  
+
+_Note:_ Claudia bot builders versions < 2.1 have just a lower case class `video`, same method works for versions >= 2.1, but it's deprecated and it will be removed in next major version.
+
+
+_Arguments_:
+
+- `url`, string (required) - a valid absolute URL for a video.
+
+### Methods
+
+| Method        | Required | Arguments                                | Returns                           | Description                              |
+| ------------- | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining               | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| get           | Yes      | No args.                                 | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
+
+### Example
+
+```js
+const botBuilder = require('claudia-bot-builder');
+const fbTemplate = botBuilder.fbTemplate;
+
+module.exports = botBuilder(message => {
+  if (message.type === 'facebook') {
+    return new fbTemplate
+      .Video('http://mirror.bigbuckbunny.de/peach/bigbuckbunny_movies/big_buck_bunny_720p_surround.avi')
+      .get();
+  }
+});
+```
+
+## File attachment
+
+File attachment allows you to send files.
+
+### API
+
+`File` (class) - Class that allows you to send a file attachment message  
+
+_Note:_ Claudia bot builders versions < 2.1 have just a lower case class `file`, same method works for versions >= 2.1, but it's deprecated and it will be removed in next major version.
+
+
+_Arguments_:
+
+- `url`, string (required) - a valid absolute URL for a file you want to send.
+
+### Methods
+
+| Method        | Required | Arguments                                | Returns                           | Description                              |
+| ------------- | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining               | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| get           | Yes      | No args.                                 | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
+
+### Example
+
+```js
+const botBuilder = require('claudia-bot-builder');
+const fbTemplate = botBuilder.fbTemplate;
+
+module.exports = botBuilder(message => {
+  if (message.type === 'facebook') {
+    return new fbTemplate
+      .File('http://media.xiph.org/BBB/BBB-360-png/big_buck_bunny_01542.png')
+      .get();
+  }
+});
+```
+
+## Other attachments
+
+Beside those, Facebook Messenger now supports a few other templates that are not so useful for the common bots, ie. Airline templates.
+
+You can use all those templates by simply providing an object (just a message part, without recepient) instead of a template builder class.
+
+An example:
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+
+module.exports = botBuilder(message => {
+  return {
+    "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+          {
+            "title":"Breaking News: Record Thunderstorms",
+            "subtitle":"The local area is due for record thunderstorms over the weekend.",
+            "image_url":"https://thechangreport.com/img/lightning.png",
+            "buttons":[
+              {
+                "type":"element_share"
+              }              
+            ]
+          }
+        ]
+      }
+    }
+  };
+});
+```
+
 
 
 ## Handling errors
 
 _Facebook Template Message builder_ checks if the messages you are generating are following Facebook Messenger guidelines and limits, in case they are not an error will be thrown.
 
+_Example:_
+
+Calling `new fbTemplate.text()`  without text will throw `Text is required for text template` error.
+
 More info about limits and guidelines can be found in [Messenger's Send API Referece](https://developers.facebook.com/docs/messenger-platform/send-api-reference).
+
+All errors that Claudia bot builder's fbTemplate library is throwing can be found [in the source code](../lib/facebook/format-message.js).
+
+Errors will be logged in Cloud Watch log for your bot.
