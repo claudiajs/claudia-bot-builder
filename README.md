@@ -67,6 +67,11 @@ See the [Chat-Bots section](https://github.com/claudiajs/example-projects#chat-b
 
    Yes, here's [the tutorial for that](https://claudiajs.com/tutorials/slack-delayed-responses.html).
 
+5. **What's new in v2?**
+
+   Nothing :) It's a new major version because of the dependencies - there's a big improvements in _Claudia API Builder_ and _Claudia_ and _Claudia Bot Builder_ v1.x is not compatible with them.  
+   However, v2.1 brings probably the biggest update since the beginning.
+
 
 Have a question that is not on this list? Feel free to ask it on [Claudia chat on Gitter](https://gitter.im/claudiajs/claudia).
 
