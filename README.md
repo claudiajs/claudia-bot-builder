@@ -18,8 +18,8 @@ Here's a simple example:
 const botBuilder = require('claudia-bot-builder');
 const excuse = require('huh');
 
-module.exports = botBuilder(function (request) {
-  return 'Thanks for sending ' + request.text +
+module.exports = botBuilder(function (message) {
+  return 'Thanks for sending ' + message.text +
     'Your message is very important to us, but ' +
     excuse.get();
 });
@@ -83,6 +83,7 @@ See the [Release History](RELEASES.md)
 
 ## Cool things built with _Claudia bot Builder_
 
+- [AWS Bot for Slack](https://github.com/andypowe11/AWS-Claudia-AWSBot) - A Slack bot to stop and start selected AWS EC2 instances and generally keep an eye on your AWS estate.
 - [DotCom Bot](http://dotcom.montoyaindustries.com) - Search & buy domain names and check @usernames fast on Slack & Facebook Messenger!
 - [Eksplorer](http://eksplo.weebly.com) - The Facebook chat bot that will help you discover amazing things in your neighborhood.
 - [Fact Bot](https://github.com/claudiajs/example-projects/tree/master/bot-with-buttons) - The bot will query WikiData for anything you send it and print out the facts.
@@ -96,9 +97,9 @@ Building something cool with Claudia Bot Builder? Let us know or send a PR to up
 
 ## Authors
 
-* [Gojko Adzic](https://github.com/gojko)
-* [Alexander Simovic](https://github.com/simalexan)
-* [Slobodan Stojanovic](https://github.com/stojanovic)
+* [Gojko Adžić](https://github.com/gojko)
+* [Aleksandar Simović](https://github.com/simalexan)
+* [Slobodan Stojanović](https://github.com/stojanovic)
 
 ## License
 
