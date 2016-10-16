@@ -41,6 +41,8 @@ More info about each type of structured messages can be found in [Facebook Messe
 
 Text messages returns a simple text. In case you don't need to add quick responses reply with a simple text and _Cluaudia Bot Builder_ will do the rest.
 
+However, if you want to add quick replies check the class below.
+
 ### API
 
 `Text` (class) - Class that allows you to build text messages with quick replies  
@@ -78,6 +80,10 @@ module.exports = botBuilder(message => {
   }
 });
 ```
+
+_How it looks:_
+
+![Text with quick replies](https://claudiajs.com/assets/facebook/text_with_quick_replies.png)
 
 ## Generic template
 
@@ -120,16 +126,20 @@ module.exports = botBuilder(message => {
     return generic
       .addBubble('Claudia.js', 'Deploy Node.js microservices to AWS easily')
         .addUrl('https://claudiajs.com')
-        .addImage('https://github.com/claudiajs/claudiajs.com/blob/master/assets/claudiajs.png')
+        .addImage('https://claudiajs.com/assets/claudiajs.png')
         .addButton('Say hello', 'HELLO')
         .addButton('Go to Github', 'https://github.com/claudiajs/claudia')
       .addBubble('Claudia Bot Builder')
-      	.addImage('https://github.com/claudiajs/claudiajs.com/blob/master/assets/claudia-bot-builder-video.jpg')
+      	.addImage('https://claudiajs.com/assets/claudia-bot-builder-video.jpg')
       	.addButton('Go to Github', 'https://github.com/claudiajs/claudia-bot-builder')
       .get();
   }
 });
 ```
+
+_How it looks:_
+
+![Text with quick replies](https://claudiajs.com/assets/facebook/generic.png)
 
 ## Button template
 
@@ -172,6 +182,10 @@ module.exports = botBuilder(message => {
   }
 });
 ```
+
+_How it looks:_
+
+![Text with quick replies](https://claudiajs.com/assets/facebook/button.png)
 
 ## Receipt template
 
@@ -249,6 +263,10 @@ module.exports = botBuilder(message => {
 });
 ```
 
+_How it looks:_
+
+![Text with quick replies](https://claudiajs.com/assets/facebook/receipt.png)
+
 ## Image attachment
 
 Image attachment allows you to send, obviously, an image :)
@@ -280,11 +298,15 @@ const fbTemplate = botBuilder.fbTemplate;
 module.exports = botBuilder(message => {
   if (message.type === 'facebook') {
     return new fbTemplate
-      .Image('https://github.com/claudiajs/claudiajs.com/blob/master/assets/claudiajs.png')
+      .Image('https://claudiajs.com/assets/claudiajs.png')
       .get();
   }
 });
 ```
+
+_How it looks:_
+
+![Text with quick replies](https://claudiajs.com/assets/facebook/image.png)
 
 ## Audio attachment
 
@@ -317,11 +339,15 @@ const fbTemplate = botBuilder.fbTemplate;
 module.exports = botBuilder(message => {
   if (message.type === 'facebook') {
     return new fbTemplate
-      .Audio('http://media.xiph.org/BBB/bbb3d/audio/bbb3d_sunflower_soundtrack_stereo.mp3')
+      .Audio('http://www.noiseaddicts.com/samples_1w72b820/4927.mp3')
       .get();
   }
 });
 ```
+
+_How it looks:_
+
+![Text with quick replies](https://claudiajs.com/assets/facebook/audio.png)
 
 ## Video attachment
 
@@ -354,11 +380,15 @@ const fbTemplate = botBuilder.fbTemplate;
 module.exports = botBuilder(message => {
   if (message.type === 'facebook') {
     return new fbTemplate
-      .Video('http://mirror.bigbuckbunny.de/peach/bigbuckbunny_movies/big_buck_bunny_720p_surround.avi')
+      .Video('http://techslides.com/demos/sample-videos/small.mp4')
       .get();
   }
 });
 ```
+
+_How it looks:_
+
+![Text with quick replies](https://claudiajs.com/assets/facebook/video.png)
 
 ## File attachment
 
@@ -391,11 +421,15 @@ const fbTemplate = botBuilder.fbTemplate;
 module.exports = botBuilder(message => {
   if (message.type === 'facebook') {
     return new fbTemplate
-      .File('http://media.xiph.org/BBB/BBB-360-png/big_buck_bunny_01542.png')
+      .File('https://claudiajs.com/assets/claudiajs.png')
       .get();
   }
 });
 ```
+
+_How it looks:_
+
+![Text with quick replies](https://claudiajs.com/assets/facebook/image.png)
 
 ## Other attachments
 
@@ -410,29 +444,27 @@ const botBuilder = require('claudia-bot-builder');
 
 module.exports = botBuilder(message => {
   return {
-    "attachment":{
-      "type":"template",
-      "payload":{
-        "template_type":"generic",
-        "elements":[
-          {
-            "title":"Breaking News: Record Thunderstorms",
-            "subtitle":"The local area is due for record thunderstorms over the weekend.",
-            "image_url":"https://thechangreport.com/img/lightning.png",
-            "buttons":[
-              {
-                "type":"element_share"
-              }              
-            ]
-          }
-        ]
+    attachment: {
+      type: 'template',
+      payload: {
+        template_type: 'generic',
+        elements: [{
+          title: 'Breaking News: Record Thunderstorms',
+          subtitle: 'The local area is due for record thunderstorms over the weekend.',
+          image_url: 'https://media.xiph.org/BBB/BBB-360-png/big_buck_bunny_01542.png',
+          buttons: [{
+            type: 'element_share'
+          }]
+        }]
       }
     }
   };
 });
 ```
 
+_How it looks:_
 
+![Text with quick replies](https://claudiajs.com/assets/facebook/other.png)
 
 ## Handling errors
 
