@@ -10,48 +10,49 @@ describe('Facebook format message', () => {
 
   describe('Text', () => {
     it('should be a class', () => {
-      const message = new formatFbMessage.text('text');
-      expect(typeof formatFbMessage.text).toBe('function');
-      expect(message instanceof formatFbMessage.text).toBeTruthy();
+      const message = new formatFbMessage.Text('text');
+      expect(typeof formatFbMessage.Text).toBe('function');
+      expect(message instanceof formatFbMessage.Text).toBeTruthy();
     });
 
     it('should throw an error if text is not provided', () => {
-      expect(() => new formatFbMessage.text()).toThrowError('Text is required for text template');
+      expect(() => new formatFbMessage.Text()).toThrowError('Text is required for text template');
     });
 
     it('should add a text', () => {
-      const message = new formatFbMessage.text('Some text');
+      const message = new formatFbMessage.Text('Some text').get();
       expect(message.text).toBe('Some text');
     });
 
     it('should return a simple text object', () => {
-      const message = new formatFbMessage.text('Some text');
+      const message = new formatFbMessage.Text('Some text');
       expect(message.get()).toEqual({
         text: 'Some text'
       });
     });
 
     it('should throw an error if addQuickReply arguments are not provided', () => {
-      const message = new formatFbMessage.text('Some text');
-      expect(() => message.addQuickReply()).toThrowError('Both text and payload are required for quick reply');
+      const message = new formatFbMessage.Text('Some text');
+      expect(() => message.addQuickReply()).toThrowError('Both text and payload are required for a quick reply');
     });
 
     it('should throw an error if addQuickReply payload is too long', () => {
-      const message = new formatFbMessage.text('Some text');
+      const message = new formatFbMessage.Text('Some text');
       let payload = new Array(102).join('0123456789');
       expect(() => message.addQuickReply('title', payload)).toThrowError('Payload can not be more than 1000 characters long');
     });
 
     it('should add a quick reply', () => {
-      const message = new formatFbMessage.text('Some text')
-        .addQuickReply('title', 'PAYLOAD');
-      expect(message.quickReplies.length).toBe(1);
-      expect(message.quickReplies[0].title).toBe('title');
-      expect(message.quickReplies[0].payload).toBe('PAYLOAD');
+      const message = new formatFbMessage.Text('Some text')
+        .addQuickReply('title', 'PAYLOAD')
+        .get();
+      expect(message.quick_replies.length).toBe(1);
+      expect(message.quick_replies[0].title).toBe('title');
+      expect(message.quick_replies[0].payload).toBe('PAYLOAD');
     });
 
     it('should add 10 quick replies', () => {
-      const message = new formatFbMessage.text('Some text')
+      const message = new formatFbMessage.Text('Some text')
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
@@ -61,12 +62,13 @@ describe('Facebook format message', () => {
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
-        .addQuickReply('title', 'PAYLOAD');
-      expect(message.quickReplies.length).toBe(10);
+        .addQuickReply('title', 'PAYLOAD')
+        .get();
+      expect(message.quick_replies.length).toBe(10);
     });
 
     it('should throw an error if there\'s more than 10 quick replies', () => {
-      const message = new formatFbMessage.text('Some text')
+      const message = new formatFbMessage.Text('Some text')
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
@@ -82,13 +84,14 @@ describe('Facebook format message', () => {
 
     it('should trim the title if it is too long', () => {
       let title = new Array(4).join('0123456789');
-      const message = new formatFbMessage.text('Some text')
-        .addQuickReply(title, 'PAYLOAD');
-      expect(message.quickReplies[0].title).toBe('01234567890123456789');
+      const message = new formatFbMessage.Text('Some text')
+        .addQuickReply(title, 'PAYLOAD')
+        .get();
+      expect(message.quick_replies[0].title).toBe('01234567890123456789');
     });
 
     it('should return a json with text and quick replies', () => {
-      const message = new formatFbMessage.text('Some text')
+      const message = new formatFbMessage.Text('Some text')
         .addQuickReply('title', 'PAYLOAD');
       expect(message.get()).toEqual({
         text: 'Some text',
@@ -105,12 +108,12 @@ describe('Facebook format message', () => {
     let generic;
 
     beforeEach(() => {
-      generic = new formatFbMessage.generic();
+      generic = new formatFbMessage.Generic();
     });
 
     it('should be a class', () => {
-      expect(typeof formatFbMessage.generic).toBe('function');
-      expect(generic instanceof formatFbMessage.generic).toBeTruthy();
+      expect(typeof formatFbMessage.Generic).toBe('function');
+      expect(generic instanceof formatFbMessage.Generic).toBeTruthy();
     });
 
     it('should throw an error if at least one bubble/element is not added', () => {
@@ -294,79 +297,79 @@ describe('Facebook format message', () => {
 
   describe('Button template', () => {
     it('should be a class', () => {
-      let button = new formatFbMessage.button('Test');
+      let button = new formatFbMessage.Button('Test');
 
-      expect(typeof formatFbMessage.button).toBe('function');
-      expect(button instanceof formatFbMessage.button).toBeTruthy();
+      expect(typeof formatFbMessage.Button).toBe('function');
+      expect(button instanceof formatFbMessage.Button).toBeTruthy();
     });
 
     it('should throw an error if button text is not provided', () => {
-      expect(() => new formatFbMessage.button()).toThrowError('Button template text cannot be empty');
+      expect(() => new formatFbMessage.Button()).toThrowError('Button template text cannot be empty');
     });
 
     it('should throw an error if button text is longer than 80 characters', () => {
-      expect(() => new formatFbMessage.button('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua')).toThrowError('Button template text cannot be longer than 80 characters');
+      expect(() => new formatFbMessage.Button('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua')).toThrowError('Button template text cannot be longer than 80 characters');
     });
 
     it('should create a button template with the text when valid text is provided', () => {
-      let button = new formatFbMessage.button('Test');
+      let button = new formatFbMessage.Button('Test');
 
-      expect(button.text).toBe('Test');
+      expect(button.template.attachment.payload.text).toBe('Test');
     });
 
     it('should throw an error if you add a button without the title', () => {
-      let button = new formatFbMessage.button('Test');
+      let button = new formatFbMessage.Button('Test');
 
       expect(() => button.addButton()).toThrowError('Button title cannot be empty');
     });
 
     it('should throw an error if you add a button without the value', () => {
-      let button = new formatFbMessage.button('Test');
+      let button = new formatFbMessage.Button('Test');
 
       expect(() => button.addButton('Title')).toThrowError('Button value is required');
     });
 
     it('should add a button with title and payload if you pass valid format', () => {
-      let button = new formatFbMessage.button('Test');
+      let button = new formatFbMessage.Button('Test');
       button.addButton('Title 1', 1);
 
-      expect(button.buttons.length).toBe(1);
-      expect(button.buttons[0].title).toBe('Title 1');
-      expect(button.buttons[0].type).toBe('postback');
-      expect(button.buttons[0].payload).toBe(1);
-      expect(button.buttons[0].url).not.toBeDefined();
+      expect(button.template.attachment.payload.buttons.length).toBe(1);
+      expect(button.template.attachment.payload.buttons[0].title).toBe('Title 1');
+      expect(button.template.attachment.payload.buttons[0].type).toBe('postback');
+      expect(button.template.attachment.payload.buttons[0].payload).toBe(1);
+      expect(button.template.attachment.payload.buttons[0].url).not.toBeDefined();
     });
 
     it('should add a button with title and url if you pass valid format', () => {
-      let button = new formatFbMessage.button('Test');
+      let button = new formatFbMessage.Button('Test');
       button.addButton('Title 1', 'http://google.com');
 
-      expect(button.buttons.length).toBe(1);
-      expect(button.buttons[0].title).toBe('Title 1');
-      expect(button.buttons[0].type).toBe('web_url');
-      expect(button.buttons[0].url).toBe('http://google.com');
-      expect(button.buttons[0].payload).not.toBeDefined();
+      expect(button.template.attachment.payload.buttons.length).toBe(1);
+      expect(button.template.attachment.payload.buttons[0].title).toBe('Title 1');
+      expect(button.template.attachment.payload.buttons[0].type).toBe('web_url');
+      expect(button.template.attachment.payload.buttons[0].url).toBe('http://google.com');
+      expect(button.template.attachment.payload.buttons[0].payload).not.toBeDefined();
     });
 
     it('should add 3 buttons with valid titles and formats', () => {
-      let button = new formatFbMessage.button('Test');
+      let button = new formatFbMessage.Button('Test');
       button
         .addButton('b1', 'v1')
         .addButton('b2', 'v2')
         .addButton('b3', 'v3');
 
-      expect(button.buttons.length).toBe(3);
-      expect(button.buttons[0].title).toBe('b1');
-      expect(button.buttons[0].payload).toBe('v1');
-      expect(button.buttons[1].title).toBe('b2');
-      expect(button.buttons[1].payload).toBe('v2');
-      expect(button.buttons[2].title).toBe('b3');
-      expect(button.buttons[2].payload).toBe('v3');
+      expect(button.template.attachment.payload.buttons.length).toBe(3);
+      expect(button.template.attachment.payload.buttons[0].title).toBe('b1');
+      expect(button.template.attachment.payload.buttons[0].payload).toBe('v1');
+      expect(button.template.attachment.payload.buttons[1].title).toBe('b2');
+      expect(button.template.attachment.payload.buttons[1].payload).toBe('v2');
+      expect(button.template.attachment.payload.buttons[2].title).toBe('b3');
+      expect(button.template.attachment.payload.buttons[2].payload).toBe('v3');
     });
 
     it('should return a formated object in the end', () => {
       expect(
-        new formatFbMessage.button('Test')
+        new formatFbMessage.Button('Test')
           .addButton('Title 1', 1)
           .get()
       ).toEqual({
@@ -445,215 +448,215 @@ describe('Facebook format message', () => {
     };
 
     it('should be a class', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
 
-      expect(typeof formatFbMessage.receipt).toBe('function');
-      expect(receipt instanceof formatFbMessage.receipt).toBeTruthy();
+      expect(typeof formatFbMessage.Receipt).toBe('function');
+      expect(receipt instanceof formatFbMessage.Receipt).toBeTruthy();
     });
 
     it('should throw an error if recipient\'s name is not defined', () => {
-      expect(() => new formatFbMessage.receipt()).toThrowError('Recipient\'s name cannot be empty');
+      expect(() => new formatFbMessage.Receipt()).toThrowError('Recipient\'s name cannot be empty');
     });
 
     it('should throw an error if order number is not defined', () => {
-      expect(() => new formatFbMessage.receipt('John Doe')).toThrowError('Order number cannot be empty');
+      expect(() => new formatFbMessage.Receipt('John Doe')).toThrowError('Order number cannot be empty');
     });
 
     it('should throw an error if currency is not defined', () => {
-      expect(() => new formatFbMessage.receipt('John Doe', 'O123')).toThrowError('Currency cannot be empty');
+      expect(() => new formatFbMessage.Receipt('John Doe', 'O123')).toThrowError('Currency cannot be empty');
     });
 
     it('should throw an error if payment method is not defined', () => {
-      expect(() => new formatFbMessage.receipt('John Doe', 'O123', '$')).toThrowError('Payment method cannot be empty');
+      expect(() => new formatFbMessage.Receipt('John Doe', 'O123', '$')).toThrowError('Payment method cannot be empty');
     });
 
     it('should create a receipt template object if recipient, order number, currency and payment method are passed', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
 
       expect(typeof receipt).toBe('object');
-      expect(receipt.output.recipient_name).toBe('John Doe');
-      expect(receipt.output.order_number).toBe('O123');
-      expect(receipt.output.currency).toBe('$');
-      expect(receipt.output.payment_method).toBe('Paypal');
+      expect(receipt.template.attachment.payload.recipient_name).toBe('John Doe');
+      expect(receipt.template.attachment.payload.order_number).toBe('O123');
+      expect(receipt.template.attachment.payload.currency).toBe('$');
+      expect(receipt.template.attachment.payload.payment_method).toBe('Paypal');
     });
 
     it('should throw an error if user tries to add timestamp but don\'t provide it', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
 
       expect(() => receipt.addTimestamp()).toThrowError('Timestamp is required for addTimestamp method');
     });
 
     it('should throw an error if timestamp is not valid date object', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
 
       expect(() => receipt.addTimestamp('invalid-timestamp')).toThrowError('Timestamp needs to be a valid Date object');
     });
 
     it('should add a timestamp if it is a valid date object', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt.addTimestamp(new Date('2016-06-14T20:55:31.438Z'));
 
-      expect(receipt.output.timestamp).toBe(new Date('2016-06-14T20:55:31.438Z').getTime());
+      expect(receipt.template.attachment.payload.timestamp).toBe(new Date('2016-06-14T20:55:31.438Z').getTime());
     });
 
     it('should should throw an error if user tries to add order url but doesn\'t provide it', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
 
       expect(() => receipt.addOrderUrl()).toThrowError('Url is required for addOrderUrl method');
     });
 
     it('should should throw an error if order url is not a valid url', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
 
       expect(() => receipt.addOrderUrl('http//invalid-url')).toThrowError('Url needs to be valid for addOrderUrl method');
     });
 
     it('should add an order url if it is a valid url', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt.addOrderUrl('http://google.com');
 
-      expect(receipt.output.order_url).toBe('http://google.com');
+      expect(receipt.template.attachment.payload.order_url).toBe('http://google.com');
     });
 
     it('should throw an error if there\'s no items in order', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
 
       expect(() => receipt.get()).toThrowError('At least one element/item is required');
     });
 
     it('should throw an error if user tries to add an item without title', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
 
       expect(() => receipt.addItem()).toThrowError('Item title is required');
     });
 
     it('should add an item if valid title is provided', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt.addItem('Title');
 
-      expect(receipt.output.elements.length).toBe(1);
-      expect(receipt.output.elements[0].title).toBe('Title');
+      expect(receipt.template.attachment.payload.elements.length).toBe(1);
+      expect(receipt.template.attachment.payload.elements[0].title).toBe('Title');
     });
 
     it('should throw an error if user tries to add an item\'s subtitle but doesn\'t provide it', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt.addItem('Title');
 
       expect(() => receipt.addSubtitle()).toThrowError('Subtitle is required for addSubtitle method');
     });
 
     it('should add an item with a subtitle if valid subtitle is provided', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt
         .addItem('Title')
         .addSubtitle('Subtitle');
 
-      expect(receipt.output.elements.length).toBe(1);
-      expect(receipt.output.elements[0].subtitle).toBe('Subtitle');
+      expect(receipt.template.attachment.payload.elements.length).toBe(1);
+      expect(receipt.template.attachment.payload.elements[0].subtitle).toBe('Subtitle');
     });
 
     it('should throw an error if user tries to add an item\'s quantity but doesn\'t provide it', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt.addItem('Title');
 
       expect(() => receipt.addQuantity()).toThrowError('Quantity is required for addQuantity method');
     });
 
     it('should throw an error if user tries to add an item\'s quantity which is not a number', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt.addItem('Title');
 
       expect(() => receipt.addQuantity('test')).toThrowError('Quantity needs to be a number');
     });
 
     it('should add an item with a quantity if valid number is provided', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt
         .addItem('Title')
         .addQuantity(42);
 
-      expect(receipt.output.elements.length).toBe(1);
-      expect(receipt.output.elements[0].quantity).toBe(42);
+      expect(receipt.template.attachment.payload.elements.length).toBe(1);
+      expect(receipt.template.attachment.payload.elements[0].quantity).toBe(42);
     });
 
     it('should throw an error if user tries to add an item\'s price but doesn\'t provide it', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt.addItem('Title');
 
       expect(() => receipt.addPrice()).toThrowError('Price is required for addPrice method');
     });
 
     it('should throw an error if user tries to add an item\'s price which is not a number', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt.addItem('Title');
 
       expect(() => receipt.addPrice('test')).toThrowError('Price needs to be a number');
     });
 
     it('should add an item with a quantity if valid price is provided', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt
         .addItem('Title')
         .addPrice(4.2);
 
-      expect(receipt.output.elements.length).toBe(1);
-      expect(receipt.output.elements[0].price).toBe(4.2);
+      expect(receipt.template.attachment.payload.elements.length).toBe(1);
+      expect(receipt.template.attachment.payload.elements[0].price).toBe(4.2);
     });
 
     it('should throw an error if user tries to add an item\'s currency but doesn\'t provide it', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt.addItem('Title');
 
       expect(() => receipt.addCurrency()).toThrowError('Currency is required for addCurrency method');
     });
 
     it('should add an item with a currency if valid currency is provided', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt
         .addItem('Title')
         .addCurrency('$');
 
-      expect(receipt.output.elements.length).toBe(1);
-      expect(receipt.output.elements[0].currency).toBe('$');
+      expect(receipt.template.attachment.payload.elements.length).toBe(1);
+      expect(receipt.template.attachment.payload.elements[0].currency).toBe('$');
     });
 
     it('should throw an error if user tries to add an item\'s image but doesn\'t provide it', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt.addItem('Title');
 
-      expect(() => receipt.addImage()).toThrowError('Url is required for addImage method');
+      expect(() => receipt.addImage()).toThrowError('Abotolute url is required for addImage method');
     });
 
     it('should throw an error if user tries to add an item\'s image which is not a valid url', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt.addItem('Title');
 
-      expect(() => receipt.addImage('test')).toThrowError('Valid url is required for addImage method');
+      expect(() => receipt.addImage('test')).toThrowError('Valid absolute url is required for addImage method');
     });
 
     it('should add an item with an image if valid url is provided', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt
         .addItem('Title')
         .addImage('http://google.com/path/to/image.png');
 
-      expect(receipt.output.elements.length).toBe(1);
-      expect(receipt.output.elements[0].image_url).toBe('http://google.com/path/to/image.png');
+      expect(receipt.template.attachment.payload.elements.length).toBe(1);
+      expect(receipt.template.attachment.payload.elements[0].image_url).toBe('http://google.com/path/to/image.png');
     });
 
     it('should add more than 1 item if titles are valid', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt
         .addItem('Title 1')
         .addItem('Title 2');
 
-      expect(receipt.output.elements.length).toBe(2);
-      expect(receipt.output.elements[0].title).toBe('Title 1');
-      expect(receipt.output.elements[1].title).toBe('Title 2');
+      expect(receipt.template.attachment.payload.elements.length).toBe(2);
+      expect(receipt.template.attachment.payload.elements[0].title).toBe('Title 1');
+      expect(receipt.template.attachment.payload.elements[1].title).toBe('Title 2');
     });
 
     it('should throw an error if user tries to add a shipping address without a street address', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt
         .addItem('Title 1');
 
@@ -661,7 +664,7 @@ describe('Facebook format message', () => {
     });
 
     it('should throw an error if user tries to add a shipping address without the city', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt
         .addItem('Title 1');
 
@@ -669,7 +672,7 @@ describe('Facebook format message', () => {
     });
 
     it('should throw an error if user tries to add a shipping address without a postal code', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt
         .addItem('Title 1');
 
@@ -677,7 +680,7 @@ describe('Facebook format message', () => {
     });
 
     it('should throw an error if user tries to add a shipping address without the state', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt
         .addItem('Title 1');
 
@@ -685,7 +688,7 @@ describe('Facebook format message', () => {
     });
 
     it('should throw an error if user tries to add a shipping address without the country', () => {
-      let receipt = new formatFbMessage.receipt('John Doe', 'O123', '$', 'Paypal');
+      let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt
         .addItem('Title 1');
 
@@ -693,7 +696,7 @@ describe('Facebook format message', () => {
     });
 
     it('should parse an example for FB documentation', () => {
-      let receipt = new formatFbMessage.receipt('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345')
+      let receipt = new formatFbMessage.Receipt('Stephane Crozatier', '12345678902', 'USD', 'Visa 2345')
         .addTimestamp(new Date(1428444852))
         .addOrderUrl('http://petersapparel.parseapp.com/order?order_id=123456')
         .addItem('Classic White T-Shirt')
@@ -724,29 +727,29 @@ describe('Facebook format message', () => {
 
   describe('Image attachment', () => {
     it('should be a class', () => {
-      let image = new formatFbMessage.image('http://google.com');
+      let image = new formatFbMessage.Image('http://google.com');
 
-      expect(typeof formatFbMessage.image).toBe('function');
-      expect(image instanceof formatFbMessage.image).toBeTruthy();
+      expect(typeof formatFbMessage.Image).toBe('function');
+      expect(image instanceof formatFbMessage.Image).toBeTruthy();
     });
 
     it('should throw an error if you add an image without the url', () => {
-      expect(() => new formatFbMessage.image()).toThrowError('Image template requires a valid URL as a first paramether');
+      expect(() => new formatFbMessage.Image()).toThrowError('Image template requires a valid URL as a first paramether');
     });
 
     it('should throw an error if you add an image with invalid url', () => {
-      expect(() => new formatFbMessage.image('google')).toThrowError('Image template requires a valid URL as a first paramether');
+      expect(() => new formatFbMessage.Image('google')).toThrowError('Image template requires a valid URL as a first paramether');
     });
 
     it('should add an image with given URL if URL is valid', () => {
-      let image = new formatFbMessage.image('http://google.com/path/to/image.png');
+      let image = new formatFbMessage.Image('http://google.com/path/to/image.png');
 
-      expect(image.url).toBe('http://google.com/path/to/image.png');
+      expect(image.template.attachment.payload.url).toEqual('http://google.com/path/to/image.png');
     });
 
     it('should return a formated object in the end', () => {
       expect(
-        new formatFbMessage.image('http://google.com/path/to/image.png').get()
+        new formatFbMessage.Image('http://google.com/path/to/image.png').get()
       ).toEqual({
         attachment: {
           type: 'image',
