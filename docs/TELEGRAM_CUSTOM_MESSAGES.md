@@ -62,6 +62,21 @@ _Arguments:_
 | forceReply        | No       | selective (boolean, optional, use this parameter if you want to hide keyboard for specific users only ) | `this` for chaining               | Telegram ForceReply, for more info visit [official docs](https://core.telegram.org/bots/api#forcereply) |
 | get               | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Telegram Messenger |
 
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+
+module.exports = botBuilder(message => {
+  if (message.type === 'telegram')
+    new telegramTemplate.Text(`What's your favorite House in Game Of Thrones`)
+      .addReplyKeyboard([['Stark'], ['Lannister'], ['Targaryen'], ['None of the above']])
+      .get();
+});
+```
+
+
+
 ## Custom Keyboards
 
 Each of the methods below except `Pause` and `ChatAction` has 4 methods for controling and creating custom keyboards. Only one of them can be used, if you add more of them only the last one will be active.
@@ -75,12 +90,51 @@ Following methods are allowed, each of them represents one keyboard markup:
 
 ### Methods
 
-| Method            | Required | Arguments                                | Returns                           | Description                              |
-| ----------------- | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
-| addReplyKeyboard  | No       | keyboardArray (array, required, an array of keyboard keys), resizeKeyboard (boolean, optional, if the keyboard should be resizable), oneTimeKeyboard (boolean, optional, if the keyboard should be hidden after first usage) | `this` for chaining               | Telegram ReplyKeyboardMarkup, for more info visit [official docs](https://core.telegram.org/bots/api#replykeyboardmarkup) |
-| addInlineKeyboard | No       | keyboardArray (array, required, an array of keyboard keys) | `this` for chaining               | Telegram InlineKeyboardMarkup, for more info visit [official docs](https://core.telegram.org/bots/api#inlinekeyboardmarkup) |
-| replyKeyboardHide | No       | selective (boolean, optional, use this parameter if you want to hide keyboard for specific users only ) | `this` for chaining               | Telegram ReplyKeyboardHide, for more info visit [official docs](https://core.telegram.org/bots/api#replykeyboardhide) |
-| forceReply        | No       | selective (boolean, optional, use this parameter if you want to hide keyboard for specific users only ) | `this` for chaining               | Telegram ForceReply, for more info visit [official docs](https://core.telegram.org/bots/api#forcereply) |
+| Method            | Required | Arguments                                | Returns             | Description                              |
+| ----------------- | -------- | ---------------------------------------- | ------------------- | ---------------------------------------- |
+| addReplyKeyboard  | No       | keyboardArray (array, required, an array of keyboard keys), resizeKeyboard (boolean, optional, if the keyboard should be resizable), oneTimeKeyboard (boolean, optional, if the keyboard should be hidden after first usage) | `this` for chaining | Telegram ReplyKeyboardMarkup, for more info visit [official docs](https://core.telegram.org/bots/api#replykeyboardmarkup) |
+| addInlineKeyboard | No       | keyboardArray (array, required, an array of keyboard keys) | `this` for chaining | Telegram InlineKeyboardMarkup, for more info visit [official docs](https://core.telegram.org/bots/api#inlinekeyboardmarkup) |
+| replyKeyboardHide | No       | selective (boolean, optional, use this parameter if you want to hide keyboard for specific users only ) | `this` for chaining | Telegram ReplyKeyboardHide, for more info visit [official docs](https://core.telegram.org/bots/api#replykeyboardhide) |
+| forceReply        | No       | selective (boolean, optional, use this parameter if you want to hide keyboard for specific users only ) | `this` for chaining | Telegram ForceReply, for more info visit [official docs](https://core.telegram.org/bots/api#forcereply) |
+
+### Example
+
+Reply keyboard:
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+
+module.exports = botBuilder(message => {
+  if (message.type === 'telegram')
+    new telegramTemplate.Text(`What's your favorite House in Game Of Thrones`)
+      .addReplyKeyboard([['Stark'], ['Lannister'], ['Targaryen'], ['None of the above']])
+      .get();
+});
+```
+
+Inline keyboard:
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+
+module.exports = botBuilder(message => {
+  if (message.type === 'telegram')
+    new telegramTemplate.Text(`Claudia Bot Builder`)
+      .addInlineKeyboard([
+      	[{
+          text: 'Website',
+          url: 'https://claudiajs.com'
+      	}],
+        [{
+          text: 'Tell me more',
+          callback_data: 'MORE'
+        }]
+      ])
+      .get();
+});
+```
+
+
 
 ## Photo messages
 
@@ -101,6 +155,19 @@ _Arguments:_
 | ------------------------ | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
 | Custom Keyboards methods | No       | See [Custom Keyboard](#custom-keyboards) section | `this` for chaining               | See [Custom Keyboard](#custom-keyboards) section |
 | get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Telegram Messenger |
+
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+
+module.exports = botBuilder(message => {
+  if (message.type === 'telegram')
+    return new telegramTemplate.Photo('https://claudiajs.com/assets/claudiajs.png').get();
+});
+```
+
+
 
 ## Audio messages
 
@@ -125,6 +192,22 @@ _Arguments:_
 | Custom Keyboards methods | No       | See [Custom Keyboard](#custom-keyboards) section | `this` for chaining               | See [Custom Keyboard](#custom-keyboards) section |
 | get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Telegram Messenger |
 
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+
+module.exports = botBuilder(message => {
+  if (message.type === 'telegram')
+    return new telegramTemplate.Audio('http://www.noiseaddicts.com/samples_1w72b820/4927.mp3')
+      .addTitle('Roar')
+      .addPerformer('Bear')
+      .get();
+});
+```
+
+
+
 ## Location messages
 
 Location template allows you to send a location, if you want to send a location of some venue use [Venue message template](#venue-messages).
@@ -144,6 +227,20 @@ _Arguments:_
 | ------------------------ | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
 | Custom Keyboards methods | No       | See [Custom Keyboard](#custom-keyboards) section | `this` for chaining               | See [Custom Keyboard](#custom-keyboards) section |
 | get                      | Yes      | No argsuments                            | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Telegram Messenger |
+
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+
+module.exports = botBuilder(message => {
+  if (message.type === 'telegram')
+    return new telegramTemplate.Location(44.831115, 20.421277)
+      .get();
+});
+```
+
+
 
 ## Venue messages
 
@@ -167,6 +264,21 @@ _Arguments:_
 | Custom Keyboards methods | No       | See [Custom Keyboard](#custom-keyboards) section | `this` for chaining               | See [Custom Keyboard](#custom-keyboards) section |
 | get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Telegram Messenger |
 
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+
+module.exports = botBuilder(message => {
+  if (message.type === 'telegram')
+    return new telegramTemplate.Venue(44.831115, 20.421277, 'Lemon Chili', 'Zemun Quay, Belgrade, Serbia')
+      .get();
+});
+
+```
+
+
+
 ## Changing chat action
 
 Sometimes you just want to simulate user actions before sending a real message, ie. typing, uploading, etc. _Claudia Bot Builder_ supports those chat actions.
@@ -184,6 +296,22 @@ _Arguments:_
 | Method | Required | Arguments    | Returns                           | Description                              |
 | ------ | -------- | ------------ | --------------------------------- | ---------------------------------------- |
 | get    | Yes      | No arguments | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Telegram Messenger |
+
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+
+module.exports = botBuilder(message => {
+  if (message.type === 'telegram')
+    return [
+      new telegramTemplate.ChatAction('typing').get(),
+      'Hello'
+    ];
+});
+```
+
+
 
 ## Pause between messages
 
@@ -204,6 +332,23 @@ _Note:_ This is not the Telegram API method, it's a Claudia Bot Builder method t
 | Method | Required | Arguments    | Returns                           | Description                              |
 | ------ | -------- | ------------ | --------------------------------- | ---------------------------------------- |
 | get    | Yes      | No arguments | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Claudia Bot Builder |
+
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+
+module.exports = botBuilder(message => {
+  if (message.type === 'telegram')
+    return [
+      '1',
+      new telegramTemplate.Pause(1000).get(),
+      '2'
+    ];
+});
+```
+
+
 
 ## Other attachments
 
@@ -260,6 +405,7 @@ module.exports = botBuilder(message => {
       new telegramTemplate.Text(`What's your favorite House in Game Of Thrones`)
         .addReplyKeyboard([['Stark'], ['Lannister'], ['Targaryen'], ['None of the above']])
         .get()
+    ];
 });
 ```
 
