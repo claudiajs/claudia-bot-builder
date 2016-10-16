@@ -5,10 +5,24 @@
 - upgrading to use claudia-api-builder 2.0.0
 - requires using claudia 2.x to deploy
 
+## 1.4.5, 24 September 2016
+
+- add support for Telegram custom messages, more info [here](https://github.com/claudiajs/claudia-bot-builder/blob/master/docs/TELEGRAM_CUSTOM_MESSAGES.md)
+
 ## 1.4.4, 3 September 2016
 
 - upgrade Skype bot to v3 API
 - temporary remove FB security because of the problem with unicode with attachments
+
+## 1.4.3, 26 August 2016
+
+- update a message for Facebook Messenger deprecation notice for non-validated requests
+
+## 1.4.2, 25 August 2016
+
+- add Facebook Messenger payload verification
+- add Facebook Messenger deprecation notice for non-validated requests
+- add GET endpoint for Slack SSL checks
 
 ## 1.4.1, 4 August 2016
 
