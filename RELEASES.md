@@ -1,5 +1,11 @@
 # Claudia Bot Builder release history
 
+## 2.1.0, 17 October 2016
+
+- add Twilio support
+- add Telegram template builder
+- update Facebook template builder with TitleCase methods and add deprecation note for camelCase method names
+
 ## 2.0.0, 27 September 2016
 
 - upgrading to use claudia-api-builder 2.0.0
