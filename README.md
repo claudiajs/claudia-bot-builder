@@ -92,6 +92,7 @@ See the [Release History](RELEASES.md)
 - [DotCom Bot](http://dotcom.montoyaindustries.com) - Search & buy domain names and check @usernames fast on Slack & Facebook Messenger!
 - [Eksplorer](http://eksplo.weebly.com) - The Facebook chat bot that will help you discover amazing things in your neighborhood.
 - [Fact Bot](https://github.com/claudiajs/example-projects/tree/master/bot-with-buttons) - The bot will query WikiData for anything you send it and print out the facts.
+- [JS Belgrade bot](https://github.com/JSBelgrade/jsbelgrade-chatbot) - Simple meetup group Telegram chatbot created during the meetup.
 - [Pokemon Lookup bot](https://www.facebook.com/PokedexLookup/) - Simple pokemon lookup bot, [source code](https://github.com/kirkins/PokedexBot).
 - [QRCode Bot](https://www.facebook.com/QRCode-Bot-1779956152289103/) - Artistic QR code maker, [source code](https://github.com/jveres/qrcode-bot).
 - [Robbert](https://www.facebook.com/Robbert-1119546194768078) - General chatbot.
