@@ -1,5 +1,9 @@
 # Claudia Bot Builder release history
 
+## 2.2.0, 27 October 2016
+
+- allow Skype bot to reply in the group conversation
+
 ## 2.1.0, 17 October 2016
 
 - add Twilio support
