@@ -63,6 +63,7 @@ _Claudia Bot Builder_ automates most of the configuration tasks, and stores acce
 * For Skype, use `--configure-skype-bot`
 * For Telegram, use `--configure-telegram-bot`
 * For Twilio, use `--configure-twilio-sms-bot`
+* For Kik, use `--configure-kik-bot`
 
 You need to do this only once per version. If you create different versions for development, testing and production, remember to configure the bots.
 
