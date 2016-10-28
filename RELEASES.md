@@ -1,5 +1,9 @@
 # Claudia Bot Builder release history
 
+## 2.3.0, 28 October 2016
+
+- add Kik support
+
 ## 2.2.0, 27 October 2016
 
 - allow Skype bot to reply in the group conversation
