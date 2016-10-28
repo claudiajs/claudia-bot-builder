@@ -21,7 +21,9 @@
     "messenger",
     "telegram",
     "skype",
-    "slack"
+    "slack",
+    "twilio",
+    "kik"
   ],
   "author": "Slobodan Stojanovic <slobodan@cloudhorizon.com> (http://slobodan.me/), ",
   "contributors": [
