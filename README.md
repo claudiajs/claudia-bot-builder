@@ -35,6 +35,7 @@ This code is enough to operate bots for all four supported platforms. Claudia Bo
 * Telegram
 * Twilio (messaging service)
 * Kik
+* GroupMe
 
 ## Creating bots
 
