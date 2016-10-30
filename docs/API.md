@@ -64,6 +64,7 @@ _Claudia Bot Builder_ automates most of the configuration tasks, and stores acce
 * For Telegram, use `--configure-telegram-bot`
 * For Twilio, use `--configure-twilio-sms-bot`
 * For Kik, use `--configure-kik-bot`
+* For GroupMe, use `--configure-groupme-bot`
 
 You need to do this only once per version. If you create different versions for development, testing and production, remember to configure the bots.
 
@@ -85,3 +86,14 @@ Here are the steps you need to do before you can use it with _Claudia Bot Builde
 10. Enable your country in GeoPermissions options in the Programmable SMS Settings;
 
 That's it, you are ready to build your first SMS bot with _Claudia Bot Builder_.
+
+## GroupMe setup
+
+GroupMe setup is a bit of a back-and-forth.
+
+1. Register for a GroupMe account and developer account;
+2. Create your group within GroupMe;
+3. Create your bot (without the CallbackURL) and copy its bot ID;
+4. Invoke `claudia create` or `claudia update` with `--configure-groupme-bot` flag;
+5. _Claudia Bot Builder_ will respond with your AWS Lambda incoming webhook address, copy that webhook URL;
+6. Edit your bot and paste the copied webhook URL into Callback URL field for your bot;
