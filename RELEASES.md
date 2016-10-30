@@ -1,5 +1,9 @@
 # Claudia Bot Builder release history
 
+## 2.4.0, 30 October 2016
+
+- add GroupMe support
+
 ## 2.3.0, 28 October 2016
 
 - add Kik support
