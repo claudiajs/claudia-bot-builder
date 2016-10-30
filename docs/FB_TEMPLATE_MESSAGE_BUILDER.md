@@ -69,9 +69,9 @@ const fbTemplate = botBuilder.fbTemplate;
 
 module.exports = botBuilder(message => {
   if (message.type === 'facebook') {
-    const message = new fbTemplate.Text('What\'s your favorite House in Game Of Thrones');
+    const newMessage = new fbTemplate.Text('What\'s your favorite House in Game Of Thrones');
 
-    return message
+    return newMessage
       .addQuickReply('Stark', 'STARK')
       .addQuickReply('Lannister', 'LANNISTER')
       .addQuickReply('Targaryen', 'TARGARYEN')
