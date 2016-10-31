@@ -67,33 +67,3 @@ _Claudia Bot Builder_ automates most of the configuration tasks, and stores acce
 * For GroupMe, use `--configure-groupme-bot`
 
 You need to do this only once per version. If you create different versions for development, testing and production, remember to configure the bots.
-
-## Twilio setup
-
-Twilio setup is probably a bit more complicated then the other platforms because you need to registed a number.
-
-Here are the steps you need to do before you can use it with _Claudia Bot Builder_:
-
-1.  Register for a Twilio account;
-2.  Buy a Twilio virtual number;
-3.  Name up a Messaging service with a number you bought;
-4.  Write down or copy your Twilio Account SID, Twilio Auth Token from *Home -> Dashboard -> Account Summary*;
-5.  Write down your Messaging service virtual number from your *Programmable SMS -> Messaging Services -> click on the name of your Messaging Service (or if none present - create it) -> Numbers menu*;
-6.  Invoke `claudia create` or `claudia update` with `--configure-twilio-sms-bot` flag;
-7.  You will be prompted for your Twilio Account SID, Twilio Auth token and a number from steps 4 and 5;
-8.  _Claudia Bot Builder_ will respond with your AWS Lambda incoming webhook address, copy that webhook URL;
-9.  Put the copied webhook adress in your Messaging service Request URL input and choose `HTTP POST` from the dropdown;
-10. Enable your country in GeoPermissions options in the Programmable SMS Settings;
-
-That's it, you are ready to build your first SMS bot with _Claudia Bot Builder_.
-
-## GroupMe setup
-
-GroupMe setup is a bit of a back-and-forth.
-
-1. Register for a GroupMe account and developer account;
-2. Create your group within GroupMe;
-3. Create your bot (without the CallbackURL) and copy its bot ID;
-4. Invoke `claudia create` or `claudia update` with `--configure-groupme-bot` flag;
-5. _Claudia Bot Builder_ will respond with your AWS Lambda incoming webhook address, copy that webhook URL;
-6. Edit your bot and paste the copied webhook URL into Callback URL field for your bot;
