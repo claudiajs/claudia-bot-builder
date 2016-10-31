@@ -67,3 +67,5 @@ _Claudia Bot Builder_ automates most of the configuration tasks, and stores acce
 * For GroupMe, use `--configure-groupme-bot`
 
 You need to do this only once per version. If you create different versions for development, testing and production, remember to configure the bots.
+
+An example tutorial for creating a bot with these you can find on [Claudia.js Hello World Chatbot](https://claudiajs.com/tutorials/hello-world-chatbot.html)
