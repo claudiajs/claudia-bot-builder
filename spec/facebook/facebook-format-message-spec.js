@@ -245,6 +245,14 @@ describe('Facebook format message', () => {
       expect(generic.bubbles[0].buttons[2].payload).toBe('v3');
     });
 
+    it('should override type when a type parameter is passed', () => {
+      generic
+        .addBubble('Test')
+        .addButton('b1', '+123456789', 'phone_number');
+
+      expect(generic.bubbles[0].buttons[0].type).toBe('phone_number');
+    });
+
     it('should throw an error if you add more than 3 buttons', () => {
       generic
         .addBubble('Test');
