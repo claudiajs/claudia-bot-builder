@@ -30,7 +30,7 @@ describe('Twilio setup', () => {
     }};
     it('wires the POST request for twilio to the message processor', () => {
       expect(api.post.calls.count()).toEqual(1);
-      expect(api.post).toHaveBeenCalledWith('/twilio', jasmine.any(Function));
+      expect(api.post).toHaveBeenCalledWith('/twilio', jasmine.any(Function), { success: { contentType: 'text/xml' }});
     });
     describe('processing a single message', () => {
       var handler;
@@ -55,14 +55,15 @@ describe('Twilio setup', () => {
       it('does not invoke the bot if the message cannot be parsed', (done) => {
         parser.and.returnValue(false);
         handler(messageTemplate).then((message) => {
-          expect(message).toBe('ok');
+          expect(message).toBe('<Response></Response>');
           expect(bot).not.toHaveBeenCalled();
         }).then(done, done.fail);
       });
       it('responds when the bot resolves', (done) => {
         parser.and.returnValue({sender: '+333333333', text: 'SMS Twilio'});
         botResolve('SMS Twilio');
-        handler(messageTemplate).then(() => {
+        handler(messageTemplate).then((message) => {
+          expect(message).toBe('<Response></Response>');
           expect(responder).toHaveBeenCalledWith('randomTwilioAccountSID', 'randomTwilioAuthToken', new Buffer('+4444444444', 'base64').toString('ascii'), '+333333333', 'SMS Twilio');
         }).then(done, done.fail);
       });
