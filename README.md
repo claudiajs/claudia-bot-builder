@@ -25,7 +25,7 @@ module.exports = botBuilder(function (message) {
 });
 ```
 
-This code is enough to operate bots for all four supported platforms. Claudia Bot Builder automatically parses the incoming messages into a common format, so you can handle it easily. It also automatically packages the response into the correct message template for the requesting bot, so you do not have to worry about individual bot protocols.
+This code is enough to operate bots for all supported platforms. Claudia Bot Builder automatically parses the incoming messages into a common format, so you can handle it easily. It also automatically packages the response into the correct message template for the requesting bot, so you do not have to worry about individual bot protocols.
 
 ## Supported platforms
 
@@ -52,7 +52,7 @@ See the [Chat-Bots section](https://github.com/claudiajs/example-projects#chat-b
 
 1. **How to run it locally?**
 
-   You can't. At least not easy. Claudia Bot Builder doesn't have a stand alone http server in the background (such as Express, Hapi, etc.), instead it uses API Gateway and it's not trivial to simulate similar environment locally.
+   You can't. At least not easy. Claudia Bot Builder doesn't have a stand-alone http server in the background (such as Express, Hapi, etc.), instead it uses API Gateway and it's not trivial to simulate similar environment locally. Deploy it with `--version test` to create a separate test environment directly in AWS Lambda.
 
 2. **How to test your bot?**
 
@@ -72,14 +72,12 @@ See the [Chat-Bots section](https://github.com/claudiajs/example-projects#chat-b
 
 5. **What's new in v2?**
 
-   It's a new major version because of the dependencies - there's a big improvements in _Claudia API Builder_ and _Claudia_, so _Claudia Bot Builder_ v1.x is not compatible with them.  
-   However, from the initial v2.0 we have brought probably the biggest updates since the beginning - as we are supporting _four_ new chat platforms: Twilio, Viber, Kik and GroupMe
-
+   It's a new major version because of the dependencies - there are big improvements in the _Claudia API Builder_ and _Claudia_, so _Claudia Bot Builder_ v1.x is not compatible with them.  
+   V2.x also brings support for many new platforms.
 
 Have a question that is not on this list? Feel free to ask it on [Claudia chat on Gitter](https://gitter.im/claudiajs/claudia).
 
 _Please, do not use GitHub issues for asking questions or requesting assistance/support, use it only to report bugs._
-
 
 ## Contributing
 
