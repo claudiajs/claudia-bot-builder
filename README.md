@@ -32,6 +32,7 @@ This code is enough to operate bots for all four supported platforms. Claudia Bo
 * Facebook Messenger
 * Slack (channel slash commands and apps with slash commands)
 * Skype
+* Viber
 * Telegram
 * Twilio (messaging service)
 * Kik
