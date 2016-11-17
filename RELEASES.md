@@ -1,5 +1,14 @@
 # Claudia Bot Builder release history
 
+## 2.5.0, 9 November 2016
+
+- add Viber support
+
+## 2.4.1, 9 November 2016
+
+- Allows manual override of FB button type to allow buttons such as Call button
+- Fix Twilio responses
+
 ## 2.4.0, 30 October 2016
 
 - add GroupMe support

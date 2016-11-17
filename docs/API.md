@@ -61,6 +61,7 @@ _Claudia Bot Builder_ automates most of the configuration tasks, and stores acce
 * For Slack App slash commands, use `--configure-slack-slash-app`
 * For Slack slash commands for your team, use `--configure-slack-slash-command`
 * For Skype, use `--configure-skype-bot`
+* For Viber, use `--configure-viber-bot`
 * For Telegram, use `--configure-telegram-bot`
 * For Twilio, use `--configure-twilio-sms-bot`
 * For Kik, use `--configure-kik-bot`
