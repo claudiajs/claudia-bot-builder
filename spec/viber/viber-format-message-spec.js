@@ -45,10 +45,9 @@ describe('Viber format message', () => {
     });
 
     it('should add reply keyboard with reply action button', () => {
-      const message = new formatMessage
-        .Text('Some text')
+      const message = new formatMessage.Text('Some text')
         .addReplyKeyboard(true)
-        .addKeyboardButton({text:'test', actionType: 'reply', actionBody: 'test body'})
+          .addKeyboardButton('test', 'test body', 2, 1)
         .get();
       expect(message).toEqual({
         type: 'text',
@@ -61,7 +60,9 @@ describe('Viber format message', () => {
             {
               Text: 'test',
               ActionType: 'reply',
-              ActionBody: 'test body'
+              ActionBody: 'test body',
+              Columns: 2,
+              Rows: 1
             }
           ]
         }
@@ -69,10 +70,9 @@ describe('Viber format message', () => {
     });
 
     it('should reply text and add reply keyboard with open-url action button', () => {
-      const message = new formatMessage
-        .Text('Claudia.js')
+      const message = new formatMessage.Text('Claudia.js')
         .addReplyKeyboard()
-        .addKeyboardButton({text: 'Open Claudia.js website', actionType: 'open-url', actionBody: 'https://claudiajs.com'})
+          .addKeyboardButton('Open Claudia.js website', 'https://claudiajs.com', 2, 1)
         .get();
       expect(message).toEqual({
         type: 'text',
@@ -85,11 +85,41 @@ describe('Viber format message', () => {
             {
               Text: 'Open Claudia.js website',
               ActionType: 'open-url',
-              ActionBody: 'https://claudiajs.com'
+              ActionBody: 'https://claudiajs.com',
+              Columns: 2,
+              Rows: 1
             }
           ]
         }
       });
+    });
+  });
+
+  it('should reply text and add reply keyboard with open-url action button and button color if custom object is passed', () => {
+    const message = new formatMessage.Text('Claudia.js')
+      .addReplyKeyboard()
+        .addKeyboardButton('Open Claudia.js website', 'https://claudiajs.com', 2, 1, {
+          BgColor: '#BADA55'
+        })
+      .get();
+    expect(message).toEqual({
+      type: 'text',
+      text: 'Claudia.js',
+      keyboard: {
+        Type: 'keyboard',
+        DefaultHeight: true,
+        BgColor: '#FFFFFF',
+        Buttons: [
+          {
+            Text: 'Open Claudia.js website',
+            ActionType: 'open-url',
+            ActionBody: 'https://claudiajs.com',
+            Columns: 2,
+            Rows: 1,
+            BgColor: '#BADA55'
+          }
+        ]
+      }
     });
   });
 
