@@ -48,7 +48,7 @@ describe('Viber format message', () => {
       const message = new formatMessage
         .Text('Some text')
         .addReplyKeyboard(true)
-        .addKeyboardButton('test', 'reply', 'test body')
+        .addKeyboardButton({text:'test', actionType: 'reply', actionBody: 'test body'})
         .get();
       expect(message).toEqual({
         type: 'text',
@@ -72,7 +72,7 @@ describe('Viber format message', () => {
       const message = new formatMessage
         .Text('Claudia.js')
         .addReplyKeyboard()
-        .addKeyboardButton('Open Claudia.js website', 'open-url', 'https://claudiajs.com')
+        .addKeyboardButton({text: 'Open Claudia.js website', actionType: 'open-url', actionBody: 'https://claudiajs.com'})
         .get();
       expect(message).toEqual({
         type: 'text',
