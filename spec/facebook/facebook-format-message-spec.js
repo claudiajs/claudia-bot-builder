@@ -44,8 +44,8 @@ describe('Facebook format message', () => {
     
     it('should throw an error if addQuickReply imageUrl is not an url', () => {
       const message = new formatFbMessage.Text('Some text');
-      const imageUrl= 'http//invalid-url'
-      expect(() => message.addQuickReply('title', payload,imageUrl)).toThrowError('Image has a bad url');
+      const imageUrl = 'http//invalid-url';
+      expect(() => message.addQuickReply('title', 'PAYLOAD', imageUrl)).toThrowError('Image has a bad url');
     });    
 
     it('should add a quick reply', () => {
