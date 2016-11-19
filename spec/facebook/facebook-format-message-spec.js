@@ -62,9 +62,18 @@ describe('Facebook format message', () => {
         .addQuickReply('title', 'PAYLOAD','http://google.com/path/to/image.png')
         .get();
       expect(message.quick_replies.length).toBe(1);
+      expect(message.quick_replies[0].content_type).toBe('text');
       expect(message.quick_replies[0].title).toBe('title');
       expect(message.quick_replies[0].payload).toBe('PAYLOAD');
       expect(message.quick_replies[0].image_url).toBe('http://google.com/path/to/image.png');
+    });
+
+    it('should add a quick reply with a location', () => {
+      const message = new formatFbMessage.Text('Some text')
+        .addQuickReplyLocation()
+        .get();
+      expect(message.quick_replies.length).toBe(1);
+      expect(message.quick_replies[0].content_type).toBe('location');
     });
 
     it('should add 11 quick replies', () => {
@@ -77,7 +86,7 @@ describe('Facebook format message', () => {
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
-        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReplyLocation()
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
         .get();
@@ -90,7 +99,7 @@ describe('Facebook format message', () => {
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
-        .addQuickReply('title', 'PAYLOAD')
+        .addQuickReplyLocation()
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
