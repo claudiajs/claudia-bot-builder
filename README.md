@@ -85,7 +85,7 @@ Contributions are greatly appreciated. See the [Contributors' guide](CONTRIBUTIN
 
 ## What's new since...?
 
-See the [Release History](RELEASES.md)
+See the [Release History](https://github.com/claudiajs/claudia-bot-builder/releases)
 
 ## Cool things built with _Claudia bot Builder_
 
