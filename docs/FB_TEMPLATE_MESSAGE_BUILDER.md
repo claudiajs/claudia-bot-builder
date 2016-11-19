@@ -58,7 +58,8 @@ _Arguments_:
 
 | Method        | Required | Arguments                                | Returns                           | Description                              |
 | ------------- | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
-| addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining               | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required) - up to 1000 characters, image (string, optional, valid url) - an url of an icon, can be transparent and it should be at least 24x24px | `this` for chaining               | Facebook allows us to send up to 11 quick replies that will appear above the keyboard |
+| addQuickReplyLocation | No       | No args. | `this` for chaining               | Same as above, just asks user for a current location |
 | get           | Yes      | No args.                                 | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 ### Example
