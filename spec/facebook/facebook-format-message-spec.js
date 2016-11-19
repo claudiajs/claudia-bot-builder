@@ -41,12 +41,12 @@ describe('Facebook format message', () => {
       let payload = new Array(102).join('0123456789');
       expect(() => message.addQuickReply('title', payload)).toThrowError('Payload can not be more than 1000 characters long');
     });
-    
+
     it('should throw an error if addQuickReply imageUrl is not an url', () => {
       const message = new formatFbMessage.Text('Some text');
       const imageUrl = 'http//invalid-url';
       expect(() => message.addQuickReply('title', 'PAYLOAD', imageUrl)).toThrowError('Image has a bad url');
-    });    
+    });
 
     it('should add a quick reply', () => {
       const message = new formatFbMessage.Text('Some text')
@@ -56,7 +56,7 @@ describe('Facebook format message', () => {
       expect(message.quick_replies[0].title).toBe('title');
       expect(message.quick_replies[0].payload).toBe('PAYLOAD');
     });
-    
+
     it('should add a quick reply with an image', () => {
       const message = new formatFbMessage.Text('Some text')
         .addQuickReply('title', 'PAYLOAD','http://google.com/path/to/image.png')
@@ -67,8 +67,9 @@ describe('Facebook format message', () => {
       expect(message.quick_replies[0].image_url).toBe('http://google.com/path/to/image.png');
     });
 
-    it('should add 10 quick replies', () => {
+    it('should add 11 quick replies', () => {
       const message = new formatFbMessage.Text('Some text')
+        .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
@@ -80,10 +81,10 @@ describe('Facebook format message', () => {
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
         .get();
-      expect(message.quick_replies.length).toBe(10);
+      expect(message.quick_replies.length).toBe(11);
     });
 
-    it('should throw an error if there\'s more than 10 quick replies', () => {
+    it('should throw an error if there\'s more than 11 quick replies', () => {
       const message = new formatFbMessage.Text('Some text')
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
@@ -94,8 +95,9 @@ describe('Facebook format message', () => {
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD')
+        .addQuickReply('title', 'PAYLOAD')
         .addQuickReply('title', 'PAYLOAD');
-      expect(() => message.addQuickReply('title', 'PAYLOAD')).toThrowError('There can not be more than 10 quick replies');
+      expect(() => message.addQuickReply('title', 'PAYLOAD')).toThrowError('There can not be more than 11 quick replies');
     });
 
     it('should trim the title if it is too long', () => {
