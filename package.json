@@ -20,10 +20,12 @@
     "chatbot",
     "messenger",
     "telegram",
+    "viber",
     "skype",
     "slack",
     "twilio",
-    "kik"
+    "kik",
+    "groupme"
   ],
   "author": "Slobodan Stojanovic <slobodan@cloudhorizon.com> (http://slobodan.me/), ",
   "contributors": [
