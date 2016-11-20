@@ -134,8 +134,8 @@ describe('Viber format message', () => {
       expect(() => new formatMessage.Photo()).toThrowError('Photo needs to be an URL for the Viber Photo method');
     });
 
-    it('should throw an error if photo text is not provided', () => {
-      expect(() => new formatMessage.Photo('https://claudiajs.com/assets/claudiajs.svg')).toThrowError('Text needs to be an URL for the Viber Photo method');
+    it('should throw an error if photo text is provided but not string', () => {
+      expect(() => new formatMessage.Photo('https://claudiajs.com/assets/claudiajs.svg', { foo: 'bar' })).toThrowError('Text needs to be a string for Viber Photo method');
     });
 
     it('should generate a valid Viber template object', () => {
@@ -144,6 +144,15 @@ describe('Viber format message', () => {
         type: 'picture',
         media: 'https://claudiajs.com/assets/claudiajs.svg',
         text: 'Claudia.js photo text'
+      });
+    });
+
+    it('should generate a valid Viber template object with an empty text if it is not provided', () => {
+      const message = new formatMessage.Photo('https://claudiajs.com/assets/claudiajs.svg').get();
+      expect(message).toEqual({
+        type: 'picture',
+        media: 'https://claudiajs.com/assets/claudiajs.svg',
+        text: ''
       });
     });
 
