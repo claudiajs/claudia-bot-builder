@@ -67,7 +67,7 @@ describe('Facebook setup', () => {
       });
       it('breaks down the message and puts it into the parser', () => {
         handler({body: singleMessageTemplate, env: {facebookAccessToken: 'ABC'}});
-        expect(parser).toHaveBeenCalledWith({'A': 'B'});
+        expect(parser.calls.argsFor(0)[0]).toEqual({'A': 'B'});
       });
       it('passes the parsed value to the bot if a message can be parsed', (done) => {
         parser.and.returnValue('MSG1');
@@ -221,10 +221,10 @@ describe('Facebook setup', () => {
       it('parses messages in sequence', () => {
         handler({body: multiMessageTemplate, env: {facebookAccessToken: 'ABC'}});
         expect(parser.calls.count()).toBe(4);
-        expect(parser).toHaveBeenCalledWith({'A': 'B'});
-        expect(parser).toHaveBeenCalledWith({'C': 'D'});
-        expect(parser).toHaveBeenCalledWith({'E': 'F'});
-        expect(parser).toHaveBeenCalledWith({'G': 'H'});
+        expect(parser.calls.argsFor(0)[0]).toEqual({'A': 'B'});
+        expect(parser.calls.argsFor(1)[0]).toEqual({'C': 'D'});
+        expect(parser.calls.argsFor(2)[0]).toEqual({'E': 'F'});
+        expect(parser.calls.argsFor(3)[0]).toEqual({'G': 'H'});
       });
       it('calls the bot for each message individually', (done) => {
         handler({body: multiMessageTemplate, env: {facebookAccessToken: 'ABC'}});
