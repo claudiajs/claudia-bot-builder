@@ -42,6 +42,7 @@ For the details see:
 - [Slack Message builder documentation](SLACK_MESSAGE_MESSAGE_BUILDER.md)
 - [Slack Delayed reply documentation](SLACK_DELAYED_REPLY_BUILDER.md)
 - [Telegram custom messages documentation](TELEGRAM_CUSTOM_MESSAGES.md)
+- [Viber custom messages documentation](VIBER_CUSTOM_MESSAGES.md)
 
 ### Synchronous replies
 
