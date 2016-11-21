@@ -109,8 +109,8 @@ _Arguments:_
 
 | Method                   | Required | Arguments                                | Returns                           | Description                              |
 | ------------------------ | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
-| addReplyKeyboard  | No       | isDefaultHeight (boolean, optional, is keyboard default height, default is true), backgroundColor (string, optional, keyboard background color) | `this` for chaining               | Adds a custom keyboard |
-| addKeyboardButton | No       | text (string, required, button text), buttonValue (string, required, url or text value that will be returned on press), columnSize (number, optional, a width of the button), , rowSize (number, optional, a height of the button), buttonObj (object, optional, additional button settings, should be a valid values from [Viber Keyboard docs](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145#buttons-parameters)) | `this` for chaining               | Viber button on a keyboard, more info is available [here](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145) |
+| addReplyKeyboard  | No       | isDefaultHeight (boolean, optional, is keyboard default height, default is true), <br/>backgroundColor (string, optional, keyboard background color) | `this` for chaining               | Adds a custom keyboard |
+| addKeyboardButton | No       | text (string, required, button text), <br/>buttonValue (string, required, url or text value that will be returned on press), <br/>columnSize (number, optional, a width of the button), <br/>rowSize (number, optional, a height of the button), <br/>buttonObj (object, optional, additional button settings, should be a valid values from [Viber Keyboard docs](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145#buttons-parameters)) | `this` for chaining               | Viber button on a keyboard, more info is available [here](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145) |
 | get               | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Viber |
 
 ### Example
@@ -145,8 +145,8 @@ _Arguments:_
 
 | Method                   | Required | Arguments                                | Returns                           | Description                              |
 | ------------------------ | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
-| addReplyKeyboard  | No       | isDefaultHeight (boolean, optional, is keyboard default height, default is true), backgroundColor (string, optional, keyboard background color) | `this` for chaining               | Adds a custom keyboard |
-| addKeyboardButton | No       | text (string, required, button text), buttonValue (string, required, url or text value that will be returned on press), columnSize (number, optional, a width of the button), , rowSize (number, optional, a height of the button), buttonObj (object, optional, additional button settings, should be a valid values from [Viber Keyboard docs](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145#buttons-parameters)) | `this` for chaining               | Viber button on a keyboard, more info is available [here](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145) |
+| addReplyKeyboard  | No       | isDefaultHeight (boolean, optional, is keyboard default height, default is true), <br/>backgroundColor (string, optional, keyboard background color) | `this` for chaining               | Adds a custom keyboard |
+| addKeyboardButton | No       | text (string, required, button text), <br/>buttonValue (string, required, url or text value that will be returned on press), <br/>columnSize (number, optional, a width of the button), <br/>rowSize (number, optional, a height of the button), <br/>buttonObj (object, optional, additional button settings, should be a valid values from [Viber Keyboard docs](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145#buttons-parameters)) | `this` for chaining               | Viber button on a keyboard, more info is available [here](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145) |
 | get               | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Viber |
 
 ### Example
@@ -181,8 +181,8 @@ _Arguments:_
 
 | Method                   | Required | Arguments                                | Returns                           | Description                              |
 | ------------------------ | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
-| addReplyKeyboard  | No       | isDefaultHeight (boolean, optional, is keyboard default height, default is true), backgroundColor (string, optional, keyboard background color) | `this` for chaining               | Adds a custom keyboard |
-| addKeyboardButton | No       | text (string, required, button text), buttonValue (string, required, url or text value that will be returned on press), columnSize (number, optional, a width of the button), , rowSize (number, optional, a height of the button), buttonObj (object, optional, additional button settings, should be a valid values from [Viber Keyboard docs](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145#buttons-parameters)) | `this` for chaining               | Viber button on a keyboard, more info is available [here](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145) |
+| addReplyKeyboard  | No       | isDefaultHeight (boolean, optional, is keyboard default height, default is true), <br/>backgroundColor (string, optional, keyboard background color) | `this` for chaining               | Adds a custom keyboard |
+| addKeyboardButton | No       | text (string, required, button text), <br/>buttonValue (string, required, url or text value that will be returned on press), <br/>columnSize (number, optional, a width of the button), <br/>rowSize (number, optional, a height of the button), <br/>buttonObj (object, optional, additional button settings, should be a valid values from [Viber Keyboard docs](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145#buttons-parameters)) | `this` for chaining               | Viber button on a keyboard, more info is available [here](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145) |
 | get               | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Viber |
 
 ### Example
@@ -216,8 +216,8 @@ _Arguments:_
 
 | Method                   | Required | Arguments                                | Returns                           | Description                              |
 | ------------------------ | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
-| addReplyKeyboard  | No       | isDefaultHeight (boolean, optional, is keyboard default height, default is true), backgroundColor (string, optional, keyboard background color) | `this` for chaining               | Adds a custom keyboard |
-| addKeyboardButton | No       | text (string, required, button text), buttonValue (string, required, url or text value that will be returned on press), columnSize (number, optional, a width of the button), , rowSize (number, optional, a height of the button), buttonObj (object, optional, additional button settings, should be a valid values from [Viber Keyboard docs](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145#buttons-parameters)) | `this` for chaining               | Viber button on a keyboard, more info is available [here](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145) |
+| addReplyKeyboard  | No       | isDefaultHeight (boolean, optional, is keyboard default height, default is true), <br/>backgroundColor (string, optional, keyboard background color) | `this` for chaining               | Adds a custom keyboard |
+| addKeyboardButton | No       | text (string, required, button text), <br/>buttonValue (string, required, url or text value that will be returned on press), <br/>columnSize (number, optional, a width of the button), <br/>rowSize (number, optional, a height of the button), <br/>buttonObj (object, optional, additional button settings, should be a valid values from [Viber Keyboard docs](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145#buttons-parameters)) | `this` for chaining               | Viber button on a keyboard, more info is available [here](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145) |
 | get               | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Viber |
 
 ### Example
@@ -252,8 +252,8 @@ _Arguments:_
 
 | Method                   | Required | Arguments                                | Returns                           | Description                              |
 | ------------------------ | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
-| addReplyKeyboard  | No       | isDefaultHeight (boolean, optional, is keyboard default height, default is true), backgroundColor (string, optional, keyboard background color) | `this` for chaining               | Adds a custom keyboard |
-| addKeyboardButton | No       | text (string, required, button text), buttonValue (string, required, url or text value that will be returned on press), columnSize (number, optional, a width of the button), , rowSize (number, optional, a height of the button), buttonObj (object, optional, additional button settings, should be a valid values from [Viber Keyboard docs](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145#buttons-parameters)) | `this` for chaining               | Viber button on a keyboard, more info is available [here](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145) |
+| addReplyKeyboard  | No       | isDefaultHeight (boolean, optional, is keyboard default height, default is true), <br/>backgroundColor (string, optional, keyboard background color) | `this` for chaining               | Adds a custom keyboard |
+| addKeyboardButton | No       | text (string, required, button text), <br/>buttonValue (string, required, url or text value that will be returned on press), <br/>columnSize (number, optional, a width of the button), <br/>rowSize (number, optional, a height of the button), <br/>buttonObj (object, optional, additional button settings, should be a valid values from [Viber Keyboard docs](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145#buttons-parameters)) | `this` for chaining               | Viber button on a keyboard, more info is available [here](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145) |
 | get               | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Viber |
 
 ### Example
@@ -272,12 +272,68 @@ module.exports = botBuilder(message => {
 
 ## URL messages
 
+URL template allows you to send a link.
 
+### API
+
+`Url` (class) - Class that allows you to build a link messages with optional custom keyboards.
+
+_Arguments:_
+
+- url, string (required) - valid URL.
+
+### Methods
+
+| Method                   | Required | Arguments                                | Returns                           | Description                              |
+| ------------------------ | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| addReplyKeyboard  | No       | isDefaultHeight (boolean, optional, is keyboard default height, default is true), <br/>backgroundColor (string, optional, keyboard background color) | `this` for chaining               | Adds a custom keyboard |
+| addKeyboardButton | No       | text (string, required, button text), <br/>buttonValue (string, required, url or text value that will be returned on press), <br/>columnSize (number, optional, a width of the button), <br/>rowSize (number, optional, a height of the button), <br/>buttonObj (object, optional, additional button settings, should be a valid values from [Viber Keyboard docs](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145#buttons-parameters)) | `this` for chaining               | Viber button on a keyboard, more info is available [here](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145) |
+| get               | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Viber |
+
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+const viberTemplate = botBuilder.viberTemplate;
+
+module.exports = botBuilder(message => {
+  if (message.type === 'viber')
+    return new viberTemplate.Url('https://claudiajs.com').get();
+});
+```
 
 
 ## Sticker messages
 
+Sticker template allows you to send a Viber sticker.
 
+### API
+
+`Sticker` (class) - Class that allows you to build a sticker messages with optional custom keyboards.
+
+_Arguments:_
+
+- stickerId, number (required) - valid sticker ID, check [Viber documentation](https://developers.viber.com/customer/portal/articles/2645276-sticker-ids) for more info.
+
+### Methods
+
+| Method                   | Required | Arguments                                | Returns                           | Description                              |
+| ------------------------ | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| addReplyKeyboard  | No       | isDefaultHeight (boolean, optional, is keyboard default height, default is true), <br/>backgroundColor (string, optional, keyboard background color) | `this` for chaining               | Adds a custom keyboard |
+| addKeyboardButton | No       | text (string, required, button text), <br/>buttonValue (string, required, url or text value that will be returned on press), <br/>columnSize (number, optional, a width of the button), <br/>rowSize (number, optional, a height of the button), <br/>buttonObj (object, optional, additional button settings, should be a valid values from [Viber Keyboard docs](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145#buttons-parameters)) | `this` for chaining               | Viber button on a keyboard, more info is available [here](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145) |
+| get               | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Viber |
+
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+const viberTemplate = botBuilder.viberTemplate;
+
+module.exports = botBuilder(message => {
+  if (message.type === 'viber')
+    return new viberTemplate.Sticker(40126).get();
+});
+```
 
 
 ## Sending multiple messages
