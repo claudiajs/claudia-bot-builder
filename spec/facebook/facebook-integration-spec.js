@@ -34,7 +34,7 @@ describe('Facebook Bot integration test', () => {
   beforeEach(() => {
     messageHandler = jasmine.createSpy('messageHandler');
     lambdaContextSpy = jasmine.createSpyObj('lambdaContext', ['done']);
-    underTest = botBuilder(messageHandler, () => {});
+    underTest = botBuilder(messageHandler, {}, () => {});
   });
 
   describe('API integration wiring', () => {
