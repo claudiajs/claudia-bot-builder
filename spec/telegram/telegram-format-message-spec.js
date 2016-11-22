@@ -324,4 +324,37 @@ describe('Telegram format message', () => {
       });
     });
   });
+
+  describe('File', () => {
+    it('should be a class', () => {
+      const message = new formatMessage.File('https://some.file.com/address.md');
+      expect(typeof formatMessage.File).toBe('function');
+      expect(message instanceof formatMessage.File).toBeTruthy();
+    });
+
+    it('should throw an error if file url is not available', () => {
+      expect(() => new formatMessage.File()).toThrowError('Document needs to be an URL for the Telegram File method');
+    });
+
+    it('should generate a valid Telegram File template object if caption is not sent', () => {
+      const message = new formatMessage.File('https://some.file.com/address.md').get();
+      expect(message).toEqual({
+        method: 'sendDocument',
+        body: {
+          document: 'https://some.file.com/address.md'
+        }
+      });
+    });
+
+    it('should generate a valid Telegram File template object if caption is sent', () => {
+      const message = new formatMessage.File('https://some.file.com/address.md', 'addressing').get();
+      expect(message).toEqual({
+        method: 'sendDocument',
+        body: {
+          document: 'https://some.file.com/address.md',
+          caption: 'addressing'
+        }
+      });
+    });
+  });
 });
