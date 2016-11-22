@@ -14,6 +14,20 @@ The first argument is the message object, as explained below.
 
 The second argument (since version `1.2.0`) is the [Claudia API Builder](https://github.com/claudiajs/claudia-api-builder/blob/master/docs/api.md#the-request-object) request object, with all the details of the HTTP request and Lambda context.
 
+## Selecting platforms
+
+By default, Bot Builder will set up endpoints for all supported platforms. This can slow down deployment unnecessarily if you only want to use one or two bot engines. Pass the second optional argument to the `botBuilder` function, and include a list of platform names into the `platforms` array key to limit the deployed platform APIs:
+
+```
+const botBuilder = require('claudia-bot-builder');
+
+module.exports = botBuilder(function (message, originalApiRequest) {
+  return `I got ${message.text}`;
+}, { platforms: ['facebook', 'twilio'] });
+```  
+
+The list of platform names can include: `facebook`, `slackSlashCommand`, `telegram`, `skype`, `twilio`, `kik`, `groupme`, `viber`, `alexa`.
+
 ## Message object structure
 
 The message object contains the following fields
