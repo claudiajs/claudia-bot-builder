@@ -76,6 +76,12 @@ See the [Chat-Bots section](https://github.com/claudiajs/example-projects#chat-b
    It's a new major version because of the dependencies - there are big improvements in the _Claudia API Builder_ and _Claudia_, so _Claudia Bot Builder_ v1.x is not compatible with them.  
    V2.x also brings support for many new platforms.
 
+6. **How to speed up the deployment**
+
+   You can use `claudia update` with `--cache-api-config` flag to cache the API Gateway config, for more info visit [docs page for claudia update](https://github.com/claudiajs/claudia/blob/master/docs/update.md).
+
+   Also, from version 2.7.0, you can disable platforms that you are not using, check the full explanation in the [API docs](https://github.com/claudiajs/claudia-bot-builder/blob/master/docs/API.md#selecting-platforms).
+
 Have a question that is not on this list? Feel free to ask it on [Claudia chat on Gitter](https://gitter.im/claudiajs/claudia).
 
 _Please, do not use GitHub issues for asking questions or requesting assistance/support, use it only to report bugs._
