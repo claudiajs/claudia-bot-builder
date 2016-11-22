@@ -61,15 +61,15 @@ describe('Alexa setup', () => {
       it('responds when the bot resolves', (done) => {
         parser.and.returnValue({sender: 'user1', text: 'MSG1', type: 'alexa-skill'});
         botResolve('Hello Alexa');
-        handler({body: singleMessageTemplate, env: {alexaAppName: 'Claudia Alexa Bot'}}).then(() => {
-          expect(responder).toHaveBeenCalledWith('Hello Alexa', utils.decode('Q2xhdWRpYSBBbGV4YSBCb3Q='));
+        handler({body: singleMessageTemplate, env: {alexaAppName: utils.encode('Claudia Alexa Bot')}}).then(() => {
+          expect(responder).toHaveBeenCalledWith('Hello Alexa', 'Claudia Alexa Bot');
         }).then(done, done.fail);
       });
       it('can work with bot responses as strings', (done) => {
         botResolve('Hello Alexa');
         parser.and.returnValue({sender: 'user1', text: 'Hello'});
-        handler({body: singleMessageTemplate, env: {alexaAppName: 'Claudia Alexa Bot'}}).then(() => {
-          expect(responder).toHaveBeenCalledWith('Hello Alexa', utils.decode('Q2xhdWRpYSBBbGV4YSBCb3Q='));
+        handler({body: singleMessageTemplate, env: {alexaAppName: utils.encode('Claudia Alexa Bot')}}).then(() => {
+          expect(responder).toHaveBeenCalledWith('Hello Alexa', 'Claudia Alexa Bot');
         }).then(done, done.fail);
 
       });
