@@ -79,6 +79,7 @@ _Claudia Bot Builder_ automates most of the configuration tasks, and stores acce
 * For Viber, use `--configure-viber-bot`
 * For Telegram, use `--configure-telegram-bot`
 * For Twilio, use `--configure-twilio-sms-bot`
+* For Amazon Alexa, use `--configure-alexa-skill`
 * For Kik, use `--configure-kik-bot`
 * For GroupMe, use `--configure-groupme-bot`
 
