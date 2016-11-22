@@ -208,6 +208,39 @@ module.exports = botBuilder(message => {
 
 
 
+## File messages
+
+File attachment allows you to send any files.
+
+### API
+
+`File` (class) - Class that allows you to build file messages with optional custom keyboards.
+
+_Arguments:_
+
+- document, string (required) - an url or an ID of already uploaded file.
+- caption, string (optional) - a caption for file.
+
+### Methods
+
+| Method                   | Required | Arguments                                | Returns                           | Description                              |
+| ------------------------ | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| Custom Keyboards methods | No       | See [Custom Keyboard](#custom-keyboards) section | `this` for chaining               | See [Custom Keyboard](#custom-keyboards) section |
+| get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Telegram Messenger |
+
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+
+module.exports = botBuilder(message => {
+  if (message.type === 'telegram')
+    return new telegramTemplate.File('http://example.com/files/file.pdf', 'Some File').get();
+});
+```
+
+
+
 ## Location messages
 
 Location template allows you to send a location, if you want to send a location of some venue use [Venue message template](#venue-messages).
