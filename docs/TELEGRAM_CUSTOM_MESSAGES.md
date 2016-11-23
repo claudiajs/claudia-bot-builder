@@ -319,6 +319,39 @@ module.exports = botBuilder(message => {
 
 
 
+## Sticker messages
+
+Sticker template allows you to send a Telegram sticker.
+
+### API
+
+`Sticker` (class) - Class that allows you to build sticker messages with optional custom keyboards.
+
+_Arguments:_
+
+- sticker, string (required) - an url (.webp sticker) or an ID of already uploaded sticker.
+
+### Methods
+
+| Method                   | Required | Arguments                                | Returns                           | Description                              |
+| ------------------------ | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| Custom Keyboards methods | No       | See [Custom Keyboard](#custom-keyboards) section | `this` for chaining               | See [Custom Keyboard](#custom-keyboards) section |
+| get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Telegram Messenger |
+
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+const telegramTemplate = botBuilder.telegramTemplate;
+
+module.exports = botBuilder(message => {
+  if (message.type === 'telegram')
+    return new telegramTemplate.Sticker('http://example.com/stickers/sticker.webp').get();
+});
+```
+
+
+
 ## Changing chat action
 
 Sometimes you just want to simulate user actions before sending a real message, ie. typing, uploading, etc. _Claudia Bot Builder_ supports those chat actions.
