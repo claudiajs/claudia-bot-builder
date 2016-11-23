@@ -66,6 +66,7 @@ _Arguments:_
 
 ```javascript
 const botBuilder = require('claudia-bot-builder');
+const telegramTemplate = botBuilder.telegramTemplate;
 
 module.exports = botBuilder(message => {
   if (message.type === 'telegram')
@@ -103,6 +104,7 @@ Reply keyboard:
 
 ```javascript
 const botBuilder = require('claudia-bot-builder');
+const telegramTemplate = botBuilder.telegramTemplate;
 
 module.exports = botBuilder(message => {
   if (message.type === 'telegram')
@@ -160,6 +162,7 @@ _Arguments:_
 
 ```javascript
 const botBuilder = require('claudia-bot-builder');
+const telegramTemplate = botBuilder.telegramTemplate;
 
 module.exports = botBuilder(message => {
   if (message.type === 'telegram')
@@ -196,6 +199,7 @@ _Arguments:_
 
 ```javascript
 const botBuilder = require('claudia-bot-builder');
+const telegramTemplate = botBuilder.telegramTemplate;
 
 module.exports = botBuilder(message => {
   if (message.type === 'telegram')
@@ -232,6 +236,7 @@ _Arguments:_
 
 ```javascript
 const botBuilder = require('claudia-bot-builder');
+const telegramTemplate = botBuilder.telegramTemplate;
 
 module.exports = botBuilder(message => {
   if (message.type === 'telegram')
@@ -265,6 +270,7 @@ _Arguments:_
 
 ```javascript
 const botBuilder = require('claudia-bot-builder');
+const telegramTemplate = botBuilder.telegramTemplate;
 
 module.exports = botBuilder(message => {
   if (message.type === 'telegram')
@@ -301,6 +307,7 @@ _Arguments:_
 
 ```javascript
 const botBuilder = require('claudia-bot-builder');
+const telegramTemplate = botBuilder.telegramTemplate;
 
 module.exports = botBuilder(message => {
   if (message.type === 'telegram')
@@ -334,6 +341,7 @@ _Arguments:_
 
 ```javascript
 const botBuilder = require('claudia-bot-builder');
+const telegramTemplate = botBuilder.telegramTemplate;
 
 module.exports = botBuilder(message => {
   if (message.type === 'telegram')
@@ -370,6 +378,7 @@ _Note:_ This is not the Telegram API method, it's a Claudia Bot Builder method t
 
 ```javascript
 const botBuilder = require('claudia-bot-builder');
+const telegramTemplate = botBuilder.telegramTemplate;
 
 module.exports = botBuilder(message => {
   if (message.type === 'telegram')
@@ -426,6 +435,7 @@ It's easy to send multiple messages, just pass an array with at least one of the
 
 ```javascript
 const botBuilder = require('claudia-bot-builder');
+const telegramTemplate = botBuilder.telegramTemplate;
 
 module.exports = botBuilder(message => {
   if (message.type === 'telegram')
@@ -452,6 +462,6 @@ _Example:_
 
 Calling `new telegramTemplate.Text()` without `text` will throw `Text is required for Telegram Text template` error.
 
-All errors that Claudia bot builder's fbTemplate library is throwing can be found [in the source code](../lib/telegram/format-message.js).
+All errors that Claudia bot builder's telegramTemplate library is throwing can be found [in the source code](../lib/telegram/format-message.js).
 
 Errors will be logged in Cloud Watch log for your bot.
