@@ -244,6 +244,15 @@ describe('Facebook format message', () => {
       expect(generic.bubbles[0].buttons[0].url).not.toBeDefined();
     });
 
+    it('should add a button with a share url', () => {
+      generic
+        .addBubble('Test')
+        .addShareButton();
+
+      expect(generic.bubbles[0].buttons.length).toBe(1);
+      expect(generic.bubbles[0].buttons[0].type).toBe('element_share');
+    });
+
     it('should add a button with title and url if you pass valid format', () => {
       generic
         .addBubble('Test')
