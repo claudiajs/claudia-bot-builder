@@ -97,14 +97,20 @@ See the [Release History](https://github.com/claudiajs/claudia-bot-builder/relea
 ## Cool things built with _Claudia bot Builder_
 
 - [AWS Bot for Slack](https://github.com/andypowe11/AWS-Claudia-AWSBot) - A Slack bot to stop and start selected AWS EC2 instances and generally keep an eye on your AWS estate.
+- [Comic Book Bot](https://github.com/stojanovic/comic-book-bot) - A simple Viber chatbot for Marvel characters.
 - [DotCom Bot](http://dotcom.montoyaindustries.com) - Search & buy domain names and check @usernames fast on Slack & Facebook Messenger!
 - [Eksplorer](http://eksplo.weebly.com) - The Facebook chat bot that will help you discover amazing things in your neighborhood.
 - [Fact Bot](https://github.com/claudiajs/example-projects/tree/master/bot-with-buttons) - The bot will query WikiData for anything you send it and print out the facts.
 - [JS Belgrade bot](https://github.com/JSBelgrade/jsbelgrade-chatbot) - Simple meetup group Telegram chatbot created during the meetup.
+- [LaptopFriendly Bot](https://github.com/stojanovic/laptop-friendly-bot) - Viber bot for [LaptopFriendly.co](https://laptopfriendly.co).
+- [PingdomBot](https://github.com/andypowe11/AWS-Claudia-PingdomBot) - A Slack bot to see the status of Pingdom website monitoring.
 - [Pokemon Lookup bot](https://www.facebook.com/PokedexLookup/) - Simple pokemon lookup bot, [source code](https://github.com/kirkins/PokedexBot).
 - [QRCode Bot](https://www.facebook.com/QRCode-Bot-1779956152289103/) - Artistic QR code maker, [source code](https://github.com/jveres/qrcode-bot).
+- [Quote bot](https://github.com/philnash/quote-bot) - A very simple bot that will respond with an inspirational quote from the Forismatic API.
 - [Robbert](https://www.facebook.com/Robbert-1119546194768078) - General chatbot.
+- [slackslash-radar](https://github.com/Ibuprofen/slackslash-radar) - A Claudiajs bot which retrieves a Wunderground radar animated gif and posts to Slack.
 - [Space Explorer Bot](https://github.com/stojanovic/space-explorer-bot) - A simple Messenger chat bot that uses NASA's API to get the data and images about the Space.
+- [Space Explorer Bot for Viber](https://github.com/stojanovic/space-explorer-bot-viber) - Viber version of Space Explorer Bot.
 - [Vacation tracker bot](http://vacationtrackerbot.com/) - A simple Slack bot to help you manage your team’s vacations, sick days and days off.
 
 Building something cool with Claudia Bot Builder? Let us know or send a PR to update this list!
