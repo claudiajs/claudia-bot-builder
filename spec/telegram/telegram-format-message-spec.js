@@ -357,4 +357,26 @@ describe('Telegram format message', () => {
       });
     });
   });
+
+  describe('Sticker', () => {
+    it('should be a class', () => {
+      const message = new formatMessage.Sticker('https://some.file.com/address.md');
+      expect(typeof formatMessage.Sticker).toBe('function');
+      expect(message instanceof formatMessage.Sticker).toBeTruthy();
+    });
+
+    it('should throw an error if sticker URL or ID is not available', () => {
+      expect(() => new formatMessage.Sticker()).toThrowError('Sticker needs to be an URL or sticker ID for the Telegram Sticker method');
+    });
+
+    it('should generate a valid Telegram Sticker template object', () => {
+      const message = new formatMessage.Sticker('stickerID').get();
+      expect(message).toEqual({
+        method: 'sendSticker',
+        body: {
+          sticker: 'stickerID'
+        }
+      });
+    });
+  });
 });
