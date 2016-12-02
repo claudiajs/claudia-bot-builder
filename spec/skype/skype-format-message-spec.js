@@ -88,14 +88,21 @@ describe('Skype format message', () => {
     it('should throw error if addButton is called without value', () => {
       expect(() => new formatMessage.Carousel('summary', 'text')
         .addHero()
-        .addButton('title', '')
+        .addButton('title', '', 'imBack')
         .get()).toThrowError('Value needs to be a string for Skype addButton method');
+    });
+
+    it('should throw error if addButton is called without type', () => {
+      expect(() => new formatMessage.Carousel('summary', 'text')
+        .addHero()
+        .addButton('title', 'value')
+        .get()).toThrowError('Type needs to be a string for Skype addButton method');
     });
 
     it('should generate a valid Carousel template object with Hero with Button', () => {
       const message = new formatMessage.Carousel('summary', 'text')
         .addHero('title', 'subtitle', 'text', ['image'])
-          .addButton('title', 'value')
+          .addButton('title', 'value', 'imBack')
         .get();
       expect(message).toEqual({
         type: 'message/card.carousel',
