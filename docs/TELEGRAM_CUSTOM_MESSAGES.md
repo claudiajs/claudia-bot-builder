@@ -70,7 +70,7 @@ const telegramTemplate = botBuilder.telegramTemplate;
 
 module.exports = botBuilder(message => {
   if (message.type === 'telegram')
-    new telegramTemplate.Text(`What's your favorite House in Game Of Thrones`)
+    return new telegramTemplate.Text(`What's your favorite House in Game Of Thrones`)
       .addReplyKeyboard([['Stark'], ['Lannister'], ['Targaryen'], ['None of the above']])
       .get();
 });
@@ -108,7 +108,7 @@ const telegramTemplate = botBuilder.telegramTemplate;
 
 module.exports = botBuilder(message => {
   if (message.type === 'telegram')
-    new telegramTemplate.Text(`What's your favorite House in Game Of Thrones`)
+    return new telegramTemplate.Text(`What's your favorite House in Game Of Thrones`)
       .addReplyKeyboard([['Stark'], ['Lannister'], ['Targaryen'], ['None of the above']])
       .get();
 });
@@ -121,7 +121,7 @@ const botBuilder = require('claudia-bot-builder');
 
 module.exports = botBuilder(message => {
   if (message.type === 'telegram')
-    new telegramTemplate.Text(`Claudia Bot Builder`)
+    return new telegramTemplate.Text(`Claudia Bot Builder`)
       .addInlineKeyboard([
       	[{
           text: 'Website',
