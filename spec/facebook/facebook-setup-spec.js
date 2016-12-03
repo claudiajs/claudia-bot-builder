@@ -65,6 +65,14 @@ describe('Facebook setup', () => {
       beforeEach(() => {
         handler = api.post.calls.argsFor(0)[1];
       });
+      it('should fail if x hub signature does not match', done => {
+        handler({body: singleMessageTemplate, rawBody: '{"object":"page","entry":[{"id":"PAGE_ID","time":1457764198246,"messaging":[{"A":"B"}]}]}', headers: {'X-Hub-Signature': 'sha1=12345'}, env: {facebookAccessToken: 'ABC', facebookAppSecret: '54321'}})
+          .catch(err => {
+            expect(err).toBe('X-Hub-Signatures does not match');
+            return;
+          })
+          .then(done, done.fail);
+      });
       it('breaks down the message and puts it into the parser', () => {
         handler({body: singleMessageTemplate, env: {facebookAccessToken: 'ABC'}});
         expect(parser.calls.argsFor(0)[0]).toEqual({'A': 'B'});
