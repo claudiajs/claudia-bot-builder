@@ -24,7 +24,7 @@ const botBuilder = require('claudia-bot-builder');
 module.exports = botBuilder(function (message, originalApiRequest) {
   return `I got ${message.text}`;
 }, { platforms: ['facebook', 'twilio'] });
-```  
+```
 
 The list of platform names can include: `facebook`, `slackSlashCommand`, `telegram`, `skype`, `twilio`, `kik`, `groupme`, `viber`, `alexa`.
 
@@ -32,25 +32,23 @@ The list of platform names can include: `facebook`, `slackSlashCommand`, `telegr
 
 The message object contains the following fields
 
-* `text`: `string` the text of the message received, extracted from a bot-specific format. In most cases, if you just want to reply to text messages, this is the only piece of information you'll need.
-* `type`: `string` the type of the end-point receiving the message. It can be `facebook`, `slack-slash-command`, `skype`, `telegram`, `twilio`, `alexa`, `viber`, `kik` or `groupme`
-* `originalRequest`: `object` the complete original message, in a bot-specific format, useful if you want to do more than just reply to text messages.
-* `sender`: `string` the identifier of the sender
+* **`text`**: `string` the text of the message received, extracted from a bot-specific format. In most cases, if you just want to reply to text messages, this is the only piece of information you'll need.
+* **`type`**: `string` the type of the end-point receiving the message. It can be `facebook`, `slack-slash-command`, `skype`, `telegram`, `twilio`, `alexa`, `viber`, `kik` or `groupme`
+* **`originalRequest`**: `object` the complete original message, in a bot-specific format, useful if you want to do more than just reply to text messages.
+* **`sender`**: `string` the identifier of the sender
 * `postback`: `boolean` true if the message is the result of a post-back (for example clicking on a button created by a previous message in Facebook). It will be `undefined` (falsy) for completely new messages.
 
 _Note_: FB Messenger message echoes, delivery and read reports will not be parsed.
 
-## Message object structure
+## Message verification
 
-The message object contains the following fields
+_Claudia Bot Builder_ will verify message payload as recommended for each platform.
 
-* `text`: `string` the text of the message received, extracted from a bot-specific format. In most cases, if you just want to reply to text messages, this is the only piece of information you'll need.
-* `type`: `string` the type of the end-point receiving the message. It can be `facebook`, `slack-slash-command`, `skype` or `telegram`
-* `originalRequest`: `object` the complete original message, in a bot-specific format, useful if you want to do more than just reply to text messages.
-* `sender`: `string` the identifier of the sender
-* `postback`: `boolean` true if the message is the result of a post-back (for example clicking on a button created by a previous message in Facebook). It will be `undefined` (falsy) for completely new messages.
+However, Facebook Messenger beside token validation offers additional security via `X-Hub-Signature` header, but it requires your Facebook App Secret.
 
-_Note_: FB Messenger message echoes, delivery and read reports will not be parsed.
+This security step is also available in _Claudia Bot Builder_ but it is optional in current version. This will become mandatory in the next major version, so please run `claudia update` with `--configure-fb-bot` flag and set your Facebook App Secret on your next update or any time before the next major version.
+
+You can read more about security check for Facebook Messenger in [Messenger's documentation](https://developers.facebook.com/docs/messenger-platform/webhook-reference#security).
 
 ## Reply formats
 
