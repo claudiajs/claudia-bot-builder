@@ -36,7 +36,7 @@ The message object contains the following fields
 * **`type`**: `string` the type of the end-point receiving the message. It can be `facebook`, `slack-slash-command`, `skype`, `telegram`, `twilio`, `alexa`, `viber`, `kik` or `groupme`
 * **`originalRequest`**: `object` the complete original message, in a bot-specific format, useful if you want to do more than just reply to text messages.
 * **`sender`**: `string` the identifier of the sender
-* `postback`: `boolean` true if the message is the result of a post-back (for example clicking on a button created by a previous message in Facebook). It will be `undefined` (falsy) for completely new messages.
+* **`postback`**: `boolean` true if the message is the result of a post-back (for example clicking on a button created by a previous message in Facebook). It will be `undefined` (falsy) for completely new messages.
 
 _Note_: FB Messenger message echoes, delivery and read reports will not be parsed.
 
