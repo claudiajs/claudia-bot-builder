@@ -38,7 +38,6 @@ describe('Facebook parse', () => {
       recipient: { id: '67890' },
       timestamp: 1465558466933,
       message: {
-        text: 'Some text',
         mid: 'mid.1464990849238:b9a22a2bcb1de31773',
         seq: 69,
         quick_reply: {
@@ -48,9 +47,10 @@ describe('Facebook parse', () => {
     };
     expect(parse(msg)).toEqual({
       sender: '12345',
-      text: 'Some text',
+      text: 'QUICK_REPLY',
       originalRequest: msg,
-      type: 'facebook'
+      type: 'facebook',
+      postback: true
     });
   });
   it('does not parse the object if it is delivery report', () => {
