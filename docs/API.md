@@ -63,6 +63,7 @@ Additionally, _Claudia Bot Builder_ exports message generators for for generatin
 For the details see:
 
 - [Facebook Template Message builder documentation](FB_TEMPLATE_MESSAGE_BUILDER.md)
+- [Skype custom messages documentation](SKYPE_CUSTOM_MESSAGES.md)
 - [Slack Message builder documentation](SLACK_MESSAGE_MESSAGE_BUILDER.md)
 - [Slack Delayed reply documentation](SLACK_DELAYED_REPLY_BUILDER.md)
 - [Telegram custom messages documentation](TELEGRAM_CUSTOM_MESSAGES.md)
