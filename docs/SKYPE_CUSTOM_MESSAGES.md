@@ -177,7 +177,7 @@ _Arguments:_
 | addTitle                 | No       | title (string, required, title for Thumbnail)  | `this` for chaining               | Adds title on Thumbnail message               |
 | addSubtitle              | No       | subtitle (string, required, subtitle for Thumbnail)  | `this` for chaining               | Adds subtitle on Thumbnail message               |
 | addText                  | No       | text (string, required, text for Thumbnail)  | `this` for chaining               | Adds text on Thumbnail message               |
-| addButton                | No       | title (string, required, title of button), value (string, required, value of button), type (string, required, [Button types](#button-types))  | `this` for chaining               | Adds button on Hero message               |
+| addButton                | No       | title (string, required, title of button), value (string, required, value of button), type (string, required, [Button types](#button-types))  | `this` for chaining               | Adds button on Thumbnail message               |
 | get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Telegram Messenger |
 
 ### Example
@@ -222,9 +222,9 @@ _Arguments:_
 | addTitle                 | No       | title (string, required, title for Receipt)  | `this` for chaining               | Adds title on Receipt message               |
 | addSubtitle              | No       | subtitle (string, required, subtitle for Receipt)  | `this` for chaining               | Adds subtitle on Receipt message               |
 | addText                  | No       | text (string, required, text for Receipt)  | `this` for chaining               | Adds text on Receipt message               |
-| addFact                  | No       | key (string, required, key for Fact), value (string, required, value for Fact)  | `this` for chaining               | Adds text on Thumbnail message               |
-| addItem                  | No       | title (string, optional), subtitle (string, optional), text (string, optional), price (string, optional), quantity (string, optional), image (string, optional), | `this` for chaining               | Adds item to Thumbnail message               |
-| addButton                | No       | title (string, required, title of button), value (string, required, value of button), type (string, required, [Button types](#button-types))  | `this` for chaining               | Adds button on Hero message               |
+| addFact                  | No       | key (string, required, key for Fact), value (string, required, value for Fact)  | `this` for chaining               | Adds fact on Receipt message               |
+| addItem                  | No       | title (string, optional), subtitle (string, optional), text (string, optional), price (string, optional), quantity (string, optional), image (string, optional), | `this` for chaining               | Adds item to Receipt message               |
+| addButton                | No       | title (string, required, title of button), value (string, required, value of button), type (string, required, [Button types](#button-types))  | `this` for chaining               | Adds button on Receipt message               |
 | get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Telegram Messenger |
 
 ### Example
@@ -236,7 +236,7 @@ const skypeTemplate = botBuilder.skypeTemplate;
 module.exports = botBuilder(message => {
   if (message.type === 'skype')
     return new skypeTemplate.Carousel()
-      .addThumbnail(['http://lorempixel.com/400/200/'])
+      .addReceipt('100')
         .addTitle('New Thumbnail')
         .addSubtitle('Our new Thumbnail')
         .addText('Some description')
