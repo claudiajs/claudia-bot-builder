@@ -24,7 +24,7 @@ To use it, just require `skypeTemplate` function from _Claudia Bot Builder_:
 const skypeTemplate = require('claudia-bot-builder').skypeTemplate;
 ```
 
-`skypeTemplate` exports an object that contains multiple classes that allows you to generate different types of structured messages for Telegram:
+`skypeTemplate` exports an object that contains multiple classes that allows you to generate different types of structured messages for Skype:
 
 - Photo
 - Carousel
@@ -95,7 +95,7 @@ _Arguments:_
 | addHero                  | No       | See [Hero](#hero-messages)               | `this` for chaining               | Hero card                                |
 | addThumbnail             | No       | See [Thumbnail](#thumbnail-messages)     | `this` for chaining               | Thumbnail card                           |
 | addReceipt               | No       | See [Receipt](#receipt-messages) section | `this` for chaining               | Receipt card                             |
-| get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Telegram Messenger |
+| get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Skype Messenger |
 
 ### Example
 
@@ -135,7 +135,7 @@ _Arguments:_
 | addSubtitle              | No       | subtitle (string, required, subtitle for Hero)  | `this` for chaining               | Adds subtitle on Hero message               |
 | addText                  | No       | text (string, required, text for Hero)  | `this` for chaining               | Adds text on Hero message               |
 | addButton                | No       | title (string, required, title of button), value (string, required, value of button), type (string, required, [Button types](#button-types))  | `this` for chaining               | Adds button on Hero message               |
-| get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Telegram Messenger |
+| get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Skype Messenger |
 
 ### Example
 
@@ -178,7 +178,7 @@ _Arguments:_
 | addSubtitle              | No       | subtitle (string, required, subtitle for Thumbnail)  | `this` for chaining               | Adds subtitle on Thumbnail message               |
 | addText                  | No       | text (string, required, text for Thumbnail)  | `this` for chaining               | Adds text on Thumbnail message               |
 | addButton                | No       | title (string, required, title of button), value (string, required, value of button), type (string, required, [Button types](#button-types))  | `this` for chaining               | Adds button on Thumbnail message               |
-| get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Telegram Messenger |
+| get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Skype Messenger |
 
 ### Example
 
@@ -225,7 +225,7 @@ _Arguments:_
 | addFact                  | No       | key (string, required, key for Fact), value (string, required, value for Fact)  | `this` for chaining               | Adds fact on Receipt message               |
 | addItem                  | No       | title (string, optional), subtitle (string, optional), text (string, optional), price (string, optional), quantity (string, optional), image (string, optional), | `this` for chaining               | Adds item to Receipt message               |
 | addButton                | No       | title (string, required, title of button), value (string, required, value of button), type (string, required, [Button types](#button-types))  | `this` for chaining               | Adds button on Receipt message               |
-| get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Telegram Messenger |
+| get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Skype Messenger |
 
 ### Example
 
