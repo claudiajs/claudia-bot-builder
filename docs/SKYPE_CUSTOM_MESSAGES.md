@@ -273,7 +273,7 @@ Skype Template Message builder checks if messages you are generating are followi
 
 _Example:_
 
-Calling `new telegramTemplate.Carousel().addHero('imageUrl')` where's `image` passed as string instead of array will throw `Images should be sent as array for the Skype Hero template` error.
+Calling `new skypeTemplate.Carousel().addHero('imageUrl')` where's `image` passed as string instead of array will throw `Images should be sent as array for the Skype Hero template` error.
 
 All errors that Claudia bot builder's skypeTemplate library is throwing can be found [in the source code](../lib/skype/format-message.js).
 
