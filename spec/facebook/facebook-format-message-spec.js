@@ -352,7 +352,7 @@ describe('Facebook format message', () => {
     });
 
     it('should throw an error if button text is longer than 320 characters', () => {
-      expect(() => new formatFbMessage.Button(Array(321).fill('x').join(''))).toThrowError('Button template text cannot be longer than 320 characters');
+      expect(() => new formatFbMessage.Button(Array(641).fill('x').join(''))).toThrowError('Button template text cannot be longer than 640 characters');
     });
 
     it('should create a button template with the text when valid text is provided', () => {
