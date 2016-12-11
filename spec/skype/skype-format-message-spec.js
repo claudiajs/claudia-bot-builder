@@ -294,5 +294,12 @@ describe('Skype format message', () => {
         .addText()
         .get()).toThrowError('Text needs to be a string for Skype addText method');
     });
+
+    it('should generate a valid Typing template object', () => {
+      const message = new formatMessage.Typing();
+      expect(message).toEqual({
+        type: 'typing'
+      });
+    });
   });
 });

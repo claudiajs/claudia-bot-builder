@@ -11,7 +11,8 @@ In this guide:
     2. [Thumbnail](#thumbnail-messages)
     3. [Receipt](#receipt-messages)
 6. [Button types](#button-types)
-7. [Handling errors](#handling-errors)
+7. [Typing messages](#typing-messages)
+8. [Handling errors](#handling-errors)
 
 
 ## Intro
@@ -245,6 +246,34 @@ module.exports = botBuilder(message => {
           .addButton('Hi', 'hello', 'imBack')
           .addButton('Other button', 'hello again', 'imBack')
       .get();
+});
+```
+
+
+
+## Typing messages
+
+Typing message allows you to send typing event from chat bot.
+
+### API
+
+`Typing` (class) - Class that allows you to build a Typing message.
+
+### Methods
+
+| Method                   | Required | Arguments                                | Returns                           | Description                              |
+| ------------------------ | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| get                      | Optional      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Skype Messenger |
+
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+const skypeTemplate = botBuilder.skypeTemplate;
+
+module.exports = botBuilder(message => {
+  if (message.type === 'skype')
+    return new skypeTemplate.Typing();
 });
 ```
 
