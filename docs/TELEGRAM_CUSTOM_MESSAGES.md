@@ -9,11 +9,13 @@ In this guide:
 5. [Audio messages](#audio-messages)
 6. [Location messages](#location-messages)
 7. [Venue messages](#venue-messages)
-8. [Changing chat action](#changing-chat-action)
-9. [Pause between messages](#pause-between-messages)
-10. [Other attachments](#other-attachments)
-11. [Sending multiple messages](#sending-multiple-messages)
-12. [Handling errors](#handling-errors)
+8. [Sticker messages](#sticker-messages)
+9. [Contact messages](#contact-messages)
+10. [Changing chat action](#changing-chat-action)
+11. [Pause between messages](#pause-between-messages)
+12. [Other attachments](#other-attachments)
+13. [Sending multiple messages](#sending-multiple-messages)
+14. [Handling errors](#handling-errors)
 
 
 ## Intro
