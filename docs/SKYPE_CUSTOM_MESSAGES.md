@@ -250,6 +250,34 @@ module.exports = botBuilder(message => {
 
 
 
+## Typing messages
+
+Typing message allows you to send typing event from chat bot.
+
+### API
+
+`Typing` (class) - Class that allows you to build Typing message.
+
+### Methods
+
+| Method                   | Required | Arguments                                | Returns                           | Description                              |
+| ------------------------ | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| get                      | Optional      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Skype Messenger |
+
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+const skypeTemplate = botBuilder.skypeTemplate;
+
+module.exports = botBuilder(message => {
+  if (message.type === 'skype')
+    return new skypeTemplate.Typing();
+});
+```
+
+
+
 ## Button types
 
 Skype buttons have specific types for the function they are supposed to do. Bellow is the table with the types and explanations:
