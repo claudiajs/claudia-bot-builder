@@ -257,7 +257,7 @@ Typing message allows you to send typing event from chat bot.
 
 ### API
 
-`Typing` (class) - Class that allows you to build Typing message.
+`Typing` (class) - Class that allows you to build a Typing message.
 
 ### Methods
 
