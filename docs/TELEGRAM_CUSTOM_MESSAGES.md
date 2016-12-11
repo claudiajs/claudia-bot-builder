@@ -356,7 +356,7 @@ module.exports = botBuilder(message => {
 
 ## Contact messages
 
-Contact template allows you to send a contact with phone number, first name and last name.
+Contact template allows you to share contact's first name, last name and phone number.
 
 ### API
 
