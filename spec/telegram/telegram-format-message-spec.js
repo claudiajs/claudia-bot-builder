@@ -379,4 +379,43 @@ describe('Telegram format message', () => {
       });
     });
   });
+
+  describe('Contact', () => {
+    it('should be a class', () => {
+      const message = new formatMessage.Contact('123456789', 'John');
+      expect(typeof formatMessage.Contact).toBe('function');
+      expect(message instanceof formatMessage.Contact).toBeTruthy();
+    });
+
+    it('should throw an error if phone number is not available', () => {
+      expect(() => new formatMessage.Contact()).toThrowError('Phone number needs to be a string for Telegram Contact method');
+    });
+
+    it('should throw an error if first name is not available', () => {
+      expect(() => new formatMessage.Contact('123456789')).toThrowError('First name needs to be a string for Telegram Contact method');
+    });
+
+    it('should generate a valid Telegram Contact template object', () => {
+      const message = new formatMessage.Contact('123456789', 'John', 'Doe').get();
+      expect(message).toEqual({
+        method: 'sendContact',
+        body: {
+          phone_number: '123456789',
+          first_name: 'John',
+          last_name: 'Doe'
+        }
+      });
+    });
+
+    it('should generate a valid Telegram Contact template object without last name', () => {
+      const message = new formatMessage.Contact('123456789', 'John').get();
+      expect(message).toEqual({
+        method: 'sendContact',
+        body: {
+          phone_number: '123456789',
+          first_name: 'John'
+        }
+      });
+    });
+  });
 });

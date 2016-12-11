@@ -9,11 +9,13 @@ In this guide:
 5. [Audio messages](#audio-messages)
 6. [Location messages](#location-messages)
 7. [Venue messages](#venue-messages)
-8. [Changing chat action](#changing-chat-action)
-9. [Pause between messages](#pause-between-messages)
-10. [Other attachments](#other-attachments)
-11. [Sending multiple messages](#sending-multiple-messages)
-12. [Handling errors](#handling-errors)
+8. [Sticker messages](#sticker-messages)
+9. [Contact messages](#contact-messages)
+10. [Changing chat action](#changing-chat-action)
+11. [Pause between messages](#pause-between-messages)
+12. [Other attachments](#other-attachments)
+13. [Sending multiple messages](#sending-multiple-messages)
+14. [Handling errors](#handling-errors)
 
 
 ## Intro
@@ -347,6 +349,41 @@ const telegramTemplate = botBuilder.telegramTemplate;
 module.exports = botBuilder(message => {
   if (message.type === 'telegram')
     return new telegramTemplate.Sticker('http://example.com/stickers/sticker.webp').get();
+});
+```
+
+
+
+## Contact messages
+
+Contact template allows you to share contact's first name, last name and phone number.
+
+### API
+
+`Contact` (class) - Class that allows you to build contact messages with optional custom keyboards.
+
+_Arguments:_
+
+- phone, string (required) - contacts phone number.
+- firstName, string (required) - contacts first name.
+- lastName, string (optional) - contacts last name.
+
+### Methods
+
+| Method                   | Required | Arguments                                | Returns                           | Description                              |
+| ------------------------ | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| Custom Keyboards methods | No       | See [Custom Keyboard](#custom-keyboards) section | `this` for chaining               | See [Custom Keyboard](#custom-keyboards) section |
+| get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Telegram Messenger |
+
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+const telegramTemplate = botBuilder.telegramTemplate;
+
+module.exports = botBuilder(message => {
+  if (message.type === 'telegram')
+    return new telegramTemplate.Contact('123456789', 'John', 'Doe').get()
 });
 ```
 
