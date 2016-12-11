@@ -352,6 +352,41 @@ module.exports = botBuilder(message => {
 
 
 
+## Contact messages
+
+Contact template allows you to send a contact with phone number, first name and last name.
+
+### API
+
+`Contact` (class) - Class that allows you to build contact messages with optional custom keyboards.
+
+_Arguments:_
+
+- phone, string (required) - contacts phone number.
+- firstName, string (required) - contacts first name.
+- lastName, string (optional) - contacts last name.
+
+### Methods
+
+| Method                   | Required | Arguments                                | Returns                           | Description                              |
+| ------------------------ | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| Custom Keyboards methods | No       | See [Custom Keyboard](#custom-keyboards) section | `this` for chaining               | See [Custom Keyboard](#custom-keyboards) section |
+| get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Telegram Messenger |
+
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+const telegramTemplate = botBuilder.telegramTemplate;
+
+module.exports = botBuilder(message => {
+  if (message.type === 'telegram')
+    return new telegramTemplate.Contact('123456789', 'John', 'Doe').get()
+});
+```
+
+
+
 ## Changing chat action
 
 Sometimes you just want to simulate user actions before sending a real message, ie. typing, uploading, etc. _Claudia Bot Builder_ supports those chat actions.
