@@ -11,7 +11,8 @@ In this guide:
     2. [Thumbnail](#thumbnail-messages)
     3. [Receipt](#receipt-messages)
 6. [Button types](#button-types)
-7. [Handling errors](#handling-errors)
+7. [Typing messages](#typing-messages)
+8. [Handling errors](#handling-errors)
 
 
 ## Intro
