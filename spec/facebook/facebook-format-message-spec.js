@@ -804,4 +804,247 @@ describe('Facebook format message', () => {
       });
     });
   });
+
+  describe('List template', () => {
+    let list;
+
+    beforeEach(() => {
+      list = new formatFbMessage.List();
+    });
+
+    it('should be a class', () => {
+      expect(typeof formatFbMessage.List).toBe('function');
+      expect(list instanceof formatFbMessage.List).toBeTruthy();
+    });
+
+    it('should throw an error if at least two bubble/element are not added', () => {
+      expect(() => list.get()).toThrowError('2 bubbles are minimum for List template!');
+    });
+
+    it('should throw an error if bubble title does not exist', () => {
+      expect(() => list.addBubble()).toThrowError('Bubble title cannot be empty');
+    });
+
+    it('should throw an error if bubble title is too long', () => {
+      expect(() => list.addBubble('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua')).toThrowError('Bubble title cannot be longer than 80 characters');
+    });
+
+    it('should throw an error if bubble subtitle is too long', () => {
+      expect(() => list.addBubble('Test', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua')).toThrowError('Bubble subtitle cannot be longer than 80 characters');
+    });
+
+    it('should add a bubble with a provided title', () => {
+      list.addBubble('Test');
+
+      expect(list.bubbles.length).toBe(1);
+      expect(list.bubbles[0].title).toBe('Test');
+    });
+
+    it('should add a bubble with a provided title and subtitle', () => {
+      list.addBubble('Test Title', 'Test Subtitle');
+
+      expect(list.bubbles.length).toBe(1);
+      expect(list.bubbles[0].title).toBe('Test Title');
+      expect(list.bubbles[0].subtitle).toBe('Test Subtitle');
+    });
+
+    it('should throw an error if you try to add an image but not provide an url', () => {
+      list
+        .addBubble('Test');
+
+      expect(() => list.addImage()).toThrowError('Image URL is required for addImage method');
+    });
+
+    it('should throw an error if you try to add an image, but url is in invalid format', () => {
+      list
+        .addBubble('Test');
+
+      expect(() => list.addImage('http//invalid-url')).toThrowError('Image URL needs to be valid for addImage method');
+    });
+
+    it('should add an image if it is valid', () => {
+      list
+        .addBubble('Test')
+        .addImage('http://google.com/path/to/image.png');
+
+      expect(list.bubbles.length).toBe(1);
+      expect(list.bubbles[0].image_url).toBe('http://google.com/path/to/image.png');
+    });
+
+    it('should throw an error if you add a button without the title', () => {
+      list
+        .addBubble('Test');
+
+      expect(() => list.addButton()).toThrowError('Button title cannot be empty');
+    });
+
+    it('should throw an error if you add a button without the value', () => {
+      list
+        .addBubble('Test');
+
+      expect(() => list.addButton('Title')).toThrowError('Button value is required');
+    });
+
+    it('should add a button with title and payload if you pass valid format', () => {
+      list
+        .addBubble('Test')
+        .addButton('Title 1', 1);
+
+      expect(list.bubbles[0].buttons.length).toBe(1);
+      expect(list.bubbles[0].buttons[0].title).toBe('Title 1');
+      expect(list.bubbles[0].buttons[0].type).toBe('postback');
+      expect(list.bubbles[0].buttons[0].payload).toBe(1);
+      expect(list.bubbles[0].buttons[0].url).not.toBeDefined();
+    });
+
+    it('should add a button with a share url', () => {
+      list
+        .addBubble('Test')
+        .addShareButton();
+
+      expect(list.bubbles[0].buttons.length).toBe(1);
+      expect(list.bubbles[0].buttons[0].type).toBe('element_share');
+    });
+
+    it('should add a button with title and url if you pass valid format', () => {
+      list
+        .addBubble('Test')
+        .addButton('Title 1', 'http://google.com');
+
+      expect(list.bubbles[0].buttons.length).toBe(1);
+      expect(list.bubbles[0].buttons[0].title).toBe('Title 1');
+      expect(list.bubbles[0].buttons[0].type).toBe('web_url');
+      expect(list.bubbles[0].buttons[0].url).toBe('http://google.com');
+      expect(list.bubbles[0].buttons[0].payload).not.toBeDefined();
+    });
+
+    it('should override type when a type parameter is passed', () => {
+      list
+        .addBubble('Test')
+        .addButton('b1', '+123456789', 'phone_number');
+
+      expect(list.bubbles[0].buttons[0].type).toBe('phone_number');
+    });
+
+    it('should throw an error if you add more than 1 button', () => {
+      list
+        .addBubble('Test');
+
+      expect(() => {
+        list
+          .addButton('Title 1', 1)
+          .addButton('Title 2', 2);
+      }).toThrowError('One button is already added and that\'s the maximum');
+    });
+
+    it('should throw an error if you add a default action without the url', () => {
+      list
+        .addBubble('Test');
+
+      expect(() => list.addDefaultAction()).toThrowError('Bubble default action URL is required');
+    });
+
+    it('should throw an error if you add a default action without the url', () => {
+      list
+        .addBubble('Test');
+
+      expect(() => list.addDefaultAction('some_url')).toThrowError('Bubble default action URL must be valid URL');
+    });
+
+    it('should throw an error if you add a more than one default action', () => {
+      list
+        .addBubble('Test')
+        .addDefaultAction('http://google.com/some/action');
+
+      expect(() => list.addDefaultAction('http://google.com/some/action')).toThrowError('Bubble already has default action');
+    });
+
+    it('should add default action', () => {
+      list
+        .addBubble('1', 'hello')
+        .addDefaultAction('http://google.com/some/action');
+
+      expect(list.bubbles.length).toBe(1);
+      expect(list.bubbles[0].default_action.type).toBe('web_url');
+      expect(list.bubbles[0].default_action.url).toBe('http://google.com/some/action');
+    });
+
+    it('should throw an error if there\'s more than 4 bubbles', () => {
+      expect(() =>
+        list
+          .addBubble('1', 'hello')
+          .addBubble('2', 'hello')
+          .addBubble('3', 'hello')
+          .addBubble('4', 'hello')
+          .addBubble('5', 'hello')
+      )
+        .toThrowError('4 bubbles are maximum for List template');
+    });
+
+    it('should throw an error if you add a list button without the title', () => {
+      list
+        .addBubble('Test');
+
+      expect(() => list.addListButton()).toThrowError('List button title cannot be empty');
+    });
+
+    it('should throw an error if you add a list button without the value', () => {
+      list
+        .addBubble('Test');
+
+      expect(() => list.addListButton('Title')).toThrowError('List button value is required');
+    });
+
+    it('should throw an error if there\'s more than 1 list buttons', () => {
+      expect(() =>
+        list
+          .addBubble('1', 'hello')
+          .addListButton('Title 1', 1)
+          .addListButton('Title 2', 2)
+      )
+        .toThrowError('One List button is already added and that\'s the maximum');
+    });
+
+    it('should add list button', () => {
+      list
+          .addBubble('1', 'hello')
+          .addListButton('Title 1', 1);
+
+      let buttons = list.template.attachment.payload.buttons;
+
+      expect(buttons.length).toBe(1);
+      expect(buttons[0].title).toBe('Title 1');
+      expect(buttons[0].type).toBe('postback');
+      expect(buttons[0].payload).toBe(1);
+      expect(buttons[0].url).not.toBeDefined();
+    });
+
+    it('should return a formated object in the end', () => {
+      expect(
+        list
+          .addBubble('Title 1')
+            .addImage('http://google.com/path/to/image.png')
+          .addBubble('Title 2')
+          .get()
+      ).toEqual({
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'list',
+            top_element_style: 'large',
+            buttons: [],
+            elements: [
+              {
+                title: 'Title 1',
+                image_url: 'http://google.com/path/to/image.png'
+              },
+              {
+                title: 'Title 2'
+              }
+            ]
+          }
+        }
+      });
+    });
+  });
 });
