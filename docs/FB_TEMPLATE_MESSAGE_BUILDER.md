@@ -195,10 +195,6 @@ module.exports = botBuilder(message => {
 });
 ```
 
-_How it looks:_
-
-![Text with quick replies](https://claudiajs.com/assets/facebook/list.png)
-
 ## Button template
 
 The Button Template is useful when you want to present simple text with options, it has the same buttons as Generic template, but it doesn't allow element image and URL, it also doesn't allow multiple elements.
