@@ -5,14 +5,15 @@ In this guide:
 1. [Intro](#intro)
 2. [Text messages](#text-messages)
 3. [Generic template](#generic-template)
-4. [Button template](#button-template)
-5. [Receipt template](#receipt-template)
-6. [Image attachment](#image-attachment)
-7. [Audio attachment](#audio-attachment)
-8. [Video attachment](#video-attachment)
-9. [File attachment](#file-attachment)
-10. [Other attachments](#other-attachments)
-11. [Handling errors](#handling-errors)
+4. [List template](#list-template)
+5. [Button template](#button-template)
+6. [Receipt template](#receipt-template)
+7. [Image attachment](#image-attachment)
+8. [Audio attachment](#audio-attachment)
+9. [Video attachment](#video-attachment)
+10. [File attachment](#file-attachment)
+11. [Other attachments](#other-attachments)
+12. [Handling errors](#handling-errors)
 
 ## Intro
 
@@ -28,6 +29,7 @@ const fbTemplate = require('claudia-bot-builder').fbTemplate;
 
 - Text messages (this is not template, but we need to have them because of quick answers)
 - Generic template messages
+- List template messages
 - Button template messages
 - Receipt template messages
 - Image attachment messages
@@ -141,6 +143,57 @@ module.exports = botBuilder(message => {
 _How it looks:_
 
 ![Text with quick replies](https://claudiajs.com/assets/facebook/generic.png)
+
+## List template
+
+The List Template can take an image, title, subtitle, description and buttons. This template can support multiple bubbles per message and display them as a horizontal list.
+
+### API
+
+`List` (class) - Class that allows you to build List template messages  
+
+
+_Arguments_:
+
+- none
+
+### Methods
+
+| Method        | Required | Arguments                                | Returns             | Description                              |
+| ------------- | -------- | ---------------------------------------- | ------------------- | ---------------------------------------- |
+| addBubble     | Yes      | title (string, required), subtitle (string) | `this` for chaining | Each List template can have 2 to 4 elements/bubbles, before you add anything to it. It requires element's title, but it can also accept element's subtitle |
+| addDefaultAction | No       | A valid URL                              | `this` for chaining | Adds an default action url to a current element, requires a valid URL, also requires `addBubble` to be added first |
+| addImage      | No       | A valid absolute URL                     | `this` for chaining | Adds an image to a current element, requires a valid URL, also requires `addBubble` to be added first |
+| addButton     | No      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, maximum 1 is allowed. It also requires `addBubble` to be added first |
+| addListButton | No      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a List element, button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, maximum 1 is allowed. |
+| addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| get           | Yes      | No args.                                 | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
+
+*_Required arguments_, Messenger requires all elements to have those values, the message builder will throw an error if you don't provide it.
+
+### Example
+
+```js
+const botBuilder = require('claudia-bot-builder');
+const fbTemplate = botBuilder.fbTemplate;
+
+module.exports = botBuilder(message => {
+  if (message.type === 'facebook') {
+    const list = new fbTemplate.List();
+
+    return list
+      .addBubble('Claudia.js', 'Deploy Node.js microservices to AWS easily')
+        .addImage('https://claudiajs.com/assets/claudiajs.png')
+        .addDefaultAction('https://github.com/claudiajs/claudia-bot-builder')
+        .addButton('Say hello', 'HELLO')
+      .addBubble('Claudia Bot Builder')
+      	.addImage('https://claudiajs.com/assets/claudia-bot-builder-video.jpg')
+      	.addButton('Go to Github', 'https://github.com/claudiajs/claudia-bot-builder')
+      .addListButton('Contact us if you like it', 'https://claudiajs.com')
+      .get();
+  }
+});
+```
 
 ## Button template
 
