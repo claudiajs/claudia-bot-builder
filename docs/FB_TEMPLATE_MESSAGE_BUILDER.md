@@ -12,8 +12,10 @@ In this guide:
 8. [Audio attachment](#audio-attachment)
 9. [Video attachment](#video-attachment)
 10. [File attachment](#file-attachment)
-11. [Other attachments](#other-attachments)
-12. [Handling errors](#handling-errors)
+11. [Chat action](#chat-action)
+12. [Pause template](#pause-template)
+13. [Other attachments](#other-attachments)
+14. [Handling errors](#handling-errors)
 
 ## Intro
 
@@ -485,11 +487,81 @@ _How it looks:_
 
 ![Text with quick replies](https://claudiajs.com/assets/facebook/image.png)
 
+## Chat action
+
+Sometimes you just want to simulate user actions before sending a real message, ie. typing, mark message as seen, etc. _Claudia Bot Builder_ supports those chat actions.
+
+### API
+
+`ChatAction` (class) - Class that allows you to set a chat action.
+
+Arguments:
+
+- `action`, string (required) - a valid chat action: 'typing_on', 'typing_off' or 'mark_seen'.
+
+### Methods
+
+| Method        | Required | Arguments                                | Returns                           | Description                              |
+| ------------- | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| get           | Yes      | No args.                                 | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
+
+### Example
+
+```js
+const botBuilder = require('claudia-bot-builder');
+const fbTemplate = botBuilder.fbTemplate;
+
+module.exports = botBuilder(message => {
+  if (message.type === 'facebook') {
+    return new fbTemplate
+      .ChatAction('mark_seen')
+      .get()
+  }
+});
+```
+
+## Pause template
+
+Sometimes it's good to make a short break when you are sending multiple messages, for that use Pause method.
+
+### API
+
+`Pause` (class) - Class that allows you to set a pause before next message.
+
+Arguments:
+
+- `duration`, integer (optional) - a duration in milliseconds, if it's not provided 0.5 seconds will be set automatically.
+
+_Note:_ This is not the Facebook API method, it's a Claudia Bot Builder method that allows you to build better user experience.
+
+### Methods
+
+| Method        | Required | Arguments                                | Returns                           | Description                              |
+| ------------- | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| get           | Yes      | No args.                                 | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
+
+### Example
+
+```js
+const botBuilder = require('claudia-bot-builder');
+const fbTemplate = botBuilder.fbTemplate;
+
+module.exports = botBuilder(message => {
+  if (message.type === 'facebook') {
+    return [
+      new fbTemplate.ChatAction('typing_on').get(),
+      new fbTemplate.Pause(1000).get(),
+      'Hello!'
+    ]
+  }
+});
+```
+
 ## Other attachments
 
 Beside those, Facebook Messenger now supports a few other templates that are not so useful for the common bots, ie. Airline templates.
 
-You can use all those templates by simply providing an object (just a message part, without recepient) instead of a template builder class.
+You can use all those templates by simply providing an object (just a message part, without recipient) instead of a template builder class.
 
 An example:
 

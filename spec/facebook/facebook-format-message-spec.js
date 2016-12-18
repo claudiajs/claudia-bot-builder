@@ -1047,4 +1047,41 @@ describe('Facebook format message', () => {
       });
     });
   });
+  describe('ChatAction', () => {
+    it('should send a chat action if it is correct', () => {
+      expect(new formatFbMessage.ChatAction('typing_on').get()).toEqual({
+        sender_action: 'typing_on'
+      });
+      expect(new formatFbMessage.ChatAction('typing_off').get()).toEqual({
+        sender_action: 'typing_off'
+      });
+      expect(new formatFbMessage.ChatAction('mark_seen').get()).toEqual({
+        sender_action: 'mark_seen'
+      });
+    });
+    it('should throw an error if chat action is not valid', () => {
+      expect(() => new formatFbMessage.ChatAction('invalid_chat_action').get()).toThrowError('Valid action is required for Facebook ChatAction template. Available actions are: typing_on, typing_off and mark_seen.');
+    });
+  });
+  describe('Pause', () => {
+    it('should be a class', () => {
+      const message = new formatFbMessage.Pause(200);
+      expect(typeof formatFbMessage.Pause).toBe('function');
+      expect(message instanceof formatFbMessage.Pause).toBeTruthy();
+    });
+
+    it('should generate an object with a defined value', () => {
+      const message = new formatFbMessage.Pause(1000).get();
+      expect(message).toEqual({
+        claudiaPause: 1000
+      });
+    });
+
+    it('should generate an object with a default value', () => {
+      const message = new formatFbMessage.Pause().get();
+      expect(message).toEqual({
+        claudiaPause: 500
+      });
+    });
+  });
 });
