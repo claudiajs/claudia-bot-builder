@@ -97,7 +97,6 @@ describe('Facebook Reply', () => {
     });
 
   });
-
   it('sends complex messages without transforming into a text object', done => {
     https.request.pipe(callOptions => {
       expect(JSON.parse(callOptions.body)).toEqual({
@@ -114,6 +113,18 @@ describe('Facebook Reply', () => {
       done();
     });
     reply('user123', {template: 'big', contents: { title: 'red'} }, 'ACCESS123');
+  });
+  it('sets a typing action if "sender_action" is passed', done => {
+    https.request.pipe(callOptions => {
+      expect(JSON.parse(callOptions.body)).toEqual({
+        recipient: {
+          id: 'user123'
+        },
+        sender_action: 'typing_on'
+      });
+      done();
+    });
+    reply('user123', { sender_action: 'typing_on' }, 'ACCESS123');
   });
   it('does not resolve before the https endpoint responds', done => {
     https.request.pipe(done);
