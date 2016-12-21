@@ -157,7 +157,7 @@ The List Template can take an image, title, subtitle, description and buttons. T
 
 _Arguments_:
 
-- none
+- `topElementStyle`, string (required for `compact`) - style of List template you want to send. Defaults to `large`.
 
 ### Methods
 
