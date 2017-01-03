@@ -114,6 +114,22 @@ describe('Facebook Reply', () => {
     });
     reply('user123', {template: 'big', contents: { title: 'red'} }, 'ACCESS123');
   });
+  it('does not send a message if message is not provided', () => {
+    reply('user123', null, 'ACCESS123')
+      .then(() => {
+        expect(https.request.calls.length).toBe(0);
+      });
+
+    reply('user123', false, 'ACCESS123')
+      .then(() => {
+        expect(https.request.calls.length).toBe(0);
+      });
+
+    reply('user123', undefined, 'ACCESS123')
+      .then(() => {
+        expect(https.request.calls.length).toBe(0);
+      });
+  });
   it('sets a typing action if "sender_action" is passed', done => {
     https.request.pipe(callOptions => {
       expect(JSON.parse(callOptions.body)).toEqual({
