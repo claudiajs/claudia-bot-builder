@@ -51,7 +51,7 @@ However, if you want to add quick replies check the class below.
 
 `Text` (class) - Class that allows you to build text messages with quick replies  
 
-_Note:_ Claudia bot builders versions < 2.1 have just a lower case class `text`, same method works for versions >= 2.1, but it's deprecated and it will be removed in next major version.
+_Note:_ Claudia bot builders versions < 2.1 have just a lower case class `text`, same method works for versions >= 2.1, but it's deprecated and it will be removed in next major version. Text must be UTF-8 and has a 640 character limit.
 
 
 _Arguments_:
