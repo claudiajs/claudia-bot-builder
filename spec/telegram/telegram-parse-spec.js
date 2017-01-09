@@ -19,4 +19,8 @@ describe('Telegram parse', () => {
     var msg = {message: {chat: {id: 'some123ChatId'}, text: 'ello Telegram' }};
     expect(parse(msg)).toEqual({ sender: 'some123ChatId', text: 'ello Telegram', originalRequest: msg, type: 'telegram'});
   });
+  it('returns a parsed object when messageObject contains a callback_query', () => {
+    var msg = {callback_query: {message: {chat: {id: 'some123ChatId'}},data: 'someCallbackData'}};
+    expect(parse(msg)).toEqual({ sender: 'some123ChatId', text: 'someCallbackData', originalRequest: msg, type: 'telegram'});
+  });
 });
