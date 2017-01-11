@@ -28,7 +28,7 @@ describe('Twilio Reply', () => {
 
   it('sends text messages as a string', done => {
     https.request.pipe(callOptions => {
-      expect(qs.parse(callOptions.body)).toEqual({
+      expect(JSON.parse(JSON.stringify(qs.parse(callOptions.body)))).toEqual({
         To: '+4444444444',
         From: '+333333333',
         Body: 'SMS Twilio'
