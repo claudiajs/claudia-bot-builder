@@ -12,14 +12,14 @@ describe('Skype Token', () => {
         grant_type: 'client_credentials',
         client_id: 'someSkypeAppId123',
         client_secret: 'someSkypePrivateKey123',
-        scope: 'https://graph.microsoft.com/.default'
+        scope: 'https://api.botframework.com/.default'
       });
       
       https.request.pipe(callOptions => {
         expect(callOptions).toEqual(jasmine.objectContaining({
           method: 'POST',
           hostname: 'login.microsoftonline.com',
-          path: '/common/oauth2/v2.0/token',
+          path: '/botframework.com/oauth2/v2.0/token',
           headers: {
             'cache-control': 'no-cache',
             'content-type': 'application/x-www-form-urlencoded',
