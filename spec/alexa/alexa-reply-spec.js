@@ -23,7 +23,7 @@ describe('Alexa Reply', () => {
             title: 'Claudia Alexa Bot',
             content: 'hello'
           },
-          shouldEndSession: false
+          shouldEndSession: true
         }
       });
   });
