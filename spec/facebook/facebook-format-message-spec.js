@@ -109,6 +109,25 @@ describe('Facebook format message', () => {
       expect(() => message.addQuickReply('title', 'PAYLOAD')).toThrowError('There can not be more than 11 quick replies');
     });
 
+    it('should set the notification type', () => {
+      const regular = new formatFbMessage.Text('Some text')
+        .setNotificationType('REGULAR')
+        .get();
+      expect(regular.notification_type).toBe('REGULAR');
+      const silent = new formatFbMessage.Text('Some text')
+        .setNotificationType('SILENT_PUSH')
+        .get();
+      expect(silent.notification_type).toBe('SILENT_PUSH');
+      const none = new formatFbMessage.Text('Some text')
+        .setNotificationType('NO_PUSH')
+        .get();
+      expect(none.notification_type).toBe('NO_PUSH');
+    });
+
+    it('should throw an on setNotificationType with invalid value', () => {
+      expect(() => new formatFbMessage.Text('Some text').setNotificationType('FACE_SLAP')).toThrowError('Notification type must be one of REGULAR, SILENT_PUSH, or NO_PUSH');
+    });
+
     it('should trim the title if it is too long', () => {
       let title = new Array(4).join('0123456789');
       const message = new formatFbMessage.Text('Some text')
