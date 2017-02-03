@@ -64,6 +64,7 @@ _Arguments_:
 | ------------- | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
 | addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required) - up to 1000 characters, image (string, optional, valid url) - an url of an icon, can be transparent and it should be at least 24x24px | `this` for chaining               | Facebook allows us to send up to 11 quick replies that will appear above the keyboard |
 | addQuickReplyLocation | No       | No args. | `this` for chaining               | Same as above, just asks user for a current location |
+| setNotificationType | No       | type (string, one of `REGULAR`, `SILENT_PUSH` or `NO_PUSH`) | `this` for chaining               | REGULAR will emit a sound/vibration and a phone notification; SILENT_PUSH will just emit a phone notification, NO_PUSH will not emit either
 | get           | Yes      | No args.                                 | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 ### Example
@@ -114,6 +115,7 @@ _Arguments_:
 | addImage      | No       | A valid absolute URL                     | `this` for chaining | Adds an image to a current element, requires a valid URL, also requires `addBubble` to be added first |
 | addButton     | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, at least one button is required, and maximum 3 of them is allowed. It also requires `addBubble` to be added first |
 | addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| setNotificationType | No       | type (string, one of `REGULAR`, `SILENT_PUSH` or `NO_PUSH`) | `this` for chaining               | REGULAR will emit a sound/vibration and a phone notification; SILENT_PUSH will just emit a phone notification, NO_PUSH will not emit either
 | get           | Yes      | No args.                                 | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 *_Required arguments_, Messenger requires all elements to have those values, the message builder will throw an error if you don't provide it.
@@ -169,6 +171,7 @@ _Arguments_:
 | addButton     | No      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, maximum 1 is allowed. It also requires `addBubble` to be added first |
 | addListButton | No      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a List element, button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, maximum 1 is allowed. |
 | addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| setNotificationType | No       | type (string, one of `REGULAR`, `SILENT_PUSH` or `NO_PUSH`) | `this` for chaining               | REGULAR will emit a sound/vibration and a phone notification; SILENT_PUSH will just emit a phone notification, NO_PUSH will not emit either
 | get           | Yes      | No args.                                 | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 *_Required arguments_, Messenger requires all elements to have those values, the message builder will throw an error if you don't provide it.
@@ -218,6 +221,7 @@ _Arguments_:
 | ------------- | -------- | ---------------------------------------- | ------------------- | ---------------------------------------- |
 | addButton     | Yes      | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, at least one button is required, and maximum 3 of them is allowed |
 | addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| setNotificationType | No       | type (string, one of `REGULAR`, `SILENT_PUSH` or `NO_PUSH`) | `this` for chaining               | REGULAR will emit a sound/vibration and a phone notification; SILENT_PUSH will just emit a phone notification, NO_PUSH will not emit either
 | get           | Yes      | No args.                                 | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 *_Required arguments_, Messenger requires all elements to have those values, the message builder will throw an error if you don't provide it.
@@ -282,6 +286,7 @@ _Arguments_:
 | addTax             | No                | tax (number, required)                   | `this` for chaining | total tax                                |
 | addTotal           | Yes               | total (number, required)                 | `this` for chaining | total cost                               |
 | addQuickReply      | No                | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| setNotificationType | No       | type (string, one of `REGULAR`, `SILENT_PUSH` or `NO_PUSH`) | `this` for chaining               | REGULAR will emit a sound/vibration and a phone notification; SILENT_PUSH will just emit a phone notification, NO_PUSH will not emit either
 | get                | Yes               | No args.                                 | Formatted JSON      | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 ### Example
@@ -343,6 +348,7 @@ _Arguments_:
 | Method        | Required | Arguments                                | Returns                           | Description                              |
 | ------------- | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
 | addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining               | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| setNotificationType | No       | type (string, one of `REGULAR`, `SILENT_PUSH` or `NO_PUSH`) | `this` for chaining               | REGULAR will emit a sound/vibration and a phone notification; SILENT_PUSH will just emit a phone notification, NO_PUSH will not emit either
 | get           | Yes      | No args.                                 | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 ### Example
@@ -384,6 +390,7 @@ _Arguments_:
 | Method        | Required | Arguments                                | Returns                           | Description                              |
 | ------------- | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
 | addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining               | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| setNotificationType | No       | type (string, one of `REGULAR`, `SILENT_PUSH` or `NO_PUSH`) | `this` for chaining               | REGULAR will emit a sound/vibration and a phone notification; SILENT_PUSH will just emit a phone notification, NO_PUSH will not emit either
 | get           | Yes      | No args.                                 | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 ### Example
@@ -425,6 +432,7 @@ _Arguments_:
 | Method        | Required | Arguments                                | Returns                           | Description                              |
 | ------------- | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
 | addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining               | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| setNotificationType | No       | type (string, one of `REGULAR`, `SILENT_PUSH` or `NO_PUSH`) | `this` for chaining               | REGULAR will emit a sound/vibration and a phone notification; SILENT_PUSH will just emit a phone notification, NO_PUSH will not emit either
 | get           | Yes      | No args.                                 | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 ### Example
@@ -466,6 +474,7 @@ _Arguments_:
 | Method        | Required | Arguments                                | Returns                           | Description                              |
 | ------------- | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
 | addQuickReply | No       | title (string, required, up to 20 characters), payload (string, required), up to 1000 characters | `this` for chaining               | Facebook allows us to send up to 10 quick replies that will appear above the keyboard |
+| setNotificationType | No       | type (string, one of `REGULAR`, `SILENT_PUSH` or `NO_PUSH`) | `this` for chaining               | REGULAR will emit a sound/vibration and a phone notification; SILENT_PUSH will just emit a phone notification, NO_PUSH will not emit either
 | get           | Yes      | No args.                                 | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 ### Example
