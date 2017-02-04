@@ -205,7 +205,9 @@ describe('Line setup', () => {
           index += 1;
           return {
             sender: 'sender' + index,
-            text: 'text' + index
+            text: 'text' + index,
+            replyToken: 'RandomLineReplyToken',
+            type: 'line'
           };
         });
       });
@@ -243,8 +245,8 @@ describe('Line setup', () => {
         handler({body: multiMessageTemplate, env: {lineChannelAccessToken: 'ABC'}});
         Promise.resolve().then(() => {
           expect(bot.calls.count()).toEqual(2);
-          expect(bot).toHaveBeenCalledWith({sender: 'sender1', text: 'text1'}, {body: multiMessageTemplate, env: {lineChannelAccessToken: 'ABC'}});
-          expect(bot).toHaveBeenCalledWith({sender: 'sender2', text: 'text2'}, {body: multiMessageTemplate, env: {lineChannelAccessToken: 'ABC'}});
+          expect(bot).toHaveBeenCalledWith({sender: 'sender1', text: 'text1', replyToken: 'RandomLineReplyToken', type: 'line'}, {body: multiMessageTemplate, env: {lineChannelAccessToken: 'ABC'}});
+          expect(bot).toHaveBeenCalledWith({sender: 'sender2', text: 'text2', replyToken: 'RandomLineReplyToken', type: 'line'}, {body: multiMessageTemplate, env: {lineChannelAccessToken: 'ABC'}});
         }).then(done, done.fail);
       });
       it('calls the responders for each bot response individually', (done) => {
