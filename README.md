@@ -36,6 +36,7 @@ This code is enough to operate bots for all supported platforms. Claudia Bot Bui
 * Telegram
 * Twilio (messaging service)
 * Amazon Alexa
+* Line
 * Kik
 * GroupMe
 
