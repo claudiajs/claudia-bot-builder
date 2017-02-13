@@ -14,7 +14,7 @@ describe('Line Reply', () => {
         hostname: 'api.line.me',
         path: '/v2/bot/message/reply',
         headers: {
-          'Authorization': `Basic ${lineChannelAccessToken}`,
+          'Authorization': `Bearer ${lineChannelAccessToken}`,
           'Content-Type': 'application/json',
           'Content-Length': Buffer.byteLength(data, 'utf8')
         },
