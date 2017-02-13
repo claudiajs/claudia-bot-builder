@@ -41,7 +41,7 @@ describe('Line setup', () => {
         handler = api.post.calls.argsFor(0)[1];
       });
       it('breaks down the message and puts it into the parser', () => {
-        handler({body: singleMessageTemplate, env: {lineChannelAccessToken: 'ABC'}});
+        handler({body: singleMessageTemplate, env: {LINE_CHANNEL_ACCESS_TOKEN: 'ABC'}});
         expect(parser.calls.argsFor(0)[0]).toEqual({
           'replyToken': 'RandomLineReplyToken', 'type': 'message',
           'source':{'type': 'user', 'userId': 'someUserId'},
@@ -65,7 +65,7 @@ describe('Line setup', () => {
       it('responds when the bot resolves', (done) => {
         parser.and.returnValue({replyToken: 'randomToken', text: 'MSG1'});
         botResolve('Yes Yes');
-        handler({body: singleMessageTemplate, env: {lineChannelAccessToken: 'ABC'}}).then((message) => {
+        handler({body: singleMessageTemplate, env: {LINE_CHANNEL_ACCESS_TOKEN: new Buffer('ABC').toString('base64')}}).then((message) => {
           expect(message).toBe('ok');
           expect(responder).toHaveBeenCalledWith('randomToken', 'Yes Yes', 'ABC');
         }).then(done, done.fail);
@@ -73,7 +73,7 @@ describe('Line setup', () => {
       it('can work with bot responses as strings', (done) => {
         bot.and.returnValue('Yes!');
         parser.and.returnValue({replyToken: 'randomToken', text: 'MSG1'});
-        handler({body: singleMessageTemplate, env: {lineChannelAccessToken: 'ABC'}}).then((message) => {
+        handler({body: singleMessageTemplate, env: {LINE_CHANNEL_ACCESS_TOKEN: new Buffer('ABC').toString('base64')}}).then((message) => {
           expect(message).toBe('ok');
           expect(responder).toHaveBeenCalledWith('randomToken', 'Yes!', 'ABC');
         }).then(done, done.fail);
@@ -94,7 +94,7 @@ describe('Line setup', () => {
         parser.and.returnValue('MSG1');
         responder.and.throwError('XXX');
         botResolve('Yes');
-        handler({body: singleMessageTemplate, env: {lineChannelAccessToken: 'ABC'}}).then((message) => {
+        handler({body: singleMessageTemplate, env: {LINE_CHANNEL_ACCESS_TOKEN: 'ABC'}}).then((message) => {
           expect(message).toBe('ok');
           expect(logError).toHaveBeenCalledWith(jasmine.any(Error));
         }).then(done, done.fail);
@@ -111,7 +111,7 @@ describe('Line setup', () => {
           parser.and.returnValue('MSG1');
         });
         it('waits for the responders to resolve before completing the request', (done) => {
-          handler({body: singleMessageTemplate, env: {lineChannelAccessToken: 'ABC'}}).then(() => {
+          handler({body: singleMessageTemplate, env: {LINE_CHANNEL_ACCESS_TOKEN: 'ABC'}}).then(() => {
             hasResolved = true;
           });
 
@@ -122,7 +122,7 @@ describe('Line setup', () => {
           botResolve('YES');
         });
         it('resolves when the responder resolves', (done) => {
-          handler({body: singleMessageTemplate, env: {lineChannelAccessToken: 'ABC'}}).then((message) => {
+          handler({body: singleMessageTemplate, env: {LINE_CHANNEL_ACCESS_TOKEN: 'ABC'}}).then((message) => {
             expect(message).toEqual('ok');
           }).then(done, done.fail);
 
@@ -132,7 +132,7 @@ describe('Line setup', () => {
           botResolve('YES');
         });
         it('logs error when the responder rejects', (done) => {
-          handler({body: singleMessageTemplate, env: {lineChannelAccessToken: 'ABC'}}).then((message) => {
+          handler({body: singleMessageTemplate, env: {LINE_CHANNEL_ACCESS_TOKEN: 'ABC'}}).then((message) => {
             expect(message).toEqual('ok');
             expect(logError).toHaveBeenCalledWith('Bomb!');
           }).then(done, done.fail);
@@ -212,7 +212,7 @@ describe('Line setup', () => {
         });
       });
       it('parses messages in sequence', () => {
-        handler({body: multiMessageTemplate, env: {lineChannelAccessToken: 'ABC'}});
+        handler({body: multiMessageTemplate, env: {LINE_CHANNEL_ACCESS_TOKEN: 'ABC'}});
         expect(parser.calls.count()).toBe(2);
         expect(parser.calls.argsFor(0)[0]).toEqual({
           'replyToken': 'RandomLineReplyToken',
@@ -242,15 +242,15 @@ describe('Line setup', () => {
         });
       });
       it('calls the bot for each message individually', (done) => {
-        handler({body: multiMessageTemplate, env: {lineChannelAccessToken: 'ABC'}});
+        handler({body: multiMessageTemplate, env: {LINE_CHANNEL_ACCESS_TOKEN: new Buffer('ABC').toString('base64')}});
         Promise.resolve().then(() => {
           expect(bot.calls.count()).toEqual(2);
-          expect(bot).toHaveBeenCalledWith({sender: 'sender1', text: 'text1', replyToken: 'RandomLineReplyToken', type: 'line'}, {body: multiMessageTemplate, env: {lineChannelAccessToken: 'ABC'}});
-          expect(bot).toHaveBeenCalledWith({sender: 'sender2', text: 'text2', replyToken: 'RandomLineReplyToken', type: 'line'}, {body: multiMessageTemplate, env: {lineChannelAccessToken: 'ABC'}});
+          expect(bot).toHaveBeenCalledWith({sender: 'sender1', text: 'text1', replyToken: 'RandomLineReplyToken', type: 'line'}, {body: multiMessageTemplate, env: {LINE_CHANNEL_ACCESS_TOKEN:  new Buffer('ABC').toString('base64')}});
+          expect(bot).toHaveBeenCalledWith({sender: 'sender2', text: 'text2', replyToken: 'RandomLineReplyToken', type: 'line'}, {body: multiMessageTemplate, env: {LINE_CHANNEL_ACCESS_TOKEN:  new Buffer('ABC').toString('base64')}});
         }).then(done, done.fail);
       });
       it('calls the responders for each bot response individually', (done) => {
-        handler({body: multiMessageTemplate, env: {lineChannelAccessToken: 'ABC'}});
+        handler({body: multiMessageTemplate, env: {LINE_CHANNEL_ACCESS_TOKEN: new Buffer('ABC').toString('base64')}});
         Promise.resolve().then(() => {
           botPromises[0].resolve('From first');
           botPromises[1].resolve('From second');
@@ -262,7 +262,7 @@ describe('Line setup', () => {
       });
       it('does not resolve until all the responders resolve', (done) => {
         var hasResolved;
-        handler({body: multiMessageTemplate, env: {lineChannelAccessToken: 'ABC'}}).then(() => {
+        handler({body: multiMessageTemplate, env: {LINE_CHANNEL_ACCESS_TOKEN: 'ABC'}}).then(() => {
           hasResolved = true;
         }).then(done.fail, done.fail);
         Promise.resolve().then(() => {
@@ -276,7 +276,7 @@ describe('Line setup', () => {
         }).then(done, done.fail);
       });
       it('resolves when all the responders resolve', (done) => {
-        handler({body: multiMessageTemplate, env: {lineChannelAccessToken: 'ABC'}}).then((message) => {
+        handler({body: multiMessageTemplate, env: {LINE_CHANNEL_ACCESS_TOKEN: 'ABC'}}).then((message) => {
           expect(message).toEqual('ok');
         }).then(done, done.fail);
         Promise.resolve().then(() => {
