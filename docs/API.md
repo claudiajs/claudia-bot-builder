@@ -26,7 +26,7 @@ module.exports = botBuilder(function (message, originalApiRequest) {
 }, { platforms: ['facebook', 'twilio'] });
 ```
 
-The list of platform names can include: `facebook`, `slackSlashCommand`, `telegram`, `skype`, `twilio`, `kik`, `groupme`, `viber`, `alexa`.
+The list of platform names can include: `facebook`, `slackSlashCommand`, `telegram`, `skype`, `twilio`, `kik`, `groupme`, `viber`, `alexa`, `line`.
 
 ## Message object structure
 
@@ -88,6 +88,7 @@ _Claudia Bot Builder_ automates most of the configuration tasks, and stores acce
 * For Slack slash commands for your team, use `--configure-slack-slash-command`
 * For Skype, use `--configure-skype-bot`
 * For Viber, use `--configure-viber-bot`
+* For Line, use `--configure-line-bot`
 * For Telegram, use `--configure-telegram-bot`
 * For Twilio, use `--configure-twilio-sms-bot`
 * For Amazon Alexa, use `--configure-alexa-skill`

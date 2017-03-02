@@ -36,6 +36,7 @@ This code is enough to operate bots for all supported platforms. Claudia Bot Bui
 * Telegram
 * Twilio (messaging service)
 * Amazon Alexa
+* Line
 * Kik
 * GroupMe
 
@@ -103,6 +104,7 @@ See the [Release History](https://github.com/claudiajs/claudia-bot-builder/relea
 - [Fact Bot](https://github.com/claudiajs/example-projects/tree/master/bot-with-buttons) - The bot will query WikiData for anything you send it and print out the facts.
 - [JS Belgrade bot](https://github.com/JSBelgrade/jsbelgrade-chatbot) - Simple meetup group Telegram chatbot created during the meetup.
 - [LaptopFriendly Bot](https://github.com/stojanovic/laptop-friendly-bot) - Viber bot for [LaptopFriendly.co](https://laptopfriendly.co).
+- [MrRoadboto](https://github.com/antsankov/MrRoadboto) - A low-bandwidth and easy to use Facebook chat bot that serves Colorado's Department of Transportation (CDOT) alerts for I70 road-closures affecting major ski resorts. You can read about the motivation [here](https://medium.com/@antsankov/domo-arigato-mr-roadboto-pt-1-introducing-the-problem-b0d44e384dc#.tcsq9nrs4).
 - [PingdomBot](https://github.com/andypowe11/AWS-Claudia-PingdomBot) - A Slack bot to see the status of Pingdom website monitoring.
 - [Pokemon Lookup bot](https://www.facebook.com/PokedexLookup/) - Simple pokemon lookup bot, [source code](https://github.com/kirkins/PokedexBot).
 - [QRCode Bot](https://www.facebook.com/QRCode-Bot-1779956152289103/) - Artistic QR code maker, [source code](https://github.com/jveres/qrcode-bot).
