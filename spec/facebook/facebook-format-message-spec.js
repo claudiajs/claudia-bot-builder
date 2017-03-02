@@ -687,7 +687,7 @@ describe('Facebook format message', () => {
       let receipt = new formatFbMessage.Receipt('John Doe', 'O123', '$', 'Paypal');
       receipt.addItem('Title');
 
-      expect(() => receipt.addImage()).toThrowError('Abotolute url is required for addImage method');
+      expect(() => receipt.addImage()).toThrowError('Absolute url is required for addImage method');
     });
 
     it('should throw an error if user tries to add an item\'s image which is not a valid url', () => {
@@ -797,11 +797,11 @@ describe('Facebook format message', () => {
     });
 
     it('should throw an error if you add an image without the url', () => {
-      expect(() => new formatFbMessage.Image()).toThrowError('Image template requires a valid URL as a first paramether');
+      expect(() => new formatFbMessage.Image()).toThrowError('Image template requires a valid URL as a first parameter');
     });
 
     it('should throw an error if you add an image with invalid url', () => {
-      expect(() => new formatFbMessage.Image('google')).toThrowError('Image template requires a valid URL as a first paramether');
+      expect(() => new formatFbMessage.Image('google')).toThrowError('Image template requires a valid URL as a first parameter');
     });
 
     it('should add an image with given URL if URL is valid', () => {
