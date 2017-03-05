@@ -15,8 +15,8 @@ describe('Line Reply', () => {
         path: '/v2/bot/message/reply',
         headers: {
           'Authorization': `Bearer ${lineChannelAccessToken}`,
-          'Content-Type': 'application/json',
-          'Content-Length': Buffer.byteLength(data, 'utf8')
+          'Content-Type': 'application/json; charset=utf-8',
+          'Content-Length': Buffer.byteLength(JSON.stringify(data), 'utf8')
         },
         body: JSON.stringify(data)
       }));
