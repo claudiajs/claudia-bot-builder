@@ -311,12 +311,82 @@ describe('Facebook format message', () => {
       expect(generic.bubbles[0].buttons[2].payload).toBe('v3');
     });
 
-    it('should override type when a type parameter is passed', () => {
-      generic
-        .addBubble('Test')
-        .addButton('b1', '+123456789', 'phone_number');
+    it('should throw an error if call button is added with wrong phone format', () => {
+      generic.addBubble('Test');
+      expect(() => generic.addCallButton('Title')).toThrowError('Call button value needs to be a valid phone number in following format: +1234567...');
+      expect(() => generic.addCallButton('Title', 123)).toThrowError('Call button value needs to be a valid phone number in following format: +1234567...');
+      expect(() => generic.addCallButton('Title', 'abc')).toThrowError('Call button value needs to be a valid phone number in following format: +1234567...');
+      expect(() => generic.addCallButton('Title', '+123')).toThrowError('Call button value needs to be a valid phone number in following format: +1234567...');
+    });
 
+    it('should add a call button', () => {
+      generic.addBubble('Test')
+        .addCallButton('Button 1', '+123456789');
+
+      expect(generic.bubbles[0].buttons.length).toBe(1);
+      expect(generic.bubbles[0].buttons[0].title).toBe('Button 1');
+      expect(generic.bubbles[0].buttons[0].payload).toBe('+123456789');
       expect(generic.bubbles[0].buttons[0].type).toBe('phone_number');
+    });
+
+    it('should add a share button', () => {
+      generic.addBubble('Test')
+        .addShareButton();
+
+      expect(generic.bubbles[0].buttons.length).toBe(1);
+      expect(generic.bubbles[0].buttons[0].title).toBeUndefined();
+      expect(generic.bubbles[0].buttons[0].type).toBe('element_share');
+    });
+
+    it('should throw an error if all arguments are not provided for buy button', () => {
+      generic.addBubble('Test');
+
+      expect(() => generic.addBuyButton()).toThrowError('Button value is required');
+      expect(() => generic.addBuyButton('Title')).toThrowError('Button value is required');
+      expect(() => generic.addBuyButton('Title', 'PAYLOAD')).toThrowError('Payment summary is required for buy button');
+      expect(() => generic.addBuyButton('Title', 'PAYLOAD', 123)).toThrowError('Payment summary is required for buy button');
+      expect(() => generic.addBuyButton('Title', 'PAYLOAD', 'abc')).toThrowError('Payment summary is required for buy button');
+    });
+
+    it('should add a buy button', () => {
+      generic.addBubble('Test')
+        .addBuyButton('Buy', 'BUY_PAYLOAD', {
+          additionalOptions: true
+        });
+
+      expect(generic.bubbles[0].buttons.length).toBe(1);
+      expect(generic.bubbles[0].buttons[0].title).toBe('Buy');
+      expect(generic.bubbles[0].buttons[0].type).toBe('payment');
+      expect(generic.bubbles[0].buttons[0].payload).toBe('BUY_PAYLOAD');
+      expect(generic.bubbles[0].buttons[0].payment_summary).toEqual({
+        additionalOptions: true
+      });
+    });
+
+    it('should throw an error if url provided for login button is not valid', () => {
+      generic.addBubble('Test');
+
+      expect(() => generic.addLoginButton()).toThrowError('Valid URL is required for Login button');
+      expect(() => generic.addLoginButton('123')).toThrowError('Valid URL is required for Login button');
+    });
+
+    it('should add a login button', () => {
+      generic.addBubble('Test')
+        .addLoginButton('https://example.com');
+
+      expect(generic.bubbles[0].buttons.length).toBe(1);
+      expect(generic.bubbles[0].buttons[0].title).toBeUndefined();
+      expect(generic.bubbles[0].buttons[0].type).toBe('account_link');
+      expect(generic.bubbles[0].buttons[0].url).toBe('https://example.com');
+    });
+
+    it('should add a logout button', () => {
+      generic.addBubble('Test')
+        .addLogoutButton();
+
+      expect(generic.bubbles[0].buttons.length).toBe(1);
+      expect(generic.bubbles[0].buttons[0].title).toBeUndefined();
+      expect(generic.bubbles[0].buttons[0].type).toBe('account_unlink');
     });
 
     it('should throw an error if you add more than 3 buttons', () => {
