@@ -65,7 +65,7 @@ describe('Line setup', () => {
       it('responds when the bot resolves', (done) => {
         parser.and.returnValue({replyToken: 'randomToken', text: 'MSG1'});
         botResolve('Yes Yes');
-        handler({body: singleMessageTemplate, env: {lineChannelAccessToken: 'ABC'}}).then((message) => {
+        handler({body: singleMessageTemplate, env: {lineChannelAccessToken: new Buffer('ABC').toString('base64')}}).then((message) => {
           expect(message).toBe('ok');
           expect(responder).toHaveBeenCalledWith('randomToken', 'Yes Yes', 'ABC');
         }).then(done, done.fail);
@@ -73,7 +73,7 @@ describe('Line setup', () => {
       it('can work with bot responses as strings', (done) => {
         bot.and.returnValue('Yes!');
         parser.and.returnValue({replyToken: 'randomToken', text: 'MSG1'});
-        handler({body: singleMessageTemplate, env: {lineChannelAccessToken: 'ABC'}}).then((message) => {
+        handler({body: singleMessageTemplate, env: {lineChannelAccessToken: new Buffer('ABC').toString('base64')}}).then((message) => {
           expect(message).toBe('ok');
           expect(responder).toHaveBeenCalledWith('randomToken', 'Yes!', 'ABC');
         }).then(done, done.fail);
@@ -94,7 +94,7 @@ describe('Line setup', () => {
         parser.and.returnValue('MSG1');
         responder.and.throwError('XXX');
         botResolve('Yes');
-        handler({body: singleMessageTemplate, env: {lineChannelAccessToken: 'ABC'}}).then((message) => {
+        handler({body: singleMessageTemplate, env: {lineChannelAccessToken: new Buffer('ABC').toString('base64')}}).then((message) => {
           expect(message).toBe('ok');
           expect(logError).toHaveBeenCalledWith(jasmine.any(Error));
         }).then(done, done.fail);
@@ -250,7 +250,7 @@ describe('Line setup', () => {
         }).then(done, done.fail);
       });
       it('calls the responders for each bot response individually', (done) => {
-        handler({body: multiMessageTemplate, env: {lineChannelAccessToken: 'ABC'}});
+        handler({body: multiMessageTemplate, env: {lineChannelAccessToken: new Buffer('ABC').toString('base64')}});
         Promise.resolve().then(() => {
           botPromises[0].resolve('From first');
           botPromises[1].resolve('From second');
