@@ -1,6 +1,6 @@
 {
   "name": "claudia-bot-builder",
-  "version": "2.14.0",
+  "version": "2.14.1",
   "description": "Create chat-bots for various platforms and deploy to AWS Lambda quickly",
   "main": "index.js",
   "scripts": {
