@@ -426,7 +426,7 @@ describe('Facebook format message', () => {
     });
 
     it('should add 3 buttons with valid titles and formats', () => {
-      let button = new formatFbMessage.Button('Test');
+      const button = new formatFbMessage.Button('Test');
       button
         .addButton('b1', 'v1')
         .addButton('b2', 'v2')
@@ -439,6 +439,84 @@ describe('Facebook format message', () => {
       expect(button.template.attachment.payload.buttons[1].payload).toBe('v2');
       expect(button.template.attachment.payload.buttons[2].title).toBe('b3');
       expect(button.template.attachment.payload.buttons[2].payload).toBe('v3');
+    });
+
+    it('should throw an error if call button is added with wrong phone format', () => {
+      const button = new formatFbMessage.Button('Test');
+      expect(() => button.addCallButton('Title')).toThrowError('Call button value needs to be a valid phone number in following format: +1234567...');
+      expect(() => button.addCallButton('Title', 123)).toThrowError('Call button value needs to be a valid phone number in following format: +1234567...');
+      expect(() => button.addCallButton('Title', 'abc')).toThrowError('Call button value needs to be a valid phone number in following format: +1234567...');
+      expect(() => button.addCallButton('Title', '+123')).toThrowError('Call button value needs to be a valid phone number in following format: +1234567...');
+    });
+
+    it('should add a call button', () => {
+      const button = new formatFbMessage.Button('Test')
+        .addCallButton('Button 1', '+123456789');
+
+      expect(button.template.attachment.payload.buttons.length).toBe(1);
+      expect(button.template.attachment.payload.buttons[0].title).toBe('Button 1');
+      expect(button.template.attachment.payload.buttons[0].payload).toBe('+123456789');
+      expect(button.template.attachment.payload.buttons[0].type).toBe('phone_number');
+    });
+
+    it('should add a share button', () => {
+      const button = new formatFbMessage.Button('Test')
+        .addShareButton();
+
+      expect(button.template.attachment.payload.buttons.length).toBe(1);
+      expect(button.template.attachment.payload.buttons[0].title).toBeUndefined();
+      expect(button.template.attachment.payload.buttons[0].type).toBe('element_share');
+    });
+
+    it('should throw an error if all arguments are not provided for buy button', () => {
+      const button = new formatFbMessage.Button('Test');
+
+      expect(() => button.addBuyButton()).toThrowError('Button value is required');
+      expect(() => button.addBuyButton('Title')).toThrowError('Button value is required');
+      expect(() => button.addBuyButton('Title', 'PAYLOAD')).toThrowError('Payment summary is required for buy button');
+      expect(() => button.addBuyButton('Title', 'PAYLOAD', 123)).toThrowError('Payment summary is required for buy button');
+      expect(() => button.addBuyButton('Title', 'PAYLOAD', 'abc')).toThrowError('Payment summary is required for buy button');
+    });
+
+    it('should add a buy button', () => {
+      const button = new formatFbMessage.Button('Test')
+        .addBuyButton('Buy', 'BUY_PAYLOAD', {
+          additionalOptions: true
+        });
+
+      expect(button.template.attachment.payload.buttons.length).toBe(1);
+      expect(button.template.attachment.payload.buttons[0].title).toBe('Buy');
+      expect(button.template.attachment.payload.buttons[0].type).toBe('payment');
+      expect(button.template.attachment.payload.buttons[0].payload).toBe('BUY_PAYLOAD');
+      expect(button.template.attachment.payload.buttons[0].payment_summary).toEqual({
+        additionalOptions: true
+      });
+    });
+
+    it('should throw an error if url provided for login button is not valid', () => {
+      const button = new formatFbMessage.Button('Test');
+
+      expect(() => button.addLoginButton()).toThrowError('Valid URL is required for Login button');
+      expect(() => button.addLoginButton('123')).toThrowError('Valid URL is required for Login button');
+    });
+
+    it('should add a login button', () => {
+      const button = new formatFbMessage.Button('Test')
+        .addLoginButton('https://example.com');
+
+      expect(button.template.attachment.payload.buttons.length).toBe(1);
+      expect(button.template.attachment.payload.buttons[0].title).toBeUndefined();
+      expect(button.template.attachment.payload.buttons[0].type).toBe('account_link');
+      expect(button.template.attachment.payload.buttons[0].url).toBe('https://example.com');
+    });
+
+    it('should add a logout button', () => {
+      const button = new formatFbMessage.Button('Test')
+        .addLogoutButton();
+
+      expect(button.template.attachment.payload.buttons.length).toBe(1);
+      expect(button.template.attachment.payload.buttons[0].title).toBeUndefined();
+      expect(button.template.attachment.payload.buttons[0].type).toBe('account_unlink');
     });
 
     it('should return a formated object in the end', () => {
