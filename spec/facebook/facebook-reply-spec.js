@@ -35,20 +35,20 @@ describe('Facebook Reply', () => {
     reply('user123', 'Hi there', 'ACCESS123');
   });
   it('sends large text messages split into several', done => {
-    var fiveHundred = new Array(101).join('blok ');
+    var longLongMessage = new Array(201).join('blok ');
 
     https.request.pipe(function () {
       this.respond('200', 'OK', 'Hi there');
     });
 
-    reply('user123', fiveHundred, 'ACCESS123').then(() => {
+    reply('user123', longLongMessage, 'ACCESS123').then(() => {
       expect(https.request.calls.length).toEqual(2);
       expect(JSON.parse(https.request.calls[0].args[0].body)).toEqual({
         recipient: {
           id: 'user123'
         },
         message: {
-          text: new Array(320/5).join('blok ') + 'blok'
+          text: new Array(640/5).join('blok ') + 'blok'
         }
       });
       expect(JSON.parse(https.request.calls[1].args[0].body)).toEqual({
@@ -56,7 +56,7 @@ describe('Facebook Reply', () => {
           id: 'user123'
         },
         message: {
-          text: new Array((500 - 320)/5).join('blok ') + 'blok'
+          text: new Array((1000 - 640)/5).join('blok ') + 'blok'
         }
       });
     }).then(done, done.fail);
