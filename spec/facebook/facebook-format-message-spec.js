@@ -237,6 +237,17 @@ describe('Facebook format message', () => {
       expect(generic.bubbles[0].image_url).toBe('http://google.com/path/to/image.png');
     });
 
+    it('should use square aspect ratio for images if "useSquareImages" method is chained', () => {
+      generic
+        .useSquareImages()
+        .addBubble('Test')
+        .addImage('http://google.com/path/to/image.png');
+
+      expect(generic.bubbles.length).toBe(1);
+      expect(generic.bubbles[0].image_url).toBe('http://google.com/path/to/image.png');
+      expect(generic.get().image_aspect_ratio).toBe('square');
+    });
+
     it('should throw an error if you add a button without the title', () => {
       generic
         .addBubble('Test');

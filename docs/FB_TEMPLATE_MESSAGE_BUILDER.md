@@ -110,6 +110,7 @@ _Arguments_:
 
 | Method        | Required | Arguments                                | Returns             | Description                              |
 | ------------- | -------- | ---------------------------------------- | ------------------- | ---------------------------------------- |
+| useSquareImages     | No       | No args. | `this` for chaining | By default images in generic template are in horizontal (1:1.91) ration, this method will set the ratio to 1:1 |
 | addBubble     | Yes      | title (string, required), subtitle (string) | `this` for chaining | Each Generic template can have 1 to 10 elements/bubbles, before you add anything to it. It requires element's title, but it can also accept element's subtitle |
 | addUrl        | No       | A valid URL                              | `this` for chaining | Adds an url to a current element, requires a valid URL, also requires `addBubble` to be added first |
 | addImage      | No       | A valid absolute URL                     | `this` for chaining | Adds an image to a current element, requires a valid URL, also requires `addBubble` to be added first |
