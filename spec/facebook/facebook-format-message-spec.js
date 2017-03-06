@@ -338,6 +338,40 @@ describe('Facebook format message', () => {
       expect(generic.bubbles[0].buttons[0].type).toBe('element_share');
     });
 
+    it('should add a share button with share content', () => {
+      const shareContent = {
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'generic',
+            elements: [
+              {
+                title: `I took Peter's "Which Hat Are You?" Quiz`,
+                subtitle: 'My result: Fez',
+                image_url: 'https//bot.peters-hats.com/img/hats/fez.jpg',
+                default_action: {
+                  type: 'web_url',
+                  url: 'http://m.me/petershats?ref=invited_by_24601'
+                },
+                buttons: [{
+                  type: 'web_url',
+                  url: 'http://m.me/petershats?ref=invited_by_24601',
+                  title: 'Take Quiz'
+                }]
+              }
+            ]
+          }
+        }
+      };
+      generic.addBubble('Test')
+        .addShareButton(shareContent);
+
+      expect(generic.bubbles[0].buttons.length).toBe(1);
+      expect(generic.bubbles[0].buttons[0].title).toBeUndefined();
+      expect(generic.bubbles[0].buttons[0].type).toBe('element_share');
+      expect(generic.bubbles[0].buttons[0].share_contents).toEqual(shareContent);
+    });
+
     it('should throw an error if all arguments are not provided for buy button', () => {
       generic.addBubble('Test');
 
@@ -536,6 +570,40 @@ describe('Facebook format message', () => {
       expect(button.template.attachment.payload.buttons.length).toBe(1);
       expect(button.template.attachment.payload.buttons[0].title).toBeUndefined();
       expect(button.template.attachment.payload.buttons[0].type).toBe('element_share');
+    });
+
+    it('should add a share button with share content', () => {
+      const shareContent = {
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'generic',
+            elements: [
+              {
+                title: `I took Peter's "Which Hat Are You?" Quiz`,
+                subtitle: 'My result: Fez',
+                image_url: 'https//bot.peters-hats.com/img/hats/fez.jpg',
+                default_action: {
+                  type: 'web_url',
+                  url: 'http://m.me/petershats?ref=invited_by_24601'
+                },
+                buttons: [{
+                  type: 'web_url',
+                  url: 'http://m.me/petershats?ref=invited_by_24601',
+                  title: 'Take Quiz'
+                }]
+              }
+            ]
+          }
+        }
+      };
+      const button = new formatFbMessage.Button('Test')
+        .addShareButton(shareContent);
+
+      expect(button.template.attachment.payload.buttons.length).toBe(1);
+      expect(button.template.attachment.payload.buttons[0].title).toBeUndefined();
+      expect(button.template.attachment.payload.buttons[0].type).toBe('element_share');
+      expect(button.template.attachment.payload.buttons[0].share_contents).toEqual(shareContent);
     });
 
     it('should throw an error if all arguments are not provided for buy button', () => {
