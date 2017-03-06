@@ -245,7 +245,7 @@ describe('Facebook format message', () => {
 
       expect(generic.bubbles.length).toBe(1);
       expect(generic.bubbles[0].image_url).toBe('http://google.com/path/to/image.png');
-      expect(generic.get().image_aspect_ratio).toBe('square');
+      expect(generic.get().attachment.payload.image_aspect_ratio).toBe('square');
     });
 
     it('should throw an error if you add a button without the title', () => {
