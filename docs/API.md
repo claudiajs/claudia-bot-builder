@@ -68,6 +68,7 @@ For the details see:
 - [Slack Delayed reply documentation](SLACK_DELAYED_REPLY_BUILDER.md)
 - [Telegram custom messages documentation](TELEGRAM_CUSTOM_MESSAGES.md)
 - [Viber custom messages documentation](VIBER_CUSTOM_MESSAGES.md)
+- [Alexa custom messages documentation](https://github.com/stojanovic/alexa-message-builder#documentation), external link, because Claudia Bot Builder is using [Alexa Message Builder module](https://www.npmjs.com/package/alexa-message-builder) for Alexa custom messages.
 
 ### Synchronous replies
 
