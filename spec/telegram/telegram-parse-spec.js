@@ -23,4 +23,39 @@ describe('Telegram parse', () => {
     var msg = {callback_query: {message: {chat: {id: 'some123ChatId'}},data: 'someCallbackData'}};
     expect(parse(msg)).toEqual({ sender: 'some123ChatId', text: 'someCallbackData', originalRequest: msg, type: 'telegram'});
   });
+  it('sender field should be equal to actual user_id', () => {
+    var msg = {
+      update_id: 920742096,
+      inline_query: {
+        id: '512944664604439953',
+        from: {
+          id: 119429236,
+          first_name: 'Sergey',
+          last_name: 'Tverskikh',
+          username: 'tverskih'
+        },
+        query: 'share',
+        offset: ''
+      }
+    };
+    expect(parse(msg)).toEqual({
+      sender: 119429236,
+      text: 'share',
+      originalRequest: {
+        update_id: 920742096,
+        inline_query: {
+          id: '512944664604439953',
+          from: {
+            id: 119429236,
+            first_name: 'Sergey',
+            last_name: 'Tverskikh',
+            username: 'tverskih'
+          },
+          query: 'share',
+          offset: ''
+        }
+      },
+      type: 'telegram'
+    });
+  });
 });
