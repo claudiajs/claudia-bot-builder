@@ -41,20 +41,7 @@ describe('Telegram parse', () => {
     expect(parse(msg)).toEqual({
       sender: 119429236,
       text: 'share',
-      originalRequest: {
-        update_id: 920742096,
-        inline_query: {
-          id: '512944664604439953',
-          from: {
-            id: 119429236,
-            first_name: 'Sergey',
-            last_name: 'Tverskikh',
-            username: 'tverskih'
-          },
-          query: 'share',
-          offset: ''
-        }
-      },
+      originalRequest: msg,
       type: 'telegram'
     });
   });
