@@ -17,7 +17,7 @@ describe('Twilio parse', () => {
     expect(parse(qs.stringify({From: '+3333333333', Body: undefined}))).toBeUndefined();
   });
   it('returns nothing if the Body is undefined or missing and there are 0 media attachments', () => {
-    expect(parse(qs.stringify({From: '+3333333333'}))).toBeUndefined();
+    expect(parse(qs.stringify({From: '+3333333333', NumMedia: '0'}))).toBeUndefined();
     expect(parse(qs.stringify({From: '+3333333333', Body: undefined, NumMedia: '0'}))).toBeUndefined();
   });
   it('returns nothing if the From is undefined or missing', () => {
