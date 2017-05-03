@@ -24,4 +24,14 @@ describe('Twilio parse', () => {
     var msg = qs.stringify({From: '+3333333333', Body: 'SMS Twilio'});
     expect(parse(msg)).toEqual({ sender: '+3333333333', text: 'SMS Twilio', originalRequest: qs.parse(msg), type: 'twilio'});
   });
+  it('returns a parsed object when From is present and MMS attachments exist', () => {
+    var msg = qs.stringify({From: '+3333333333', NumMedia: '1', MediaContentType0: 'image/jpeg', MediaUrl0: 'https://api.twilio.com/test'});
+    expect(parse(msg)).toEqual({
+      sender: '+3333333333',
+      text: undefined,
+      originalRequest: qs.parse(msg),
+      type: 'twilio',
+      media: [{ contentType: 'image/jpeg', url: 'https://api.twilio.com/test' }]
+    });
+  });
 });
