@@ -34,4 +34,30 @@ describe('Twilio parse', () => {
       media: [{ contentType: 'image/jpeg', url: 'https://api.twilio.com/test' }]
     });
   });
+  it('returns a parsed object where From is present and multiple MMS attachments exist', () => {
+    var msg = qs.stringify({
+      From: '+3333333333',
+      NumMedia: '2',
+      MediaContentType0: 'image/jpeg',
+      MediaContentType1: 'video/mp4',
+      MediaUrl0: 'https://api.twilio.com/test0',
+      MediaUrl1: 'https://api.twilio.com/test1'
+    });
+    expect(parse(msg)).toEqual({
+      sender: '+3333333333',
+      text: undefined,
+      originalRequest: qs.parse(msg),
+      type: 'twilio',
+      media: [
+        {
+          contentType: 'image/jpeg',
+          url: 'https://api.twilio.com/test0'
+        },
+        {
+          contentType: 'video/mp4',
+          url: 'https://api.twilio.com/test1'
+        }
+      ]
+    });
+  });
 });
