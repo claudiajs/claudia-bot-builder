@@ -41,6 +41,12 @@ describe('Facebook format message', () => {
       let payload = new Array(102).join('0123456789');
       expect(() => message.addQuickReply('title', payload)).toThrowError('Payload can not be more than 1000 characters long');
     });
+    
+    it('should throw an error if addQuickReply imageUrl is not an url', () => {
+      const message = new formatFbMessage.Text('Some text');
+      const imageUrl= 'http//invalid-url'
+      expect(() => message.addQuickReply('title', payload,imageUrl)).toThrowError('Image has a bad url');
+    });    
 
     it('should throw an error if addQuickReply imageUrl is not an url', () => {
       const message = new formatFbMessage.Text('Some text');
@@ -55,6 +61,16 @@ describe('Facebook format message', () => {
       expect(message.quick_replies.length).toBe(1);
       expect(message.quick_replies[0].title).toBe('title');
       expect(message.quick_replies[0].payload).toBe('PAYLOAD');
+    });
+    
+    it('should add a quick reply with an image', () => {
+      const message = new formatFbMessage.Text('Some text')
+        .addQuickReply('title', 'PAYLOAD','http://google.com/path/to/image.png')
+        .get();
+      expect(message.quick_replies.length).toBe(1);
+      expect(message.quick_replies[0].title).toBe('title');
+      expect(message.quick_replies[0].payload).toBe('PAYLOAD');
+      expect(message.quick_replies[0].image_url).toBe('http://google.com/path/to/image.png');
     });
 
     it('should add a quick reply with an image', () => {
