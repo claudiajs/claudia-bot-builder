@@ -105,6 +105,7 @@ See the [Release History](https://github.com/claudiajs/claudia-bot-builder/relea
 - [DotCom Bot](http://dotcom.montoyaindustries.com) - Search & buy domain names and check @usernames fast on Slack & Facebook Messenger!
 - [Eksplorer](http://eksplo.weebly.com) - The Facebook chat bot that will help you discover amazing things in your neighborhood.
 - [Fact Bot](https://github.com/claudiajs/example-projects/tree/master/bot-with-buttons) - The bot will query WikiData for anything you send it and print out the facts.
+- [Food Recommendation Bot](https://github.com/lnmunhoz/food-recommendation-bot) - Shows you open restaurants around you based on Google Places API.
 - [JS Belgrade bot](https://github.com/JSBelgrade/jsbelgrade-chatbot) - Simple meetup group Telegram chatbot created during the meetup.
 - [LaptopFriendly Bot](https://github.com/stojanovic/laptop-friendly-bot) - Viber bot for [LaptopFriendly.co](https://laptopfriendly.co).
 - [MrRoadboto](https://github.com/antsankov/MrRoadboto) - A low-bandwidth and easy to use Facebook chat bot that serves Colorado's Department of Transportation (CDOT) alerts for I70 road-closures affecting major ski resorts. You can read about the motivation [here](https://medium.com/@antsankov/domo-arigato-mr-roadboto-pt-1-introducing-the-problem-b0d44e384dc#.tcsq9nrs4).
