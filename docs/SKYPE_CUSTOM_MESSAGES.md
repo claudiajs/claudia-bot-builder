@@ -283,6 +283,16 @@ module.exports = botBuilder(message => {
 
 Skype buttons have specific types for the function they are supposed to do. Bellow is the table with the types and explanations:
 
+### API
+
+`addButton` (method) - Method that allows you to add a button.
+
+_Arguments:_
+
+- title, string (required) - text caption on button.
+- value, string (required)
+- type, string (required) - look table below.
+
 | Type             | Explanation                                                           |
 |------------------|-----------------------------------------------------------------------|
 | openUrl          | Open given url in the built-in browser.                               |
@@ -293,6 +303,21 @@ Skype buttons have specific types for the function they are supposed to do. Bell
 | showImage        | Show image referenced by url.                                         |
 | downloadFile     | Download file referenced by url.                                      |
 | signin           | Signin button.                                                        |
+
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+const skypeTemplate = botBuilder.skypeTemplate;
+
+module.exports = botBuilder(message => {
+  if (message.type === 'skype')
+    return new skypeTemplate.Carousel('summary')
+      .addReceipt('$100')
+      .addButton('go to google!', 'https://www.google.com', 'openUrl')
+      .get();
+});
+```
 
 
 
