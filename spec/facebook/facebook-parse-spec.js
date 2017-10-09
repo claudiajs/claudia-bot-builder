@@ -97,4 +97,23 @@ describe('Facebook parse', () => {
     };
     expect(parse(msg)).toBeFalsy();
   });
+  it('returns a parsed message for checkbox plugin', () => {
+    var msg = {
+      recipient: {
+        id: '12345'
+      },
+      timestamp: 1234567890,
+      optin: {
+        ref:'SomeData',
+        user_ref: '123-abc'
+      }
+    };
+    expect(parse(msg)).toEqual({
+      sender: '123-abc',
+      text: '',
+      originalRequest: msg,
+      ref: 'SomeData',
+      type: 'facebook'
+    });
+  });
 });
