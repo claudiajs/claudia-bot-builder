@@ -8,6 +8,37 @@ describe('Skype format message', () => {
     expect(typeof formatMessage).toBe('object');
   });
 
+  describe('Text', () => {
+    it('should be a class', () => {
+      const message = new formatMessage.Text('foo');
+      expect(typeof formatMessage.Text).toBe('function');
+      expect(message instanceof formatMessage.Text).toBeTruthy();
+    });
+
+    it('should throw an error if text is not provided', () => {
+      expect(() => new formatMessage.Text()).toThrowError('Text is required for Skype Text template');
+      expect(() => new formatMessage.Text({foo: 'bar'})).toThrowError('Text is required for Skype Text template');
+    });
+
+    it('should generate a valid Skype template object with plain text default', () => {
+      const message = new formatMessage.Text('foo').get();
+      expect(message).toEqual({
+        type: 'message',
+        text: 'foo',
+        textFormat: 'plain'
+      });
+    });
+
+    it('should generate a valid Skype template object with explicit format set', () => {
+      const message = new formatMessage.Text('foo', 'markdown').get();
+      expect(message).toEqual({
+        type: 'message',
+        text: 'foo',
+        textFormat: 'markdown'
+      });
+    });
+  });
+
   describe('Photo', () => {
     it('should be a class', () => {
       const message = new formatMessage.Photo('foo');
@@ -22,9 +53,10 @@ describe('Skype format message', () => {
     it('should generate a valid Skype template object', () => {
       const message = new formatMessage.Photo('base_64_string').get();
       expect(message).toEqual({
-        type: 'message/image',
+        type: 'message',
         attachments: [
           {
+            contentType: 'image/png',
             contentUrl: 'base_64_string'
           }
         ]
@@ -42,7 +74,7 @@ describe('Skype format message', () => {
     it('should generate a valid Carousel template object', () => {
       const message = new formatMessage.Carousel('summary', 'text').get();
       expect(message).toEqual({
-        type: 'message/card.carousel',
+        type: 'message',
         attachmentLayout: 'carousel',
         summary: 'summary',
         text: 'text',
@@ -64,7 +96,7 @@ describe('Skype format message', () => {
           .addText('text')
         .get();
       expect(message).toEqual({
-        type: 'message/card.carousel',
+        type: 'message',
         attachmentLayout: 'carousel',
         summary: 'summary',
         text: 'text',
@@ -121,7 +153,7 @@ describe('Skype format message', () => {
           .addButton('title', 'value', 'imBack')
         .get();
       expect(message).toEqual({
-        type: 'message/card.carousel',
+        type: 'message',
         attachmentLayout: 'carousel',
         summary: 'summary',
         text: 'text',
@@ -156,7 +188,7 @@ describe('Skype format message', () => {
           .addText('text')
         .get();
       expect(message).toEqual({
-        type: 'message/card.carousel',
+        type: 'message',
         attachmentLayout: 'carousel',
         summary: 'summary',
         text: 'text',
@@ -181,7 +213,7 @@ describe('Skype format message', () => {
           .addText('text')
         .get();
       expect(message).toEqual({
-        type: 'message/card.carousel',
+        type: 'message',
         attachmentLayout: 'carousel',
         summary: 'summary',
         text: 'text',
@@ -211,7 +243,7 @@ describe('Skype format message', () => {
             .addItem('title', 'subtitle', 'text', 'price', 'quantity', 'image')
         .get();
       expect(message).toEqual({
-        type: 'message/card.carousel',
+        type: 'message',
         attachmentLayout: 'carousel',
         summary: 'summary',
         text: 'text',
@@ -250,7 +282,7 @@ describe('Skype format message', () => {
             .addFact('key', 'value')
         .get();
       expect(message).toEqual({
-        type: 'message/card.carousel',
+        type: 'message',
         attachmentLayout: 'carousel',
         summary: 'summary',
         text: 'text',

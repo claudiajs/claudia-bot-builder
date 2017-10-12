@@ -34,7 +34,35 @@ Carousel class gives you ability to add Hero, Thumbnail and Receipt messages. Se
 
 ## Text messages
 
-If you simply want to answer with the text you can just return text.
+If you simply want to answer with the text you can just return text. And if you want your messages Markdown or XML support, use this API.
+
+### API
+
+`Text` (class) - Class that allows you to build a text messages.
+
+_Arguments:_
+
+- text, string (required) - message you want to send
+- format, string (optional) - `plain`, `markdown` or `xml`. default is `plain`.
+
+### Methods
+
+| Method                   | Required | Arguments                                | Returns                           | Description                              |
+| ------------------------ | -------- | ---------------------------------------- | --------------------------------- | ---------------------------------------- |
+| get                      | Yes      | No arguments                             | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Skype Messenger |
+
+### Example
+
+```javascript
+const botBuilder = require('claudia-bot-builder');
+const skypeTemplate = botBuilder.skypeTemplate;
+
+module.exports = botBuilder(message => {
+  if (message.type === 'skype')
+    return new skypeTemplate.Text('**HELLO**!', 'markdown').get();
+});
+```
+more markdown or XML syntax, refer to:  https://docs.microsoft.com/en-us/bot-framework/rest-api/bot-framework-rest-connector-create-messages
 
 
 
