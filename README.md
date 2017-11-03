@@ -119,6 +119,7 @@ See the [Release History](https://github.com/claudiajs/claudia-bot-builder/relea
 - [Space Explorer Bot for Viber](https://github.com/stojanovic/space-explorer-bot-viber) - Viber version of Space Explorer Bot.
 - [Vacation tracker bot](http://vacationtrackerbot.com/) - A simple Slack bot to help you manage your team’s vacations, sick days and days off.
 - [MDNBot](https://vejather.github.io/mdn-bot-landing-page/) - A Slack bot that helps developers search MDN directory without leaving Slack channel.
+- [Ver.bot](https://rping.github.io/Ver.bot-site) - Subscribe GitHub, npm, PyPI projects, and get new version releases notifications!
 
 Building something cool with Claudia Bot Builder? Let us know or send a PR to update this list!
 
