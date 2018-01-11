@@ -10,7 +10,7 @@ describe('BotBuilder', () => {
   });
 
   it('configures a Claudia Rest API', () => {
-    expect(underTest.apiConfig().version).toEqual(3);
+    expect(underTest.apiConfig().version).toEqual(4);
   });
 
   it('sets up a GET route for /', (done) => {

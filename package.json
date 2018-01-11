@@ -1,12 +1,13 @@
 {
   "name": "claudia-bot-builder",
-  "version": "2.15.1",
+  "version": "3.0.0",
   "description": "Create chat-bots for various platforms and deploy to AWS Lambda quickly",
   "main": "index.js",
   "scripts": {
     "pretest": "eslint lib spec *.js",
     "test": "node spec/support/jasmine-runner.js",
-    "debug": "node debug spec/support/jasmine-runner.js"
+    "debug": "node debug spec/support/jasmine-runner.js",
+    "prepublishOnly": "npm shrinkwrap"
   },
   "repository": {
     "type": "git",
@@ -38,14 +39,14 @@
   "license": "MIT",
   "dependencies": {
     "alexa-message-builder": "^1.1.0",
-    "claudia-api-builder": "^2.0.1",
+    "claudia-api-builder": "^3.0.0",
     "minimal-request-promise": "^1.3.0",
     "oh-no-i-insist": "^1.0.0",
     "souffleur": "^1.0.0",
     "tsscmp": "^1.0.5"
   },
   "devDependencies": {
-    "claudia": "^2.0.0",
+    "claudia": "^3.0.0",
     "eslint": "^2.11.1",
     "eslint-config-defaults": "^9.0.0",
     "fake-http-request": "^1.3.0",
