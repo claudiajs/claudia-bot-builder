@@ -23,6 +23,10 @@ describe('Telegram parse', () => {
     var msg = {callback_query: {message: {chat: {id: 'some123ChatId'}},data: 'someCallbackData'}};
     expect(parse(msg)).toEqual({ sender: 'some123ChatId', text: 'someCallbackData', originalRequest: msg, type: 'telegram'});
   });
+  it('returns a parsed object when messageObject contains a channel post', () => {
+    var msg = {channel_post: {chat: {id: 'some123ChatId'}, text: 'ello Telegram channel' }};
+    expect(parse(msg)).toEqual({ sender: 'some123ChatId', text: 'ello Telegram channel', originalRequest: msg, type: 'telegram'});
+  });
   it('sender field should be equal to actual user_id', () => {
     var msg = {
       update_id: 920742096,
