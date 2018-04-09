@@ -1,6 +1,6 @@
 {
   "name": "claudia-bot-builder",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Create chat-bots for various platforms and deploy to AWS Lambda quickly",
   "main": "index.js",
   "scripts": {
@@ -39,14 +39,14 @@
   "license": "MIT",
   "dependencies": {
     "alexa-message-builder": "^1.1.0",
-    "claudia-api-builder": "^3.0.0",
+    "claudia-api-builder": "^4.0.0",
     "minimal-request-promise": "^1.3.0",
     "oh-no-i-insist": "^1.0.0",
     "souffleur": "^1.0.0",
     "tsscmp": "^1.0.5"
   },
   "devDependencies": {
-    "claudia": "^3.0.0",
+    "claudia": "^4.0.0",
     "eslint": "^2.11.1",
     "eslint-config-defaults": "^9.0.0",
     "fake-http-request": "^1.3.0",
