@@ -65,9 +65,11 @@ describe('Facebook Reply', () => {
     var fiveHundred = new Array(101).join('blok ');
 
     https.request.pipe(() => {
-      Promise.resolve().then(() => {
-        expect(https.request.calls.length).toEqual(1);
-      }).then(done);
+      Promise.resolve()
+        .then(() => {
+          expect(https.request.calls.length).toEqual(1);
+        })
+        .then(done);
     });
 
     reply('user123', fiveHundred, 'ACCESS123');
@@ -76,9 +78,11 @@ describe('Facebook Reply', () => {
     it('does not send the second request until the first one completes', done => {
       let answers = ['foo', 'bar'];
       https.request.pipe(() => {
-        Promise.resolve().then(() => {
-          expect(https.request.calls.length).toEqual(1);
-        }).then(done);
+        Promise.resolve()
+          .then(() => {
+            expect(https.request.calls.length).toEqual(1);
+          })
+          .then(done);
       });
       reply('user123', answers, 'ACCESS123');
     });
