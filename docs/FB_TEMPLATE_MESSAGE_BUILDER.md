@@ -66,12 +66,7 @@ _Arguments_:
 | addQuickReplyLocation | No       | No args. | `this` for chaining               | Same as above, just asks user for a current location |
 | setNotificationType | No       | type (string, one of `REGULAR`, `SILENT_PUSH` or `NO_PUSH`) | `this` for chaining               | REGULAR will emit a sound/vibration and a phone notification; SILENT_PUSH will just emit a phone notification, NO_PUSH will not emit either
 | setMessagingType | Yes* | type (string, one of 'RESPONSE', 'UPDATE', or 'MESSAGE_TAG') | `this` for chaining               | Beginning May 7, 2018, this property will be required for all message sends. After this date, message sends that do not include messaging_type will return an error and not be delivered |
-| setMessageTag | No | tag (string, one of 'COMMUNITY_ALERT', 'CONFIRMED_EVENT_REMINDER', 
- 'NON_PROMOTIONAL_SUBSCRIPTION', 'PAIRING_UPDATE', 'APPLICATION_UPDATE',
- 'ACCOUNT_UPDATE', 'PAYMENT_UPDATE', 'PERSONAL_FINANCE_UPDATE', 
- 'SHIPPING_UPDATE', 'RESERVATION_UPDATE','ISSUE_RESOLUTION', 
- 'APPOINTMENT_UPDATE', 'GAME_EVENT', 'TRANSPORTATION_UPDATE',
- 'FEATURE_FUNCTIONALITY_UPDATE', 'TICKET_UPDATE') | `this` for chaining               | Please see the [Facebook Developer's Guide for more info](https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags)
+| setMessageTag | No | tag (string, one of 'COMMUNITY_ALERT', 'CONFIRMED_EVENT_REMINDER', 'NON_PROMOTIONAL_SUBSCRIPTION', 'PAIRING_UPDATE', 'APPLICATION_UPDATE', 'ACCOUNT_UPDATE', 'PAYMENT_UPDATE', 'PERSONAL_FINANCE_UPDATE', 'SHIPPING_UPDATE', 'RESERVATION_UPDATE','ISSUE_RESOLUTION', 'APPOINTMENT_UPDATE', 'GAME_EVENT', 'TRANSPORTATION_UPDATE', 'FEATURE_FUNCTIONALITY_UPDATE', 'TICKET_UPDATE') | `this` for chaining               | Please see the [Facebook Developer's Guide for more info](https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags)
 | get           | Yes      | No args.                                 | Formatted JSON to pass as a reply | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Facebook Messenger |
 
 ### Example
