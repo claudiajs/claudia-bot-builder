@@ -2,6 +2,12 @@
 'use strict';
 
 const formatFbMessage = require('../../lib/facebook/format-message');
+const messageTags = ['COMMUNITY_ALERT', 'CONFIRMED_EVENT_REMINDER', 
+ 'NON_PROMOTIONAL_SUBSCRIPTION', 'PAIRING_UPDATE', 'APPLICATION_UPDATE',
+ 'ACCOUNT_UPDATE', 'PAYMENT_UPDATE', 'PERSONAL_FINANCE_UPDATE', 
+ 'SHIPPING_UPDATE', 'RESERVATION_UPDATE','ISSUE_RESOLUTION', 
+ 'APPOINTMENT_UPDATE', 'GAME_EVENT', 'TRANSPORTATION_UPDATE',
+ 'FEATURE_FUNCTIONALITY_UPDATE', 'TICKET_UPDATE'];
 
 describe('Facebook format message', () => {
   it('should export an object', () => {
@@ -124,8 +130,11 @@ describe('Facebook format message', () => {
       expect(msgTag.messaging_type).toBe('MESSAGE_TAG');
     });
 
-    it('should throw an error on setMessagingType with invalid value', () => {
-      expect(() => new formatFbMessage.Text('Some text').setMessagingType('FACE_SLAP')).toThrowError('Messaging type must be one of RESPONSE, UPDATE, or MESSAGE_TAG');
+    it('should set messaging type to "RESPONSE" if no valid type supplied', () => {
+      const defaultType = new formatFbMessage.Text('Some text')
+        .setMessagingType('FACE_SLAP')
+        .get();
+      expect(defaultType.messaging_type).toBe('RESPONSE');
     });
 
     it ('should set the message tag', () => {
@@ -163,7 +172,10 @@ describe('Facebook format message', () => {
         .setMessageTag('SHIPPING_UPDATE')
         .get();
       expect(shipping_update.message_tag).toBe('SHIPPING_UPDATE');
+    });
 
+    it('should throw an error on setMessageTag when given an invalid value', () => {
+      expect(() => new formatFbMessage.Text('Some text').setMessageTag('FACE_SLAP').toThrowError(`Message tag must be one of the following: ${JSON.stringify(messageTags, null, 2)}`));
     });
 
     it('should set the notification type', () => {
