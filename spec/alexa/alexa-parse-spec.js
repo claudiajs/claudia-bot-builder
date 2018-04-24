@@ -17,16 +17,16 @@ describe('Alexa parse', () => {
   });
   it('should return original request with an empty text if the intent is missing', () => {
     let msg = {request: {}, session: { user: { userId: 'claudia alexa user'} } };
-    expect(parse(msg)).toEqual({ sender: 'claudia alexa user', text: '', originalRequest: msg, type: 'alexa-skill'});
+    expect(parse(msg)).toEqual({ sender: 'claudia alexa user', text: '', originalRequest: msg, type: 'alexa-skill', accessToken: undefined });
   });
   it('should return original request with an empty text if the intent name is missing', () => {
     let msg = {request: { intent: {}}, session: { user: { userId: 'claudia alexa user'} } };
-    expect(parse(msg)).toEqual({ sender: 'claudia alexa user', text: '', originalRequest: msg, type: 'alexa-skill'});
+    expect(parse(msg)).toEqual({ sender: 'claudia alexa user', text: '', originalRequest: msg, type: 'alexa-skill', accessToken: undefined });
   });
   it('should return a parsed object with proper sender and text when the intent name and session user are present', () => {
     let msg = {
       request: { intent: { name: 'intent 1'}},
       session: { user: { userId: 'claudia alexa user'}} };
-    expect(parse(msg)).toEqual({ sender: 'claudia alexa user', text: '', originalRequest: msg, type: 'alexa-skill'});
+    expect(parse(msg)).toEqual({ sender: 'claudia alexa user', text: '', originalRequest: msg, type: 'alexa-skill', accessToken: undefined });
   });
 });

@@ -30,7 +30,7 @@
     "twilio",
     "kik",
     "groupme",
-    "cortana", 
+    "cortana",
     "google"
   ],
   "author": "Slobodan Stojanovic <slobodan@cloudhorizon.com> (http://slobodan.me/), ",
@@ -43,6 +43,7 @@
     "actions-on-google": "^1.7.0",
     "alexa-message-builder": "^1.1.0",
     "claudia-api-builder": "^4.1.1",
+    "botbuilder": "^3.14.1",
     "minimal-request-promise": "^1.3.0",
     "node-mocks-http": "^1.6.6",
     "oh-no-i-insist": "^1.0.0",
