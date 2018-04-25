@@ -2,6 +2,12 @@
 'use strict';
 
 const formatFbMessage = require('../../lib/facebook/format-message');
+const messageTags = ['COMMUNITY_ALERT', 'CONFIRMED_EVENT_REMINDER', 
+ 'NON_PROMOTIONAL_SUBSCRIPTION', 'PAIRING_UPDATE', 'APPLICATION_UPDATE',
+ 'ACCOUNT_UPDATE', 'PAYMENT_UPDATE', 'PERSONAL_FINANCE_UPDATE', 
+ 'SHIPPING_UPDATE', 'RESERVATION_UPDATE','ISSUE_RESOLUTION', 
+ 'APPOINTMENT_UPDATE', 'GAME_EVENT', 'TRANSPORTATION_UPDATE',
+ 'FEATURE_FUNCTIONALITY_UPDATE', 'TICKET_UPDATE'];
 
 describe('Facebook format message', () => {
   it('should export an object', () => {
@@ -109,20 +115,86 @@ describe('Facebook format message', () => {
       expect(() => message.addQuickReply('title', 'PAYLOAD')).toThrowError('There can not be more than 11 quick replies');
     });
 
+    it ('should set the messaging type', () => {
+      const response = new formatFbMessage.Text('Some text')
+        .setMessagingType('RESPONSE')
+        .get();
+      expect(response.messaging_type).toBe('RESPONSE');
+      const update = new formatFbMessage.Text('Some text')
+        .setMessagingType('UPDATE')
+        .get();
+      expect(update.messaging_type).toBe('UPDATE');
+      const msgTag = new formatFbMessage.Text('Some text')
+        .setMessagingType('MESSAGE_TAG')
+        .get();
+      expect(msgTag.messaging_type).toBe('MESSAGE_TAG');
+    });
+
+    it('should set messaging type to "RESPONSE" if no valid type supplied', () => {
+      const defaultType = new formatFbMessage.Text('Some text')
+        .setMessagingType('FACE_SLAP')
+        .get();
+      expect(defaultType.messaging_type).toBe('RESPONSE');
+    });
+
+    it ('should set the message tag', () => {
+      const community_alert = new formatFbMessage.Text('Some text')
+        .setMessageTag('COMMUNITY_ALERT')
+        .get();
+      expect(community_alert.message_tag).toBe('COMMUNITY_ALERT');
+
+      const event_reminder = new formatFbMessage.Text('Some text')
+        .setMessageTag('CONFIRMED_EVENT_REMINDER')
+        .get();
+      expect(event_reminder.message_tag).toBe('CONFIRMED_EVENT_REMINDER');
+
+      const subscription = new formatFbMessage.Text('Some text')
+        .setMessageTag('NON_PROMOTIONAL_SUBSCRIPTION')
+        .get();
+      expect(subscription.message_tag).toBe('NON_PROMOTIONAL_SUBSCRIPTION');
+
+      const pairing_update = new formatFbMessage.Text('Some text')
+        .setMessageTag('PAIRING_UPDATE')
+        .get();
+      expect(pairing_update.message_tag).toBe('PAIRING_UPDATE');
+
+      const application_update = new formatFbMessage.Text('Some text')
+        .setMessageTag('APPLICATION_UPDATE')
+        .get();
+      expect(application_update.message_tag).toBe('APPLICATION_UPDATE');
+
+      const account_update = new formatFbMessage.Text('Some text')
+        .setMessageTag('ACCOUNT_UPDATE')
+        .get();
+      expect(account_update .message_tag).toBe('ACCOUNT_UPDATE');
+
+      const shipping_update = new formatFbMessage.Text('Some text')
+        .setMessageTag('SHIPPING_UPDATE')
+        .get();
+      expect(shipping_update.message_tag).toBe('SHIPPING_UPDATE');
+    });
+
+    it('should throw an error on setMessageTag when given an invalid value', () => {
+      expect(() => new formatFbMessage.Text('Some text').setMessageTag('FACE_SLAP').toThrowError(`Message tag must be one of the following: ${JSON.stringify(messageTags, null, 2)}`));
+    });
+
     it('should set the notification type', () => {
       const regular = new formatFbMessage.Text('Some text')
         .setNotificationType('REGULAR')
         .get();
       expect(regular.notification_type).toBe('REGULAR');
+
       const silent = new formatFbMessage.Text('Some text')
         .setNotificationType('SILENT_PUSH')
         .get();
       expect(silent.notification_type).toBe('SILENT_PUSH');
+
       const none = new formatFbMessage.Text('Some text')
         .setNotificationType('NO_PUSH')
         .get();
       expect(none.notification_type).toBe('NO_PUSH');
     });
+
 
     it('should throw an on setNotificationType with invalid value', () => {
       expect(() => new formatFbMessage.Text('Some text').setNotificationType('FACE_SLAP')).toThrowError('Notification type must be one of REGULAR, SILENT_PUSH, or NO_PUSH');
@@ -562,7 +634,6 @@ describe('Facebook format message', () => {
       expect(button.template.attachment.payload.buttons[0].payload).toBe('+123456789');
       expect(button.template.attachment.payload.buttons[0].type).toBe('phone_number');
     });
-
     it('should add a share button', () => {
       const button = new formatFbMessage.Button('Test')
         .addShareButton();
