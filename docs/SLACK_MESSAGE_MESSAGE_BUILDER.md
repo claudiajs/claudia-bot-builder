@@ -39,7 +39,7 @@ _Arguments_:
 | addTimestamp | No | timestamp (Date, required) | `this` for chaining | Adds a timestamp for the latest attachment |
 | addField | No | title (string, required), value (string, required), isShort (boolean, optional) | `this` for chaining | Adds a field to the latest attachment |
 | addAction | No | text (string, required), name (string, required), value (string, required), style (string, optional) | `this` for chaining | Adds an action button to the latest attachment, you can add up to 5 buttons per attachment, style can be 'primary' or 'danger' |
-| addLinkButton | No | text (string, required), url (url, required), style (string, optional) | `this` for chaining | Adds an URL button to the latest attachment, you can add up to 5 buttons per attachment, style can be 'primary' or 'danger' |
+| addLinkButton | No | text (string, required), url (url, required), style (string, optional) | `this` for chaining | Adds a URL button to the latest attachment, you can add up to 5 buttons per attachment, style can be 'primary' or 'danger' |
 | getLatestAction | No | No args. | `this` for chaining | Returns the latest action, for internal use |
 | addConfirmation | No | title (string, required), text (string, required), okLabel (string, optional), dismissLabel (string, optional) | `this` for chaining | Adds a confimation popup for the latest action, default labels are 'Ok' and 'Dismiss' |
 | get | Yes | No args. | `this` for chaining | Get method is required and it returns a formatted JSON that is ready to be passed as a response to Slack |
