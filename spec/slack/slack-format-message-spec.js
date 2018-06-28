@@ -248,6 +248,31 @@ describe('Slack format message', () => {
         .addAction('A5', 'foo', 'bar');
       expect(() => message.addAction('A6', 'foo', 'bar')).toThrowError('You can not add more than 5 actions');
     });
+    
+    it('should throw an error if you addLinkButtons without valid data', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addLinkButtons()).toThrowError('Text and URL are requeired for addLinkButtons method');
+    });
+    
+    it('should throw an error if you addLinkButtons without valid data', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addLinkButtons('Button name')).toThrowError('Text and URL are requeired for addLinkButtons method');
+    });
+    
+    it('should throw an error if you addLinkButtons without valid data', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addLinkButtons('Button Name', 'foo')).toThrowError('URL need to be a valid');
+    });
+
+    it('should throw an error if you try to add more than 5 actions and link buttons', () => {
+      let message = new formatSlackMessage().addAttachment()
+        .addAction('A1', 'foo', 'bar')
+        .addAction('A2', 'foo', 'bar')
+        .addAction('A3', 'foo', 'bar')
+        .addAction('A4', 'foo', 'bar')
+        .addAction('A5', 'foo', 'bar');
+      expect(() => message.addLinkButtons('Buttons', 'http://foo.bar')).toThrowError('You can not add more than 5 actions and link buttons');
+    });
 
     it('should throw an error if you try to add confirmation before adding an action', () => {
       let message = new formatSlackMessage().addAttachment();
