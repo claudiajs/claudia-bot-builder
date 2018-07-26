@@ -356,7 +356,7 @@ describe('Slack setup', () => {
           slackVerificationToken: 'slack-verification-token'
         }
       }).then(() => {
-        expect(responder).toHaveBeenCalledWith('Hello');
+        expect(responder).toHaveBeenCalledWith('Hello', undefined);
       }).then(done, done.fail);
     });
 
