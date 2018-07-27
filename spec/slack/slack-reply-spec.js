@@ -10,12 +10,16 @@ describe('Slack Reply', () => {
     })
   );
   
-  it('returns a empty string if secound argument type is dialog_submission', () =>
+  it('returns an empty string if argument type is dialog_submission', () =>
     expect(reply('string', 'dialog_submission')).toEqual('')
   );
   
-  it('returns a empty string if secound argument type is dialog_cancellation', () =>
+  it('returns an empty string if type is dialog_cancellation', () =>
     expect(reply('string', 'dialog_cancellation')).toEqual('')
+  );
+
+  it('returns an empty string if bot response is "false"', () => 
+    expect(reply(false)).toEqual('')
   );
 
   it('returns a formatted output if string is passed and secound argument is not dialog_submission or dialog_cancellation', () =>
