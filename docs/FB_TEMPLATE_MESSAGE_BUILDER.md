@@ -116,6 +116,7 @@ _Arguments_:
 | addBubble     | Yes      | title (string, required), subtitle (string) | `this` for chaining | Each Generic template can have 1 to 10 elements/bubbles, before you add anything to it. It requires element's title, but it can also accept element's subtitle |
 | addUrl        | No       | A valid URL                              | `this` for chaining | Adds an url to a current element, requires a valid URL, also requires `addBubble` to be added first |
 | addImage      | No       | A valid absolute URL                     | `this` for chaining | Adds an image to a current element, requires a valid URL, also requires `addBubble` to be added first |
+| addDefaultAction | No       | A valid URL                              | `this` for chaining | Adds an default action url to a current element, requires a valid URL, also requires `addBubble` to be added first |
 | addButton     | Yes, at least one of the button types | title (string, required), value (required, string or a valid URL) | `this` for chaining | Adds a button to a current element, each button requires a title and a value, where value can be any string if you want `postback` type or a valid URL if you want it's type to be `web_url`, at least one button is required, and maximum 3 of them is allowed. It also requires `addBubble` to be added first |
 | addCallButton | Yes, at least one of the button types | title (string, required), phoneNumber (required, string in '+1234...' format) | `this` for chaining | Adds a call button, check [official docs](https://developers.facebook.com/docs/messenger-platform/send-api-reference/call-button) for more info |
 | addShareButton | Yes, at least one of the button types | No args. | `this` for chaining | Adds a share button, check [official docs](https://developers.facebook.com/docs/messenger-platform/send-api-reference/share-button) for more info |
@@ -142,6 +143,7 @@ module.exports = botBuilder(message => {
       .addBubble('Claudia.js', 'Deploy Node.js microservices to AWS easily')
         .addUrl('https://claudiajs.com')
         .addImage('https://claudiajs.com/assets/claudiajs.png')
+        .addDefaultAction('https://claudiajs.com')
         .addButton('Say hello', 'HELLO')
         .addButton('Go to Github', 'https://github.com/claudiajs/claudia')
       .addBubble('Claudia Bot Builder')

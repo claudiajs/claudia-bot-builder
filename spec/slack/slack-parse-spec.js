@@ -29,4 +29,14 @@ describe('Slack parse', () => {
     var msg = { user: { id: 123, name: 'username' }, actions: [{name: 'test', value: 'action'}] };
     expect(parse(msg)).toEqual({ sender: 123, text: '', originalRequest: msg, type: 'slack-message-action', postback: true});
   });
+  
+  it('returns a parsed object when user and type dialog_submission are present', () => {
+    var msg = { user: { id: 123, name: 'username' }, type: 'dialog_submission' };
+    expect(parse(msg)).toEqual({ sender: 123, text: '', originalRequest: msg, type: 'slack-dialog-confirm', postback: true});
+  });
+  
+  it('returns a parsed object when user and type dialog_cancellation are present', () => {
+    var msg = { user: { id: 123, name: 'username' }, type: 'dialog_cancellation' };
+    expect(parse(msg)).toEqual({ sender: 123, text: '', originalRequest: msg, type: 'slack-dialog-cancel', postback: true});
+  });
 });

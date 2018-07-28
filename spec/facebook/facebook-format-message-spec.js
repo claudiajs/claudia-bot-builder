@@ -2,10 +2,10 @@
 'use strict';
 
 const formatFbMessage = require('../../lib/facebook/format-message');
-const messageTags = ['COMMUNITY_ALERT', 'CONFIRMED_EVENT_REMINDER', 
+const messageTags = ['COMMUNITY_ALERT', 'CONFIRMED_EVENT_REMINDER',
  'NON_PROMOTIONAL_SUBSCRIPTION', 'PAIRING_UPDATE', 'APPLICATION_UPDATE',
- 'ACCOUNT_UPDATE', 'PAYMENT_UPDATE', 'PERSONAL_FINANCE_UPDATE', 
- 'SHIPPING_UPDATE', 'RESERVATION_UPDATE','ISSUE_RESOLUTION', 
+ 'ACCOUNT_UPDATE', 'PAYMENT_UPDATE', 'PERSONAL_FINANCE_UPDATE',
+ 'SHIPPING_UPDATE', 'RESERVATION_UPDATE','ISSUE_RESOLUTION',
  'APPOINTMENT_UPDATE', 'GAME_EVENT', 'TRANSPORTATION_UPDATE',
  'FEATURE_FUNCTIONALITY_UPDATE', 'TICKET_UPDATE'];
 
@@ -318,6 +318,38 @@ describe('Facebook format message', () => {
       expect(generic.bubbles.length).toBe(1);
       expect(generic.bubbles[0].image_url).toBe('http://google.com/path/to/image.png');
       expect(generic.get().attachment.payload.image_aspect_ratio).toBe('square');
+    });
+
+    it('should throw an error if you add a default action without the url', () => {
+      generic
+        .addBubble('Test');
+
+      expect(() => generic.addDefaultAction()).toThrowError('Bubble default action URL is required');
+    });
+
+    it('should throw an error if you add a default action with an invalid url', () => {
+      generic
+        .addBubble('Test');
+
+      expect(() => generic.addDefaultAction('some_url')).toThrowError('Bubble default action URL must be valid URL');
+    });
+
+    it('should throw an error if you add more than one default action', () => {
+      generic
+        .addBubble('Test')
+        .addDefaultAction('http://google.com/some/action');
+
+      expect(() => generic.addDefaultAction('http://google.com/some/action')).toThrowError('Bubble already has default action');
+    });
+
+    it('should add default action', () => {
+      generic
+        .addBubble('1', 'hello')
+        .addDefaultAction('http://google.com/some/action');
+
+      expect(generic.bubbles.length).toBe(1);
+      expect(generic.bubbles[0].default_action.type).toBe('web_url');
+      expect(generic.bubbles[0].default_action.url).toBe('http://google.com/some/action');
     });
 
     it('should throw an error if you add a button without the title', () => {
@@ -1261,14 +1293,14 @@ describe('Facebook format message', () => {
       expect(() => list.addDefaultAction()).toThrowError('Bubble default action URL is required');
     });
 
-    it('should throw an error if you add a default action without the url', () => {
+    it('should throw an error if you add a default action with an invalid url', () => {
       list
         .addBubble('Test');
 
       expect(() => list.addDefaultAction('some_url')).toThrowError('Bubble default action URL must be valid URL');
     });
 
-    it('should throw an error if you add a more than one default action', () => {
+    it('should throw an error if you add more than one default action', () => {
       list
         .addBubble('Test')
         .addDefaultAction('http://google.com/some/action');
