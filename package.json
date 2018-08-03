@@ -39,7 +39,7 @@
   "license": "MIT",
   "dependencies": {
     "alexa-message-builder": "^1.1.0",
-    "claudia-api-builder": "^4.0.0",
+    "claudia-api-builder": "^4.1.1",
     "minimal-request-promise": "^1.3.0",
     "oh-no-i-insist": "^1.0.0",
     "souffleur": "^1.0.0",
