@@ -42,6 +42,8 @@ This code is enough to operate bots for all supported platforms. Claudia Bot Bui
 * Line
 * Kik
 * GroupMe
+* Google Assistant
+* Cortana
 
 ## Creating bots
 
