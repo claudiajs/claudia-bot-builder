@@ -2,13 +2,12 @@
 'use strict';
 var underTest = require('../../lib/google/setup');
 describe('Google setup', () => {
-  var api, bot, logError, parser, responder, botPromise, botResolve, botReject;
+  var api, bot, logError, parser, responder, botPromise, botResolve;
 
   beforeEach(() => {
     api = jasmine.createSpyObj('api', ['get', 'post', 'addPostDeployStep']);
-    botPromise = new Promise((resolve, reject) => {
+    botPromise = new Promise((resolve) => {
       botResolve = resolve;
-      botReject = reject;
     });
     bot = jasmine.createSpy().and.returnValue(botPromise);
     parser = jasmine.createSpy();
@@ -42,7 +41,6 @@ describe('Google setup', () => {
         expect(parser).toHaveBeenCalled();
       });
       it('test promise', () => {
-        botReject();
         botResolve();
       });
     });
