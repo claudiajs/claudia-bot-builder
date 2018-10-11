@@ -248,6 +248,92 @@ describe('Slack format message', () => {
         .addAction('A5', 'foo', 'bar');
       expect(() => message.addAction('A6', 'foo', 'bar')).toThrowError('You can not add more than 5 actions');
     });
+
+    it('should throw an error if you addSelect without valid data', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addSelect()).toThrowError('Text and name are requeired for addAction method');
+    });
+    
+    it('should throw an error if you addSelect without valid data', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addSelect()).toThrowError('Text and name are requeired for addAction method');
+    });
+    
+    it('should throw an error if you addSelect with name with two or more words', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addSelect('Select menu', 'one two')).toThrowError('Name need to be one word');
+    });
+
+    it('should throw an error if addSelect with options is not valid array', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addSelect('Select menu', 'select', {}))
+        .toThrowError('options needs to be a valid array');
+      expect(() => message.addSelect('Select menu', 'select', ''))
+        .toThrowError('options needs to be a valid array');
+      expect(() => message.addSelect('Select menu', 'select', false))
+        .toThrowError('options needs to be a valid array');
+    });
+
+    it('should throw an error if you addSelect with dataSource is not static, users, channels, conversations or external', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addSelect('Selecte menu', 'select', null, 'else'))
+        .toThrowError('The value of the dataSource can be users, channels, conversations, external or static');
+      expect(() => message.addSelect('Selecte menu', 'select', null, true))
+        .toThrowError('The value of the dataSource can be users, channels, conversations, external or static');
+      expect(() => message.addSelect('Selecte menu', 'select', null, {}))
+        .toThrowError('The value of the dataSource can be users, channels, conversations, external or static');
+    });
+
+    it('should a valid addSelect with dataSource provide static', () => {
+      let message = new formatSlackMessage().addAttachment();
+      message.addSelect('Select menu', 'select', null, 'static');
+      expect(message.template.attachments[0].actions[0].data_source).toBe('static');
+    });
+
+    it('should a valid addSelect with dataSource provide users', () => {
+      let message = new formatSlackMessage().addAttachment();
+      message.addSelect('Select menu', 'select', null, 'users');
+      expect(message.template.attachments[0].actions[0].data_source).toBe('users');
+    });
+
+    it('should a valid addSelect with dataSource provide channels', () => {
+      let message = new formatSlackMessage().addAttachment();
+      message.addSelect('Select menu', 'select', null, 'channels');
+      expect(message.template.attachments[0].actions[0].data_source).toBe('channels');
+    });
+
+    it('should a valid addSelect with dataSource provide conversations', () => {
+      let message = new formatSlackMessage().addAttachment();
+      message.addSelect('Select menu', 'select', null, 'conversations');
+      expect(message.template.attachments[0].actions[0].data_source).toBe('conversations');
+    });
+
+    it('should a valid addSelect with dataSource provide external', () => {
+      let message = new formatSlackMessage().addAttachment();
+      message.addSelect('Select menu', 'select', null, 'external');
+      expect(message.template.attachments[0].actions[0].data_source).toBe('external');
+    });
+
+    it('should throw an error if addSelect with minQueryLength is not number', () => {
+      let message = new formatSlackMessage().addAttachment();
+      expect(() => message.addSelect('Select menu', 'select', undefined, 'static', '123'))
+        .toThrowError('minQueryLength needs to be a valid number');
+      expect(() => message.addSelect('Select menu', 'select', undefined, 'static', true))
+        .toThrowError('minQueryLength needs to be a valid number');
+      expect(() => message.addSelect('Select menu', 'select', undefined, 'static', {}))
+        .toThrowError('minQueryLength needs to be a valid number');
+    });
+
+    it('should add an select', () => {
+      const options = [{ text: 'Foo', value: 'foo' }, { text: 'Bar', value: 'bar' }];
+      let message = new formatSlackMessage().addAttachment().addSelect('Select menu', 'select', options);
+      expect(message.template.attachments[0].actions.length).toBe(1);
+      expect(message.template.attachments[0].actions[0].text).toBe('Select menu');
+      expect(message.template.attachments[0].actions[0].name).toBe('select');
+      expect(message.template.attachments[0].actions[0].options).toEqual(options);
+      expect(message.template.attachments[0].actions[0].type).toBe('select');
+    });
+
     
     it('should throw an error if you addLinkButton without valid data', () => {
       let message = new formatSlackMessage().addAttachment();
