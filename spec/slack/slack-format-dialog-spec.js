@@ -362,7 +362,7 @@ describe('Slack format dialog', () => {
           .toThrowError('The value of the dataSource can be users, channels, conversations, external or static');
         expect(() => message.addSelect('title', 'name', {}))
           .toThrowError('The value of the dataSource can be users, channels, conversations, external or static');
-      });      
+      });
 
       it('should a valid dataSource if provide static', () => {
         message.addSelect('title', 'name', 'static');
