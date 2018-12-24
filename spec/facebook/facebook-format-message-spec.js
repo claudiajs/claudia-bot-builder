@@ -76,10 +76,18 @@ describe('Facebook format message', () => {
 
     it('should add a quick reply with a location', () => {
       const message = new formatFbMessage.Text('Some text')
-        .addQuickReplyLocation()
-        .get();
+          .addQuickReplyLocation()
+          .get();
       expect(message.quick_replies.length).toBe(1);
       expect(message.quick_replies[0].content_type).toBe('location');
+    });
+
+    it('should add a quick reply with a email', () => {
+      const message = new formatFbMessage.Text('Some text')
+          .addQuickReplyUserEmail()
+          .get();
+      expect(message.quick_replies.length).toBe(1);
+      expect(message.quick_replies[0].content_type).toBe('user_email');
     });
 
     it('should add 11 quick replies', () => {
