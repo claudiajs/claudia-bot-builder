@@ -76,10 +76,28 @@ describe('Facebook format message', () => {
 
     it('should add a quick reply with a location', () => {
       const message = new formatFbMessage.Text('Some text')
-        .addQuickReplyLocation()
-        .get();
+          .addQuickReplyLocation()
+          .get();
       expect(message.quick_replies.length).toBe(1);
       expect(message.quick_replies[0].content_type).toBe('location');
+    });
+
+    it('should add a quick reply with a email', () => {
+      const message = new formatFbMessage.Text('Some text')
+          .addQuickReplyUserEmail()
+          .get();
+      expect(message.quick_replies.length).toBe(1);
+      expect(message.quick_replies[0].content_type).toBe('user_email');
+    });
+
+    it('should throw an error if add null quick reply', () => {
+      const message = new formatFbMessage.Text('Some text');
+      expect(() => message.addQuickReplyItem(null)).toThrowError(TypeError, '"quickReply" is null or not defined');
+    });
+
+    it('should throw an error if add undefined quick reply', () => {
+      const message = new formatFbMessage.Text('Some text');
+      expect(() => message.addQuickReplyItem()).toThrowError(TypeError, '"quickReply" is null or not defined');
     });
 
     it('should add 11 quick replies', () => {
