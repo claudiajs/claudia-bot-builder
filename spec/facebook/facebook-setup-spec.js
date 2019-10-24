@@ -292,7 +292,7 @@ describe('Facebook setup', () => {
     });
     describe('processing user input', () => {
       const singleInput = (data) => {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           setTimeout(() => {
             process.stdin.emit('data', data);
             resolve();
@@ -300,7 +300,7 @@ describe('Facebook setup', () => {
         });
       };
       const emulateUserInputPromise = (accessToken, appSecret, pageId, subscribedField) => {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           singleInput(accessToken)
             .then(() => singleInput(appSecret))
             .then(() => singleInput(pageId))
