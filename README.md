@@ -11,9 +11,9 @@ _Claudia Bot Builder_ helps developers create and deploy chat-bots for various p
 | [🚀 Getting Started](https://claudiajs.com/tutorials/hello-world-chatbot.html) | [🛠 API Docs](docs/API.md) | [🤖 Example projects](https://github.com/claudiajs/example-projects#chat-bots) | [🤔 FAQ](#frequently-asked-questions) | [💬 Chat on Gitter](https://gitter.im/claudiajs/claudia) |
 |-----------------|----------|------------------|-----|----|
 
-Check out [this two minute video](https://vimeo.com/170647056) to see how you can create and deploy a bot quickly:
+Check out [this two minute video](https://youtu.be/NvCfEuD3Nk4) to see how you can create and deploy a bot quickly:
 
-[![](https://claudiajs.com/assets/claudia-bot-builder-video.jpg)](https://vimeo.com/170647056)
+[![](https://claudiajs.com/assets/claudia-bot-builder-video.jpg)](https://youtu.be/NvCfEuD3Nk4)
 
 Here's a simple example:
 
