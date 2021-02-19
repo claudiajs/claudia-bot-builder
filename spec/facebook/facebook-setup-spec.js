@@ -1,6 +1,7 @@
-/*global require, describe, it, expect, beforeEach, jasmine*/
+/*global require, describe, it, expect, beforeEach, jasmine, spyOn*/
 'use strict';
 var underTest = require('../../lib/facebook/setup');
+var https = require('https');
 describe('Facebook setup', () => {
   var api, bot, logError, parser, responder, botPromise, botResolve, botReject;
   beforeEach(() => {
@@ -283,6 +284,91 @@ describe('Facebook setup', () => {
         });
       });
     });
-
+  });
+  describe('post deploy step processor', () => {
+    it('is called once', () => {
+      expect(api.addPostDeployStep.calls.count()).toEqual(1);
+      expect(api.addPostDeployStep).toHaveBeenCalledWith('facebook', jasmine.any(Function));
+    });
+    describe('processing user input', () => {
+      const singleInput = (data) => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            process.stdin.emit('data', data);
+            resolve();
+          }, 500);
+        });
+      };
+      const emulateUserInputPromise = (accessToken, appSecret, pageId, subscribedField) => {
+        return new Promise((resolve) => {
+          singleInput(accessToken)
+            .then(() => singleInput(appSecret))
+            .then(() => singleInput(pageId))
+            .then(() => singleInput(subscribedField))
+            .then(() => setTimeout(() => resolve()), 500);
+        });
+      };
+      let options = {'configure-fb-bot': true};
+      let lambdaDetails = {apiUrl: 'https://testlambdafunction.com/latest'};
+      let getStagePromise = () => Promise.resolve({variables: {}});
+      let createDeploymentPromise = () => Promise.resolve();
+      let utils = {apiGatewayPromise: {getStagePromise: getStagePromise, createDeploymentPromise: createDeploymentPromise}};
+      var handler;
+      beforeEach(() => {
+        handler = api.addPostDeployStep.calls.argsFor(0)[1];
+      });
+      it('returns webhook URL if all parameters are valid', (done) => {
+        handler(options, lambdaDetails, utils).then(url => {
+          expect(url).toEqual(`${lambdaDetails.apiUrl}/facebook`);
+          done();
+        });
+        emulateUserInputPromise('accessToken\n', 'appSecret\n', 'pageId\n', 'messages, messaging_postbacks\n').then(() => {
+          https.request.calls[0].respond(200, 'OK');
+        });
+      });
+      it('returns webhook URL if apiGateway already has facebookVerifyToken', (done) => {
+        getStagePromise = () => Promise.resolve({variables: {facebookVerifyToken: 'facebookVerityToken'}});
+        utils = {apiGatewayPromise: {getStagePromise: getStagePromise, createDeploymentPromise: createDeploymentPromise}};
+        handler(options, lambdaDetails, utils).then(url => {
+          expect(url).toEqual(`${lambdaDetails.apiUrl}/facebook`);
+          done();
+        });
+        emulateUserInputPromise('accessToken\n', 'appSecret\n', 'pageId\n', 'messages, messaging_postbacks\n').then(() => {
+          https.request.calls[0].respond(200, 'OK');
+        });
+      });
+      it('shows deprecation warning and returns webhook URL if apiGateway does not return \'variables\' key', (done) => {
+        spyOn(console, 'log');
+        getStagePromise = () => Promise.resolve({});
+        utils = {apiGatewayPromise: {getStagePromise: getStagePromise, createDeploymentPromise: createDeploymentPromise}};
+        handler(options, lambdaDetails, utils).then(url => {
+          expect(console.log.calls.mostRecent().args[0]).toMatch(/Deprecation warning/);
+          expect(url).toEqual(`${lambdaDetails.apiUrl}/facebook`);
+          done();
+        });
+        emulateUserInputPromise('accessToken\n', 'appSecret\n', 'pageId\n', 'messages, messaging_postbacks\n').then(() => {
+          https.request.calls[0].respond(200, 'OK');
+        });
+      });
+      it('returns webhook URL even if \'configure-fb-bot\' option is not specified', (done) => {
+        options = { 'configure-fb-bot': false };
+        handler(options, lambdaDetails, utils).then(url => {
+          expect(url).toEqual(`${lambdaDetails.apiUrl}/facebook`);
+          done();
+        });
+        emulateUserInputPromise('accessToken\n', 'appSecret\n', 'pageId\n', 'messages, messaging_postbacks\n').then(() => {
+          https.request.calls[0].respond(200, 'OK');
+        });
+      });
+      it('returns webhook URL even if subscribed fields ended with comma and space', (done) => {
+        handler(options, lambdaDetails, utils).then(url => {
+          expect(url).toEqual(`${lambdaDetails.apiUrl}/facebook`);
+          done();
+        });
+        emulateUserInputPromise('accessToken\n', 'appSecret\n', 'pageId\n', 'messages, \n').then(() => {
+          https.request.calls[0].respond(200, 'OK');
+        });
+      });
+    });
   });
 });
