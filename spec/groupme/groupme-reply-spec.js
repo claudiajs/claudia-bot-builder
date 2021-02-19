@@ -48,4 +48,29 @@ describe('GroupMe Reply', () => {
     reply({ sender: 1, text: 'hello groupme', originalRequest: {}, type: 'groupme'}, 123123).then(done, done.fail);
   });
 
+  describe('when an array is passed', () => {
+    it('does not send the second request until the first one completes', done => {
+      let answers = ['foo', 'bar'];
+      https.request.pipe(() => {
+        Promise.resolve().then(() => {
+          expect(https.request.calls.length).toEqual(1);
+        }).then(done);
+      });
+      reply(answers, 123123);
+    });
+    it('sends the requests in sequence', done => {
+      let answers = ['foo', 'bar'];
+      https.request.pipe(function () {
+        this.respond('200', 'OK');
+        if (https.request.calls.length === 2) {
+          expect(JSON.parse(https.request.calls[0].body[0])).toEqual({bot_id: 123123, text:'foo'});
+          expect(JSON.parse(https.request.calls[1].body[0])).toEqual({bot_id: 123123, text:'bar'});
+          done();
+        }
+      });
+      reply(answers, 123123);
+
+    });
+
+  });
 });
