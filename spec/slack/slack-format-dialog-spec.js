@@ -21,15 +21,15 @@ describe('Slack format dialog', () => {
     });
 
     it('should throw an error if you don\'t provide token in the constructor', () => {
-      expect(() => new formatSlackDialog()).toThrowError('token, triggerId and title are requeired for dialog.open method');
+      expect(() => new formatSlackDialog()).toThrowError('token, triggerId and title are required for dialog.open method');
     });
     
     it('should throw an error if you don\'t provide triggerId in the constructor', () => {
-      expect(() => new formatSlackDialog()).toThrowError('token, triggerId and title are requeired for dialog.open method');
+      expect(() => new formatSlackDialog()).toThrowError('token, triggerId and title are required for dialog.open method');
     });
     
     it('should throw an error if you don\'t provide title in the constructor', () => {
-      expect(() => new formatSlackDialog()).toThrowError('token, triggerId and title are requeired for dialog.open method');
+      expect(() => new formatSlackDialog()).toThrowError('token, triggerId and title are required for dialog.open method');
     });
 
     it('should add token, triggerId and title if you provide it in the constructor', () => {
@@ -85,11 +85,11 @@ describe('Slack format dialog', () => {
 
     describe('addInput', () => {
       it('should throw an error if you use without adding a title', () => {
-        expect(() => message.addInput()).toThrowError('Text and name are requeired for addInput method');
+        expect(() => message.addInput()).toThrowError('Text and name are required for addInput method');
       });
       
       it('should throw an error if you use without adding a name', () => {
-        expect(() => message.addInput('title')).toThrowError('Text and name are requeired for addInput method');
+        expect(() => message.addInput('title')).toThrowError('Text and name are required for addInput method');
       });
       
       it('should throw an error if you use with text more than 24 characters', () => {
@@ -214,11 +214,11 @@ describe('Slack format dialog', () => {
     
     describe('addTextarea', () => {
       it('should throw an error if you use without adding a title', () => {
-        expect(() => message.addTextarea()).toThrowError('Text and name are requeired for addTextarea method');
+        expect(() => message.addTextarea()).toThrowError('Text and name are required for addTextarea method');
       });
       
       it('should throw an error if you use without adding a name', () => {
-        expect(() => message.addTextarea('title')).toThrowError('Text and name are requeired for addTextarea method');
+        expect(() => message.addTextarea('title')).toThrowError('Text and name are required for addTextarea method');
       });
       
       it('should throw an error if you use with text more than 24 characters', () => {
@@ -338,11 +338,11 @@ describe('Slack format dialog', () => {
     
     describe('addSelect', () => {
       it('should throw an error if you use without adding a title', () => {
-        expect(() => message.addSelect()).toThrowError('Text and name are requeired for addSelect method');
+        expect(() => message.addSelect()).toThrowError('Text and name are required for addSelect method');
       });
       
       it('should throw an error if you use without adding a name', () => {
-        expect(() => message.addSelect('title')).toThrowError('Text and name are requeired for addSelect method');
+        expect(() => message.addSelect('title')).toThrowError('Text and name are required for addSelect method');
       });
       
       it('should throw an error if you use with text more than 24 characters', () => {

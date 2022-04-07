@@ -208,7 +208,7 @@ describe('Slack format message', () => {
 
     it('should throw an error if you addAction without valid data', () => {
       const message = new formatSlackMessage().addAttachment();
-      expect(() => message.addAction()).toThrowError('Text, name and value are requeired for addAction method');
+      expect(() => message.addAction()).toThrowError('Text, name and value are required for addAction method');
     });
 
     it('should add an action', () => {
@@ -251,12 +251,12 @@ describe('Slack format message', () => {
 
     it('should throw an error if you addSelect without valid data', () => {
       const message = new formatSlackMessage().addAttachment();
-      expect(() => message.addSelect()).toThrowError('Text and name are requeired for addAction method');
+      expect(() => message.addSelect()).toThrowError('Text and name are required for addAction method');
     });
     
     it('should throw an error if you addSelect without valid data', () => {
       const message = new formatSlackMessage().addAttachment();
-      expect(() => message.addSelect()).toThrowError('Text and name are requeired for addAction method');
+      expect(() => message.addSelect()).toThrowError('Text and name are required for addAction method');
     });
     
     it('should throw an error if you addSelect with name with two or more words', () => {
@@ -343,12 +343,12 @@ describe('Slack format message', () => {
     
     it('should throw an error if you addLinkButton without valid data', () => {
       const message = new formatSlackMessage().addAttachment();
-      expect(() => message.addLinkButton()).toThrowError('Text and URL are requeired for addLinkButton method');
+      expect(() => message.addLinkButton()).toThrowError('Text and URL are required for addLinkButton method');
     });
     
     it('should throw an error if you addLinkButton without valid data', () => {
       const message = new formatSlackMessage().addAttachment();
-      expect(() => message.addLinkButton('Button name')).toThrowError('Text and URL are requeired for addLinkButton method');
+      expect(() => message.addLinkButton('Button name')).toThrowError('Text and URL are required for addLinkButton method');
     });
     
     it('should throw an error if you addLinkButton without valid data', () => {
@@ -368,7 +368,7 @@ describe('Slack format message', () => {
 
     it('should throw an error if you try to add confirmation before adding an action', () => {
       const message = new formatSlackMessage().addAttachment();
-      expect(() => message.addConfirmation()).toThrowError('At least one action is requeired for getLatestAction method');
+      expect(() => message.addConfirmation()).toThrowError('At least one action is required for getLatestAction method');
     });
 
     it('should throw an error if you try to add confirmation without valid data', () => {
